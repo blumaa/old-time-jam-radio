@@ -11,6 +11,7 @@ interface UseStationPlaybackOptions {
   playStaticBurst: (durationMs?: number) => Promise<void>;
   onEnded: (callback: () => void) => void;
   r2PublicUrl: string;
+  enabled?: boolean;
 }
 
 export function useStationPlayback({
@@ -20,6 +21,7 @@ export function useStationPlayback({
   playStaticBurst,
   onEnded,
   r2PublicUrl,
+  enabled = true,
 }: UseStationPlaybackOptions) {
   const [currentStation, setCurrentStation] = useState<string | null>(null);
   const [currentTune, setCurrentTune] = useState<Tune | null>(null);
@@ -58,10 +60,14 @@ export function useStationPlayback({
   }, [play, r2PublicUrl]);
 
   useEffect(() => {
-    onEnded(() => {
-      playNextTune();
-    });
-  }, [onEnded, playNextTune]);
+    if (enabled) {
+      onEnded(() => {
+        playNextTune();
+      });
+    } else {
+      onEnded(() => {});
+    }
+  }, [onEnded, playNextTune, enabled]);
 
   const switchStation = useCallback(
     async (station: string) => {

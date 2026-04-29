@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import type { RadioMode } from "../types";
 
 interface RadioDisplayProps {
   tuneName: string | null;
@@ -9,6 +10,9 @@ interface RadioDisplayProps {
   speed: number;
   progress: number;
   isPoweredOn: boolean;
+  mode?: RadioMode;
+  playCount?: number;
+  onDisplayClick?: () => void;
 }
 
 function formatDisplayText(tuneName: string | null, artist: string | null): string {
@@ -24,6 +28,9 @@ export default function RadioDisplay({
   speed,
   progress,
   isPoweredOn,
+  mode = "jam",
+  playCount = 0,
+  onDisplayClick,
 }: RadioDisplayProps) {
   const measureRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -47,44 +54,66 @@ export default function RadioDisplay({
     return () => observer.disconnect();
   }, [checkOverflow]);
 
+  const isLearn = mode === "learn";
+  const isLearnIdle = isLearn && !tuneName;
+  const isLearnPlaying = isLearn && !!tuneName;
+  const isInteractive = isLearn && isPoweredOn;
+
   return (
     <div
-      className={`radio-display ${isPoweredOn ? "radio-display--on" : "radio-display--off"}`}
+      className={`radio-display ${isPoweredOn ? "radio-display--on" : "radio-display--off"}${isInteractive ? " radio-display--interactive" : ""}`}
       data-testid="radio-display"
+      onClick={isInteractive ? onDisplayClick : undefined}
     >
-      <div className="radio-display__info">
-        <span
-          className="radio-display__key"
-          style={{ visibility: stationKey ? "visible" : "hidden" }}
-        >
-          {stationKey ?? " "}
-        </span>
-        <span className="radio-display__speed">{speed.toFixed(2)}x</span>
-      </div>
-      <div
-        className={`radio-display__marquee${isOverflowing ? " radio-display__marquee--scrolling" : ""}`}
-        ref={containerRef}
-        data-testid="radio-marquee"
-      >
-        <span
-          className="radio-display__marquee-content"
-          ref={measureRef}
-          aria-hidden={isOverflowing}
-        >
-          {displayText}
-        </span>
-        {isOverflowing && (
-          <span className="radio-display__marquee-content" aria-hidden>
-            {displayText}
-          </span>
-        )}
-      </div>
-      <div className="radio-display__progress" data-testid="radio-progress">
-        <div
-          className="radio-display__progress-fill"
-          style={{ width: `${progress * 100}%` }}
-        />
-      </div>
+      {isLearnIdle && isPoweredOn && (
+        <div className="radio-display__idle-prompt">
+          <span className="radio-display__idle-title">Find a tune</span>
+          <span className="radio-display__idle-subtitle">tap to search</span>
+        </div>
+      )}
+
+      {(!isLearnIdle || !isPoweredOn) && (
+        <>
+          <div className="radio-display__info">
+            <span
+              className="radio-display__key"
+              style={{ visibility: stationKey ? "visible" : "hidden" }}
+            >
+              {stationKey ?? " "}
+            </span>
+            {isLearnPlaying && playCount > 0 && (
+              <span className="radio-display__loop-indicator" data-testid="loop-indicator">
+                ↻ ×{playCount}
+              </span>
+            )}
+            <span className="radio-display__speed">{speed.toFixed(2)}x</span>
+          </div>
+          <div
+            className={`radio-display__marquee${isOverflowing ? " radio-display__marquee--scrolling" : ""}`}
+            ref={containerRef}
+            data-testid="radio-marquee"
+          >
+            <span
+              className="radio-display__marquee-content"
+              ref={measureRef}
+              aria-hidden={isOverflowing}
+            >
+              {displayText}
+            </span>
+            {isOverflowing && (
+              <span className="radio-display__marquee-content" aria-hidden>
+                {displayText}
+              </span>
+            )}
+          </div>
+          <div className="radio-display__progress" data-testid="radio-progress">
+            <div
+              className="radio-display__progress-fill"
+              style={{ width: `${progress * 100}%` }}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

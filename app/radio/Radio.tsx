@@ -1,16 +1,21 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
-import type { Manifest } from "./types";
+import type { Manifest, RadioMode } from "./types";
 import LoadingSpinner from "./components/LoadingSpinner";
 import RadioFacade from "./components/RadioFacade";
 import RadioDisplay from "./components/RadioDisplay";
 import PowerButton from "./components/PowerButton";
+import PauseButton from "./components/PauseButton";
+import RestartButton from "./components/RestartButton";
 import StationSelector from "./components/StationSelector";
 import SpeedSlider from "./components/SpeedSlider";
 import VolumeSlider from "./components/VolumeSlider";
+import ModeToggle from "./components/ModeToggle";
+import TuneSearchDrawer from "./components/TuneSearchDrawer";
 import { useAudioEngine } from "./hooks/useAudioEngine";
 import { useStationPlayback } from "./hooks/useStationPlayback";
+import { useLearningPlayback } from "./hooks/useLearningPlayback";
 import { usePersistedSettings } from "./hooks/usePersistedSettings";
 import "@/styles/radio.css";
 
@@ -20,6 +25,7 @@ export default function Radio() {
   const [manifest, setManifest] = useState<Manifest | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPoweredOn, setIsPoweredOn] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const progressRef = useRef<number>(0);
@@ -28,14 +34,20 @@ export default function Radio() {
     station: persistedStation,
     speed,
     volume,
+    mode,
+    learningTune,
     setStation: persistStation,
     setSpeed: persistSpeed,
     setVolume: persistVolume,
+    setMode: persistMode,
+    setLearningTune: persistLearningTune,
   } = usePersistedSettings();
 
   const {
     play,
     stop,
+    pause,
+    unpause,
     setTempo,
     setVolume: setEngineVolume,
     getProgress,
@@ -59,10 +71,11 @@ export default function Radio() {
 
   const {
     currentStation,
-    currentTune,
+    currentTune: jamCurrentTune,
     isPlayingStatic,
     stations,
     switchStation,
+    replayTune: jamReplayTune,
   } = useStationPlayback({
     manifest: manifest ?? [],
     play,
@@ -70,7 +83,20 @@ export default function Radio() {
     playStaticBurst,
     onEnded,
     r2PublicUrl: R2_PUBLIC_URL,
+    enabled: mode === "jam",
   });
+
+  const learning = useLearningPlayback({
+    manifest: manifest ?? [],
+    play,
+    stop,
+    onEnded,
+    r2PublicUrl: R2_PUBLIC_URL,
+    enabled: mode === "learn",
+    initialTune: learningTune,
+  });
+
+  const currentTune = mode === "jam" ? jamCurrentTune : learning.currentTune;
 
   useEffect(() => {
     if (!isPoweredOn) return;
@@ -90,28 +116,36 @@ export default function Radio() {
     if (isPoweredOn) {
       stop();
       setIsPoweredOn(false);
+      setIsPaused(false);
       setProgress(0);
     } else {
       setIsPoweredOn(true);
+      setIsPaused(false);
       setEngineVolume(volume);
       setTempo(speed);
-      const startStation =
-        persistedStation && stations.includes(persistedStation)
-          ? persistedStation
-          : stations[0] ?? null;
-      if (startStation) {
-        switchStation(startStation);
+      if (mode === "jam") {
+        const startStation =
+          persistedStation && stations.includes(persistedStation)
+            ? persistedStation
+            : stations[0] ?? null;
+        if (startStation) {
+          switchStation(startStation);
+        }
       }
     }
-  }, [isPoweredOn, stop, persistedStation, stations, switchStation, setEngineVolume, volume, setTempo, speed]);
+  }, [isPoweredOn, stop, persistedStation, stations, switchStation, setEngineVolume, volume, setTempo, speed, mode]);
 
   const handleStationChange = useCallback(
     (station: string) => {
       if (!isPoweredOn) return;
       persistStation(station);
-      switchStation(station);
+      if (mode === "jam") {
+        switchStation(station);
+      } else {
+        learning.setStationFilter(station);
+      }
     },
-    [isPoweredOn, persistStation, switchStation]
+    [isPoweredOn, persistStation, switchStation, mode, learning]
   );
 
   const handleSpeedChange = useCallback(
@@ -128,6 +162,63 @@ export default function Radio() {
       setEngineVolume(newVolume);
     },
     [persistVolume, setEngineVolume]
+  );
+
+  const handleModeChange = useCallback(
+    (newMode: RadioMode) => {
+      const tuneBeforeSwitch = currentTune;
+      stop();
+      setIsPaused(false);
+      setProgress(0);
+      persistMode(newMode);
+      if (newMode === "jam" && isPoweredOn) {
+        const station =
+          persistedStation && stations.includes(persistedStation)
+            ? persistedStation
+            : stations[0] ?? null;
+        if (station) {
+          switchStation(station);
+        }
+      } else if (newMode === "learn" && isPoweredOn && tuneBeforeSwitch) {
+        learning.selectTune(tuneBeforeSwitch);
+        persistLearningTune(tuneBeforeSwitch);
+      }
+    },
+    [stop, persistMode, isPoweredOn, persistedStation, stations, switchStation, currentTune, learning, persistLearningTune]
+  );
+
+  const handlePause = useCallback(async () => {
+    if (isPaused) {
+      await unpause();
+      setIsPaused(false);
+    } else {
+      await pause();
+      setIsPaused(true);
+    }
+  }, [isPaused, pause, unpause]);
+
+  const handleRestart = useCallback(async () => {
+    if (mode === "jam") {
+      await jamReplayTune();
+    } else {
+      await learning.replayTune();
+    }
+    setIsPaused(false);
+  }, [mode, jamReplayTune, learning]);
+
+  const handleDisplayClick = useCallback(() => {
+    if (mode === "learn") {
+      learning.openSearch();
+    }
+  }, [mode, learning]);
+
+  const handleSelectTune = useCallback(
+    async (tune: typeof learning.searchResults[number]) => {
+      await learning.selectTune(tune);
+      persistLearningTune(tune);
+      setIsPaused(false);
+    },
+    [learning, persistLearningTune]
   );
 
   if (error) {
@@ -176,6 +267,9 @@ export default function Radio() {
           speed={speed}
           progress={progress}
           isPoweredOn={isPoweredOn}
+          mode={mode}
+          playCount={learning.playCount}
+          onDisplayClick={handleDisplayClick}
         />
         <StationSelector
           stations={stations}
@@ -193,7 +287,49 @@ export default function Radio() {
           onVolumeChange={handleVolumeChange}
           disabled={!isPoweredOn}
         />
-        <PowerButton isPoweredOn={isPoweredOn} onClick={handlePowerToggle} />
+        <div className="radio-transport">
+          {mode === "learn" ? (
+            <button
+              className="transport-button radio-transport__search"
+              onClick={() => learning.openSearch()}
+              disabled={!isPoweredOn}
+              aria-label="Search tunes"
+              type="button"
+            >
+              <svg className="transport-button__icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <circle cx="10" cy="10" r="6" />
+                <line x1="14.5" y1="14.5" x2="20" y2="20" />
+              </svg>
+            </button>
+          ) : (
+            <span className="radio-transport__search" />
+          )}
+          <div className="radio-transport__controls">
+            <RestartButton
+              onClick={handleRestart}
+              disabled={!isPoweredOn || !currentTune}
+            />
+            <PowerButton isPoweredOn={isPoweredOn} onClick={handlePowerToggle} />
+            <PauseButton
+              isPaused={isPaused}
+              onClick={handlePause}
+              disabled={!isPoweredOn || !currentTune}
+            />
+          </div>
+          <ModeToggle
+            mode={mode}
+            onModeChange={handleModeChange}
+            disabled={!isPoweredOn}
+          />
+        </div>
+        <TuneSearchDrawer
+          isOpen={learning.isSearchOpen}
+          query={learning.searchQuery}
+          results={learning.searchResults}
+          onQueryChange={learning.setSearchQuery}
+          onSelectTune={handleSelectTune}
+          onClose={learning.closeSearch}
+        />
       </RadioFacade>
     </div>
   );

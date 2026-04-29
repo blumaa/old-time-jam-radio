@@ -87,4 +87,32 @@ describe("Radio", () => {
       expect(screen.getByRole("alert")).toBeInTheDocument();
     });
   });
+
+  it("should render mode toggle, pause, and restart buttons after manifest loads", async () => {
+    vi.spyOn(global, "fetch").mockResolvedValue({
+      ok: true,
+      json: () =>
+        Promise.resolve([
+          {
+            title: "Test Tune",
+            artist: "Test Artist",
+            key: "G",
+            url: "tunes/test.mp3",
+            duration: 120,
+            confidence: 0.9,
+            format: "mp3",
+          },
+        ]),
+    } as Response);
+
+    render(<Radio />);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("radio-facade")).toBeInTheDocument();
+    });
+
+    expect(screen.getByRole("switch", { name: /mode/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /pause|resume/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /restart/i })).toBeInTheDocument();
+  });
 });

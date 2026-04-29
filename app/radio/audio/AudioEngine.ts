@@ -100,6 +100,24 @@ export class AudioEngine {
     this._onEndedCallback = callback;
   }
 
+  async pause(): Promise<void> {
+    if (this._playing) {
+      await this.audioContext.suspend();
+      this._playing = false;
+    }
+  }
+
+  async unpause(): Promise<void> {
+    if (this.shifter && this.audioContext.state === "suspended") {
+      await this.audioContext.resume();
+      this._playing = true;
+    }
+  }
+
+  isPaused(): boolean {
+    return this.audioContext.state === "suspended" && this.shifter !== null;
+  }
+
   async resume(): Promise<void> {
     await this.audioContext.resume();
   }

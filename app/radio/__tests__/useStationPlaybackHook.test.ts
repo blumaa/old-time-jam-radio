@@ -214,4 +214,48 @@ describe("useStationPlayback", () => {
 
     expect(mocks.play).not.toHaveBeenCalled();
   });
+
+  it("should not register onEnded callback when enabled is false", () => {
+    renderHook(() =>
+      useStationPlayback({
+        manifest: mockManifest,
+        play: mocks.play,
+        stop: mocks.stop,
+        playStaticBurst: mocks.playStaticBurst,
+        onEnded: mocks.onEnded,
+        r2PublicUrl: "https://r2.example.com",
+        enabled: false,
+      })
+    );
+
+    const lastCallback = mocks.onEnded.mock.calls.at(-1)?.[0];
+    expect(lastCallback).toBeDefined();
+    lastCallback();
+    expect(mocks.play).not.toHaveBeenCalled();
+  });
+
+  it("should register onEnded callback when enabled is true", async () => {
+    const { result } = renderHook(() =>
+      useStationPlayback({
+        manifest: mockManifest,
+        play: mocks.play,
+        stop: mocks.stop,
+        playStaticBurst: mocks.playStaticBurst,
+        onEnded: mocks.onEnded,
+        r2PublicUrl: "https://r2.example.com",
+        enabled: true,
+      })
+    );
+
+    await act(async () => {
+      await result.current.switchStation("G");
+    });
+
+    const onEndedCallback = mocks.onEnded.mock.calls.at(-1)?.[0];
+    await act(async () => {
+      await onEndedCallback();
+    });
+
+    expect(mocks.play).toHaveBeenCalledTimes(2);
+  });
 });

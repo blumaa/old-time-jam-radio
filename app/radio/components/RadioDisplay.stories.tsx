@@ -74,3 +74,41 @@ export const Tuning: Story = {
     isPoweredOn: true,
   },
 };
+
+export const LearnIdle: Story = {
+  args: {
+    tuneName: null,
+    artist: null,
+    stationKey: null,
+    speed: 1.0,
+    progress: 0,
+    isPoweredOn: true,
+    mode: "learn",
+  },
+};
+
+export const LearnPlaying: Story = {
+  args: {
+    tuneName: "Sally Ann",
+    artist: "Highwoods Stringband",
+    stationKey: "A",
+    speed: 0.5,
+    progress: 0.35,
+    isPoweredOn: true,
+    mode: "learn",
+    playCount: 3,
+  },
+};
+
+export const LearnFirstPlay: Story = {
+  args: {
+    tuneName: "Cluck Old Hen",
+    artist: "Dan Gellert",
+    stationKey: "D",
+    speed: 0.75,
+    progress: 0.6,
+    isPoweredOn: true,
+    mode: "learn",
+    playCount: 1,
+  },
+};

@@ -12,3 +12,5 @@ export type Manifest = Tune[];
 
 export const SUPPORTED_STATIONS = ["G", "A", "D"] as const;
 export type StationKey = (typeof SUPPORTED_STATIONS)[number];
+
+export type RadioMode = "jam" | "learn";

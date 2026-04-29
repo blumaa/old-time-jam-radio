@@ -58,6 +58,18 @@ export function useAudioEngine() {
     engineRef.current?.onEnded(callback);
   }, []);
 
+  const pause = useCallback(async () => {
+    await engineRef.current?.pause();
+  }, []);
+
+  const unpause = useCallback(async () => {
+    await engineRef.current?.unpause();
+  }, []);
+
+  const isPaused = useCallback(() => {
+    return engineRef.current?.isPaused() ?? false;
+  }, []);
+
   const playStaticBurst = useCallback(
     async (durationMs = 400) => {
       const engine = getEngine();
@@ -70,10 +82,13 @@ export function useAudioEngine() {
   return {
     play,
     stop,
+    pause,
+    unpause,
     setTempo,
     setVolume,
     getProgress,
     isPlaying,
+    isPaused,
     onEnded,
     playStaticBurst,
   };
