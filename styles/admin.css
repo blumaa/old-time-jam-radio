@@ -1,0 +1,216 @@
+/* Password Gate */
+.password-gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 20px;
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+.password-gate__title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.password-gate__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.password-gate__input {
+  padding: 10px 14px;
+  border: 1px solid var(--radio-brass);
+  border-radius: 6px;
+  background: var(--radio-wood-dark);
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.password-gate__button {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: var(--radio-brass);
+  color: var(--radio-wood-dark);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.password-gate__button:disabled {
+  opacity: 0.5;
+}
+
+.password-gate__error {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* Admin Panel */
+.admin-panel {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  color: var(--text-primary);
+}
+
+.admin-panel__title {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.admin-panel__stats {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.admin-panel__filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.admin-panel__search {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--radio-brass);
+  border-radius: 6px;
+  background: var(--radio-wood-dark);
+  color: var(--text-primary);
+}
+
+.admin-panel__key-filter {
+  padding: 8px 12px;
+  border: 1px solid var(--radio-brass);
+  border-radius: 6px;
+  background: var(--radio-wood-dark);
+  color: var(--text-primary);
+}
+
+/* Tune List */
+.tune-list {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.tune-list th,
+.tune-list td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--radio-grille-slat);
+}
+
+.tune-list th {
+  color: var(--radio-brass);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+.tune-list__empty {
+  color: var(--text-muted);
+  padding: 20px;
+  text-align: center;
+}
+
+.tune-list__confidence--low {
+  color: #e74c3c;
+}
+
+.tune-list__confidence--medium {
+  color: #f39c12;
+}
+
+.tune-list__confidence--high {
+  color: #2ecc71;
+}
+
+.tune-list__action {
+  background: none;
+  border: 1px solid var(--radio-brass);
+  color: var(--radio-brass);
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  margin-right: 4px;
+}
+
+.tune-list__action--delete {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+/* Audio Preview */
+.audio-preview__button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 2px 6px;
+}
+
+/* Tune Editor */
+.tune-editor {
+  background: var(--radio-wood-dark);
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tune-editor__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tune-editor__field label {
+  font-size: 0.75rem;
+  color: var(--radio-brass);
+  text-transform: uppercase;
+}
+
+.tune-editor__field input,
+.tune-editor__field select {
+  padding: 8px 10px;
+  border: 1px solid var(--radio-brass);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+.tune-editor__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.tune-editor__actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tune-editor__actions button[type="submit"] {
+  background: var(--radio-brass);
+  color: var(--radio-wood-dark);
+}
+
+.tune-editor__actions button[type="button"] {
+  background: var(--radio-grille);
+  color: var(--text-primary);
+}

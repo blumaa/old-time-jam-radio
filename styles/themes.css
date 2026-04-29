@@ -1,0 +1,39 @@
+/* Alternate theme palettes — override palette-layer vars only */
+
+[data-theme="midnight"] {
+  --color-wood-100: #5a4a50;
+  --color-wood-200: #3a2a30;
+  --color-wood-300: #221820;
+  --color-bakelite-100: #201a20;
+  --color-bakelite-200: #0a0608;
+  --color-brass-100: #c0c0c8;
+  --color-brass-200: #9898a4;
+  --color-amber-100: #d0e8ff;
+  --color-amber-200: #8ab0d0;
+  --color-grille-100: #302830;
+  --color-grille-200: #1a1418;
+  --color-bg: #100a10;
+
+  --radio-display-bg-off: #141418;
+  --radio-display-text: #1a1828;
+  --text-muted: #8080a0;
+}
+
+[data-theme="blonde"] {
+  --color-wood-100: #d4b896;
+  --color-wood-200: #b89870;
+  --color-wood-300: #8a7050;
+  --color-bakelite-100: #4a3828;
+  --color-bakelite-200: #2a1c10;
+  --color-brass-100: #8a7030;
+  --color-brass-200: #6a5020;
+  --color-amber-100: #fff8e0;
+  --color-amber-200: #e8d8a0;
+  --color-grille-100: #7a6040;
+  --color-grille-200: #5a4430;
+  --color-bg: #c8a878;
+
+  --radio-display-bg-off: #4a3828;
+  --radio-display-text: #3a2810;
+  --text-muted: #7a6848;
+}

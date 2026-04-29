@@ -1,0 +1,133 @@
+:root {
+  /* ── Palette (raw values, never referenced by components) ── */
+
+  /* Wood */
+  --color-wood-100: #7a5230;
+  --color-wood-200: #5c3a1e;
+  --color-wood-300: #3c2415;
+
+  /* Bakelite */
+  --color-bakelite-100: #2a1a10;
+  --color-bakelite-200: #0d0800;
+
+  /* Brass */
+  --color-brass-100: #d4a830;
+  --color-brass-200: #c9960c;
+
+  /* Display amber */
+  --color-amber-100: #e8c850;
+  --color-amber-200: #c49520;
+
+  /* Grille */
+  --color-grille-100: #4a3020;
+  --color-grille-200: #2a1a10;
+
+  /* Neutrals */
+  --color-bg: #1a1008;
+  --color-black: #000;
+  --color-white: #fff;
+
+  /* ── Semantic (what components reference) ── */
+
+  /* Radio body */
+  --radio-body-bg: var(--color-wood-200);
+  --radio-body-highlight: var(--color-wood-100);
+  --radio-body-shadow: var(--color-wood-300);
+  --radio-body-border: var(--color-wood-300);
+
+  /* Display */
+  --radio-display-bg-off: #1a1a0e;
+  --radio-display-bg-on: var(--color-amber-100);
+  --radio-display-bg-on-deep: var(--color-amber-200);
+  --radio-display-text: #2c1810;
+
+  /* Controls */
+  --radio-control-surface: var(--color-bakelite-200);
+  --radio-control-highlight: var(--color-bakelite-100);
+
+  /* Accents */
+  --radio-accent: var(--color-brass-200);
+  --radio-accent-light: var(--color-brass-100);
+
+  /* Grille */
+  --radio-grille-bg: var(--color-grille-100);
+  --radio-grille-slat: var(--color-grille-200);
+
+  /* Indicators */
+  --radio-indicator-on: var(--color-amber-200);
+  --radio-indicator-off: var(--color-bakelite-100);
+
+  /* Page */
+  --page-bg: var(--color-bg);
+  --text-primary: var(--color-amber-100);
+  --text-muted: #a08050;
+
+  /* ── Scales ── */
+
+  /* Spacing */
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 20px;
+  --space-2xl: 32px;
+
+  /* Typography */
+  --text-xs: 0.7rem;
+  --text-sm: 0.75rem;
+  --text-base: 0.85rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+
+  /* Border radius */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-round: 50%;
+
+  /* Shadows */
+  --shadow-body: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-inset-panel: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-inset-display: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  --shadow-control: 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-control-lg: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-surface-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --shadow-glow-amber: 0 0 20px rgba(232, 200, 80, 0.15);
+
+  /* Transitions */
+  --duration-fast: 0.15s;
+  --duration-normal: 0.3s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--page-bg);
+  font-family: Georgia, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+:focus-visible {
+  outline: 2px solid var(--radio-accent-light);
+  outline-offset: 2px;
+}
