@@ -13,8 +13,17 @@ export class StaticNoiseGenerator {
     const buffer = this.audioContext.createBuffer(1, length, sampleRate);
     const channelData = buffer.getChannelData(0);
 
+    const amplitude = 0.075;
+    const fadeLength = Math.floor(sampleRate * 0.04);
+
     for (let i = 0; i < length; i++) {
-      channelData[i] = Math.random() * 2 - 1;
+      let envelope = 1;
+      if (i < fadeLength) {
+        envelope = i / fadeLength;
+      } else if (i > length - fadeLength) {
+        envelope = (length - i) / fadeLength;
+      }
+      channelData[i] = (Math.random() * 2 - 1) * amplitude * envelope;
     }
 
     const source = this.audioContext.createBufferSource();
