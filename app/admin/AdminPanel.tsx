@@ -16,7 +16,7 @@ export default function AdminPanel() {
 
   useEffect(() => {
     let cancelled = false;
-    fetch("/api/manifest")
+    fetch("/api/manifest", { cache: "no-store" })
       .then((r) => (r.ok ? r.json() : []))
       .then((data: Manifest) => {
         if (!cancelled) {
@@ -46,14 +46,20 @@ export default function AdminPanel() {
     const newManifest = manifest.map((t) =>
       t.url === updated.url ? updated : t
     );
-    setManifest(newManifest);
-    setEditingTune(null);
 
-    await fetch("/api/manifest", {
+    const response = await fetch("/api/manifest", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newManifest),
     });
+
+    if (!response.ok) {
+      alert(`Save failed: ${response.status} ${response.statusText}`);
+      return;
+    }
+
+    setManifest(newManifest);
+    setEditingTune(null);
   }
 
   async function handleDelete(tune: Tune) {

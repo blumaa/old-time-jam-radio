@@ -27,6 +27,78 @@
     "format": "mp3"
   },
   {
+    "title": "8th Of January",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "D",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - 8th Of January.m4a",
+    "duration": 0,
+    "confidence": 0.87,
+    "format": "m4a"
+  },
+  {
+    "title": "Abe's Retreat- Adae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/11 Abe_s Retreat- Adae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Abe's Retreat- Adae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Abe_s Retreat- Adae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Acorn Hill",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/10 Acorn Hill.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Adeline",
+    "artist": "Luther Strong",
+    "key": "G",
+    "url": "Luther Strong/Unknown Album/Adeline.m4a",
+    "duration": 0,
+    "confidence": 0.93,
+    "format": "m4a"
+  },
+  {
+    "title": "All I've Got's Done Gone",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "G",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/07 All I_ve Got_s Done Gone.mp3",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "mp3"
+  },
+  {
+    "title": "All Young",
+    "artist": "Rhythm Rats",
+    "key": "G",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/All Young.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Angel Band",
+    "artist": "Big Medicine",
+    "key": "G",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - Angel Band.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Apple Blossom",
     "artist": "Dan Gellert",
     "key": "A",
@@ -43,6 +115,51 @@
     "duration": 0,
     "confidence": 0.9,
     "format": "mp3"
+  },
+  {
+    "title": "Are You Getting There, Rabbit?",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "G",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/04 Are You Getting There, Rabbit_.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Arkansas Traveler",
+    "artist": "Luther Strong",
+    "key": "D",
+    "url": "Luther Strong/Unknown Album/Arkansas Traveler.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Arkansas Traveler",
+    "artist": "Rayna Gellert & Friends",
+    "key": "D",
+    "url": "Rayna Gellert & Friends/Ways of the World/18 Arkansas Traveler.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Arkansas Traveler",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "D",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Arkansas Traveler.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Away Down The Road",
+    "artist": "Craig Johnson",
+    "key": "A",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Away Down The Road.m4a",
+    "duration": 0,
+    "confidence": 0.84,
+    "format": "m4a"
   },
   {
     "title": "Baby-O",
@@ -63,6 +180,15 @@
     "format": "m4a"
   },
   {
+    "title": "Beaver Dam Road",
+    "artist": "The Mill City Grinders",
+    "key": "G",
+    "url": "The Mill City Grinders/No Corn In The Crib/16 Beaver Dam Road.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Biddy",
     "artist": "Foghorn String Band",
     "key": "G",
@@ -74,7 +200,7 @@
   {
     "title": "Big Ass Blues",
     "artist": "The  Rockinghams",
-    "key": "?",
+    "key": "G",
     "url": "The  Rockinghams/Shout Lulu/14 Track 14.m4a",
     "duration": 0,
     "confidence": 0.0,
@@ -90,6 +216,33 @@
     "format": "mp3"
   },
   {
+    "title": "Big-Eyed Rabbit",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "D",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/10 Big-Eyed Rabbit.mp3",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "mp3"
+  },
+  {
+    "title": "Billy In The Low Ground",
+    "artist": "Big Medicine",
+    "key": "D",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - Billy In The Low Ground.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Billy in the Lowground",
+    "artist": "Luther Strong",
+    "key": "D",
+    "url": "Luther Strong/Unknown Album/Billy in the Lowground.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
     "title": "Billy in the Lowground",
     "artist": "Clyde Davenport",
     "key": "D",
@@ -97,6 +250,15 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Billy In the Lowground (feat. Josh Rabie)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "D",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/01 Billy In the Lowground (feat. Jos.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
   },
   {
     "title": "Black Eyed Susie",
@@ -109,12 +271,39 @@
   },
   {
     "title": "Black Eyed Susie",
+    "artist": "Bigfoot",
+    "key": "G",
+    "url": "Bob and Rafe - Old Paint/Black Eyed Susie.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Black Eyed Susie",
     "artist": "Chicken Train",
     "key": "G",
     "url": "Chicken Train/03 Black Eyed Susie.m4a",
     "duration": 0,
     "confidence": 1.0,
     "format": "m4a"
+  },
+  {
+    "title": "Black Eyed Suzie",
+    "artist": "Luther Strong",
+    "key": "D",
+    "url": "Luther Strong/Unknown Album/Black Eyed Suzie.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Blackberry Blossom",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "G",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/05 Blackberry Blossom.mp3",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "mp3"
   },
   {
     "title": "Blackfoot",
@@ -135,6 +324,51 @@
     "format": "mp3"
   },
   {
+    "title": "Blue Eyed Angel",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "D",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Blue Eyed Angel.m4a",
+    "duration": 0,
+    "confidence": 0.83,
+    "format": "m4a"
+  },
+  {
+    "title": "Bob Wills Tune",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "D",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/17 Bob Wills Tune.mp3",
+    "duration": 0,
+    "confidence": 0.83,
+    "format": "mp3"
+  },
+  {
+    "title": "Boll Weevil-Dry and Dusty",
+    "artist": "Rhythm Rats",
+    "key": "A",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Boll Weevil-Dry and Dusty.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Bonaparte",
+    "artist": "Luther Strong",
+    "key": "G",
+    "url": "Luther Strong/Unknown Album/Bonaparte.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Bonaparte's Retreat",
+    "artist": "Luther Strong",
+    "key": "D",
+    "url": "Luther Strong/Unknown Album/Bonaparte_s Retreat.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
     "title": "Bonapartes Retreat",
     "artist": "Clyde Davenport",
     "key": "A",
@@ -142,6 +376,24 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Bone Yard",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/12 Bone Yard.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Bonnie Bess",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Bonnie Bess.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
   },
   {
     "title": "Booth Shot Lincoln/June Apple",
@@ -153,12 +405,48 @@
     "format": "mp3"
   },
   {
+    "title": "Boys, The Buzzards Are Flying/Late For The Dance",
+    "artist": "Easy Street String Band",
+    "key": "G",
+    "url": "Easy Street String Band/Money In Both Pockets/06 Boys, The Buzzards Are Flying_Late For The Dance.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Breaking Up Christmas",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "A",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Breaking Up Christmas.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
     "title": "Broke And Ain't Got A Dime",
     "artist": "Chicken Train",
     "key": "Em",
     "url": "Chicken Train/15 Broke And Ain_t Got A Dime.m4a",
     "duration": 0,
     "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Brown's Dream",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "G",
+    "url": "Bob and Rafe - Old Paint/Brown_s Dream.m4a",
+    "duration": 0,
+    "confidence": 0.83,
+    "format": "m4a"
+  },
+  {
+    "title": "Brown's Dream",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "G",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Brown_s Dream.m4a",
+    "duration": 0,
+    "confidence": 0.83,
     "format": "m4a"
   },
   {
@@ -171,12 +459,120 @@
     "format": "mp3"
   },
   {
+    "title": "Brushy Run",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "G",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/18 Brushy Run.mp3",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "mp3"
+  },
+  {
     "title": "Bud, Oh Bud",
     "artist": "Chicken Train",
     "key": "G",
     "url": "Chicken Train/16 Bud, Oh Bud.m4a",
     "duration": 0,
     "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Bull At the Wagon (feat. WB Reid)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/15 Bull At the Wagon (feat. WB Reid).m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Cabbage Head",
+    "artist": "Easy Street String Band",
+    "key": "G",
+    "url": "Easy Street String Band/Money In Both Pockets/05 Cabbage Head.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Cacklin' Hen",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "G",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Cacklin_ Hen.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Cacklin' Hen",
+    "artist": "Luther Strong",
+    "key": "G",
+    "url": "Luther Strong/Unknown Album/Cacklin_ Hen.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Cacklin' Hen",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "G",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Cacklin_ Hen.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Cairo",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Cairo.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "California Blues - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/04 California Blues - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "California Blues - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - California Blues - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Camp Chase",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "A",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/09 Camp Chase.mp3",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "mp3"
+  },
+  {
+    "title": "Can You Dance a Tobacco Hill?",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "D",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/11 Can You Dance a Tobacco Hill_.m4a",
+    "duration": 0,
+    "confidence": 0.98,
+    "format": "m4a"
+  },
+  {
+    "title": "Cannonball Blues",
+    "artist": "The Mill City Grinders",
+    "key": "G",
+    "url": "The Mill City Grinders/No Corn In The Crib/10 Cannonball Blues.m4a",
+    "duration": 0,
+    "confidence": 0.0,
     "format": "m4a"
   },
   {
@@ -189,10 +585,73 @@
     "format": "m4a"
   },
   {
+    "title": "Charleston #1",
+    "artist": "Rayna Gellert & Friends",
+    "key": "D",
+    "url": "Rayna Gellert & Friends/Ways of the World/12 Charleston #1.m4a",
+    "duration": 0,
+    "confidence": 0.76,
+    "format": "m4a"
+  },
+  {
+    "title": "Charleston #2",
+    "artist": "Light And Hitch",
+    "key": "D",
+    "url": "Light and Hitch/Charleston #2.m4a",
+    "duration": 0,
+    "confidence": 0.76,
+    "format": "m4a"
+  },
+  {
     "title": "Charleston No. 1 And 3",
     "artist": "The  Rockinghams",
     "key": "C",
     "url": "The  Rockinghams/Shout Lulu/05 Track 05.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Cherokee Shuffle",
+    "artist": "Bob Carlin",
+    "key": "A",
+    "url": "Light and Hitch/Cherokee Shuffle.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Chicken In the Barnyard (feat. Greg Canote)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/02 Chicken In the Barnyard (feat. Gr(1).m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Chicken In the Barnyard (feat. Greg Canote)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/02 Chicken In the Barnyard (feat. Gr.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Chicken Reel",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "D",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Chicken Reel.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Chinese Breakdown",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "D",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Chinese Breakdown.m4a",
     "duration": 0,
     "confidence": 1.0,
     "format": "m4a"
@@ -211,6 +670,51 @@
     "artist": "Chicken Train",
     "key": "A",
     "url": "Chicken Train/09 Cider.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Cider",
+    "artist": "Light And Hitch",
+    "key": "A",
+    "url": "Light and Hitch/Cider.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Cindy",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "A",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Cindy.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Close By",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "A",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Close By.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Cluck Old Hen",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "D",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Cluck Old Hen.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Coon Dog",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "Em",
+    "url": "Bob and Rafe - Old Paint/Coon Dog.m4a",
     "duration": 0,
     "confidence": 1.0,
     "format": "m4a"
@@ -252,6 +756,24 @@
     "format": "mp3"
   },
   {
+    "title": "Cotton Eyed Joe",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "A",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Cotton Eyed Joe.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Cotton-Eyed Joe",
+    "artist": "Rayna Gellert & Friends",
+    "key": "A",
+    "url": "Rayna Gellert & Friends/Ways of the World/06 Cotton-Eyed Joe.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
     "title": "Cottoned Eyed Joe / Happy Hollow (feat. Adrienne Davis, Mark Olitsky & Joseph Dejarnette)",
     "artist": "Fiddlin' Earl White",
     "key": "A",
@@ -259,6 +781,60 @@
     "duration": 0,
     "confidence": 0.9,
     "format": "mp3"
+  },
+  {
+    "title": "Cricket On The Hearth",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "D",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Cricket On The Hearth.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Cripple Creek",
+    "artist": "Luther Strong",
+    "key": "A",
+    "url": "Luther Strong/Unknown Album/Cripple Creek.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Cripple Creek",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "A",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Cripple Creek.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Cuckoo's Nest",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "D",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/10 Cuckoo_s Nest.mp3",
+    "duration": 0,
+    "confidence": 0.89,
+    "format": "mp3"
+  },
+  {
+    "title": "Cumberland Gap",
+    "artist": "Luther Strong",
+    "key": "A",
+    "url": "Luther Strong/Unknown Album/Cumberland Gap.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Cumberland Gap",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "A",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Cumberland Gap.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
   },
   {
     "title": "Cumberland Gap",
@@ -270,6 +846,33 @@
     "format": "mp3"
   },
   {
+    "title": "Cypress Grove",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Cypress Grove.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Darling Nellie Gray",
+    "artist": "Rhythm Rats",
+    "key": "D",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Darling Nellie Gray.m4a",
+    "duration": 0,
+    "confidence": 0.92,
+    "format": "m4a"
+  },
+  {
+    "title": "Death's Dark Train",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "G",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/16 Death_s Dark Train.mp3",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "mp3"
+  },
+  {
     "title": "Devil On Dry River (feat. Mark Olitsky, Adrienne Davis & Joseph Dejarnette)",
     "artist": "Fiddlin' Earl White",
     "key": "Am",
@@ -277,6 +880,15 @@
     "duration": 0,
     "confidence": 0.9,
     "format": "mp3"
+  },
+  {
+    "title": "Dog Town",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/06 Dog Town.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
   },
   {
     "title": "Down South Blues",
@@ -297,6 +909,15 @@
     "format": "mp3"
   },
   {
+    "title": "Dry And Dusty",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "A",
+    "url": "Bob and Rafe - Old Paint/Dry And Dusty.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
     "title": "Dry and Dusty",
     "artist": "Dan Gellert and Shoofly",
     "key": "A",
@@ -304,6 +925,141 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Dry and Dusty",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "A",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/21 Dry and Dusty.mp3",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "mp3"
+  },
+  {
+    "title": "Dry and Dusty (feat. Colin Vance)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "A",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/19 Dry and Dusty (feat. Colin Vance).m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Ducks On the Millpond",
+    "artist": "Rayna Gellert & Friends",
+    "key": "D",
+    "url": "Rayna Gellert & Friends/Ways of the World/04 Ducks On the Millpond.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Ducks On The Millpond - Adae",
+    "artist": "Stefanini, Rafe",
+    "key": "D",
+    "url": "Hell And Scissors/18 Ducks On The Millpond - Adae.m4a",
+    "duration": 0,
+    "confidence": 0.89,
+    "format": "m4a"
+  },
+  {
+    "title": "Dull Chisel",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "A",
+    "url": "Red Prairie Dawn/09 Dull Chisel.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Durange's Hornpipe",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "D",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Durange_s Hornpipe.m4a",
+    "duration": 0,
+    "confidence": 0.86,
+    "format": "m4a"
+  },
+  {
+    "title": "Dusty Miller",
+    "artist": "Tim Foss",
+    "key": "D",
+    "url": "Bob and Rafe - Old Paint/Dusty Miller.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Emminence Breakdown",
+    "artist": "The Mill City Grinders",
+    "key": "D",
+    "url": "The Mill City Grinders/No Corn In The Crib/15 Emminence Breakdown.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Fall on My Knees",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "D",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/12 Fall on My Knees.mp3",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "mp3"
+  },
+  {
+    "title": "Farewell To West Virginia",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Farewell To West Virginia.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Featherbed - Aeae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/05 Featherbed - Aeae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Featherbed - Aeae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Featherbed - Aeae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Fever In The South",
+    "artist": "Big Medicine",
+    "key": "G",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - Fever In The South.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Fiddler's Dream",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "G",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Fiddler_s Dream.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Fiddler's Reel",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "D",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Fiddler_s Reel.m4a",
+    "duration": 0,
+    "confidence": 0.93,
+    "format": "m4a"
   },
   {
     "title": "Fisher's Hornpipe",
@@ -316,12 +1072,39 @@
   },
   {
     "title": "Five Miles From Town",
+    "artist": "The Mill City Grinders",
+    "key": "D",
+    "url": "The Mill City Grinders/No Corn In The Crib/18 Five Miles From Town.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Five Miles From Town",
     "artist": "Clyde Davenport",
     "key": "D",
     "url": "Unknown Album/Five_Miles_From_Town.mp3",
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Flannery's Dream",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "A",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/07 Flannery_s Dream.m4a",
+    "duration": 0,
+    "confidence": 0.84,
+    "format": "m4a"
+  },
+  {
+    "title": "Flatwoods",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "Am",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/05 Flatwoods.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
   },
   {
     "title": "Flatwoods",
@@ -342,6 +1125,24 @@
     "format": "mp3"
   },
   {
+    "title": "Flowers of Edinburg",
+    "artist": "Rhythm Rats",
+    "key": "G",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Flowers of Edinburg.m4a",
+    "duration": 0,
+    "confidence": 0.97,
+    "format": "m4a"
+  },
+  {
+    "title": "Fly Around My Pretty Little Miss",
+    "artist": "Rayna Gellert & Friends",
+    "key": "G",
+    "url": "Rayna Gellert & Friends/Ways of the World/03 Fly Around My Pretty Little Miss.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
     "title": "Forked Deer",
     "artist": "Dan Gellert and Shoofly",
     "key": "A",
@@ -351,12 +1152,75 @@
     "format": "mp3"
   },
   {
+    "title": "Fortune",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "D",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Fortune.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Four Cent Cotton",
+    "artist": "Light And Hitch",
+    "key": "G",
+    "url": "Light and Hitch/Four Cent Cotton.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Frankie (feat. Amy Hofer)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/08 Frankie (feat. Amy Hofer).m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "George Booker (feat. Bill Hunter)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/13 George Booker (feat. Bill Hunter).m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "georgia railroad",
     "artist": "Michael Ismerio",
     "key": "D",
     "url": "georgia railroad.m4a",
     "duration": 0,
     "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Get Up In The Cool",
+    "artist": "The Mill City Grinders",
+    "key": "A",
+    "url": "The Mill City Grinders/No Corn In The Crib/09 Get Up In The Cool.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Give The Fiddler A Dram - Aeae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/03 Give The Fiddler A Dram - Aeae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Give The Fiddler A Dram - Aeae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Give The Fiddler A Dram - Aeae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
     "format": "m4a"
   },
   {
@@ -369,12 +1233,84 @@
     "format": "mp3"
   },
   {
+    "title": "Glory in the Meeting House",
+    "artist": "Luther Strong",
+    "key": "A",
+    "url": "Luther Strong/Berea Sound Archives/Glory in the Meeting House.mp3",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "mp3"
+  },
+  {
+    "title": "Glory in the Meeting House",
+    "artist": "Luther Strong",
+    "key": "A",
+    "url": "Luther Strong/Unknown Album/Glory in the Meeting House.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Goin' Up to Hamburg",
+    "artist": "Rhythm Rats",
+    "key": "G",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Goin_ Up to Hamburg.m4a",
+    "duration": 0,
+    "confidence": 0.97,
+    "format": "m4a"
+  },
+  {
+    "title": "Going Across The Mountain",
+    "artist": "The Mill City Grinders",
+    "key": "A",
+    "url": "The Mill City Grinders/No Corn In The Crib/05 Going Across The Mountain.m4a",
+    "duration": 0,
+    "confidence": 0.82,
+    "format": "m4a"
+  },
+  {
+    "title": "Good Ax Elve",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "G",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/13 Good Ax Elve.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Greasy Coat",
+    "artist": "The Mill City Grinders",
+    "key": "G",
+    "url": "The Mill City Grinders/No Corn In The Crib/03 Greasy Coat.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Great Big Taters In the Sandy Land",
     "artist": "Rayna Gellert & Friends",
     "key": "G",
     "url": "01 Great Big Taters In the Sandy Lan.m4a",
     "duration": 0,
     "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Great Big Taters In the Sandy Land",
+    "artist": "Rayna Gellert & Friends",
+    "key": "G",
+    "url": "Rayna Gellert & Friends/Ways of the World/01 Great Big Taters In the Sandy Lan.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Green Sleeve",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/15 Green Sleeve.m4a",
+    "duration": 0,
+    "confidence": 0.0,
     "format": "m4a"
   },
   {
@@ -396,6 +1332,42 @@
     "format": "mp3"
   },
   {
+    "title": "Half Past Four",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "G",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/03 Half Past Four.mp3",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "mp3"
+  },
+  {
+    "title": "Halifax (feat. Armin Barnett)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/05 Halifax (feat. Armin Barnett).m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Handsome Molly",
+    "artist": "The Mill City Grinders",
+    "key": "D",
+    "url": "The Mill City Grinders/No Corn In The Crib/14 Handsome Molly.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Hangman's Reel",
+    "artist": "The Mill City Grinders",
+    "key": "A",
+    "url": "The Mill City Grinders/No Corn In The Crib/17 Hangman_s Reel.m4a",
+    "duration": 0,
+    "confidence": 0.93,
+    "format": "m4a"
+  },
+  {
     "title": "Hard Times Coming/Cornbread Molasses Sassafras Tea",
     "artist": "Dan Gellert and Shoofly",
     "key": "G",
@@ -405,6 +1377,24 @@
     "format": "mp3"
   },
   {
+    "title": "Haven't Seen Mary In Years",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "D",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Haven_t Seen Mary In Years.m4a",
+    "duration": 0,
+    "confidence": 0.93,
+    "format": "m4a"
+  },
+  {
+    "title": "Hay Mow",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/13 Hay Mow.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Hell & Scissors",
     "artist": "Foghorn String Band",
     "key": "A",
@@ -412,6 +1402,42 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "m4a"
+  },
+  {
+    "title": "Hell And Scissors - Adae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/19 Hell And Scissors - Adae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Hell And Scissors - Adae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Hell And Scissors - Adae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Hell Up Coal Holler",
+    "artist": "Big Medicine",
+    "key": "A",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - Hell Up Coal Holler.m4a",
+    "duration": 0,
+    "confidence": 0.84,
+    "format": "m4a"
+  },
+  {
+    "title": "Hell up Cole Holler",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "A",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/11 Hell up Cole Holler.mp3",
+    "duration": 0,
+    "confidence": 0.79,
+    "format": "mp3"
   },
   {
     "title": "Hey Little Boy Whered You Get Your Britches",
@@ -441,12 +1467,48 @@
     "format": "mp3"
   },
   {
+    "title": "High Up On Tug (feat. Maggie Lind)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/11 High Up On Tug (feat. Maggie Lind.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "How Can A Poor Man Stand Such Times And Live",
+    "artist": "The Mill City Grinders",
+    "key": "G",
+    "url": "The Mill City Grinders/No Corn In The Crib/08 How Can A Poor Man Stand Such Times And Live.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "I Know Whose Tears",
+    "artist": "Big Medicine",
+    "key": "G",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - I Know Whose Tears.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "I Truly Understand (feat. Adrienne Davis, Mark Olitsky & Joseph Dejarnette)",
     "artist": "Fiddlin' Earl White",
     "key": "G",
     "url": "Fiddlin Earl White Stringband/FiddlinEarlWhite-EarlWhiteStringband-08-ITrulyUnderstand.mp3",
     "duration": 0,
     "confidence": 0.9,
+    "format": "mp3"
+  },
+  {
+    "title": "I'll Reap What I've Sown",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "G",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/13 I_ll Reap What I_ve Sown.mp3",
+    "duration": 0,
+    "confidence": 0.0,
     "format": "mp3"
   },
   {
@@ -457,6 +1519,51 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "I'm Going To Georgia",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - I_m Going To Georgia.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "I've Got a Bulldog",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "G",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/09 I_ve Got a Bulldog.mp3",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "mp3"
+  },
+  {
+    "title": "I've Got No Honey Baby Now - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/06 I_ve Got No Honey Baby Now - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.76,
+    "format": "m4a"
+  },
+  {
+    "title": "I've Got No Honey Baby Now - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - I_ve Got No Honey Baby Now - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.76,
+    "format": "m4a"
+  },
+  {
+    "title": "I've Got No Honeybabe Now",
+    "artist": "Rayna Gellert & Friends",
+    "key": "G",
+    "url": "Rayna Gellert & Friends/Ways of the World/10 I_ve Got No Honeybabe Now.m4a",
+    "duration": 0,
+    "confidence": 0.85,
+    "format": "m4a"
   },
   {
     "title": "Icy Mountain",
@@ -477,6 +1584,24 @@
     "format": "m4a"
   },
   {
+    "title": "Ikum Got A Coon Treed",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/17 Ikum Got A Coon Treed.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "In the Pines",
+    "artist": "Rhythm Rats",
+    "key": "D",
+    "url": "Bob and Rafe - Old Paint/In the Pines.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
     "title": "Indian Ate a Woodchuck",
     "artist": "Grace Forrest",
     "key": "A",
@@ -484,6 +1609,33 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Indian Ate a Woodchuck",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "A",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/08 Indian Ate a Woodchuck.mp3",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "mp3"
+  },
+  {
+    "title": "Indian Ate The Woodchuck - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "A",
+    "url": "Hell And Scissors/16 Indian Ate The Woodchuck - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.82,
+    "format": "m4a"
+  },
+  {
+    "title": "Indian Ate The Woodchuck - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "A",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Indian Ate The Woodchuck - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.82,
+    "format": "m4a"
   },
   {
     "title": "Indian Squaw",
@@ -495,6 +1647,15 @@
     "format": "mp3"
   },
   {
+    "title": "Indian War Whoop",
+    "artist": "Rhythm Rats",
+    "key": "D",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Indian War Whoop.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
     "title": "Iowa Center",
     "artist": "Clyde Davenport",
     "key": "C",
@@ -502,6 +1663,42 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Irons Massacre",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/18 Irons Massacre.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Jail Break",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/16 Jail Break.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Jake's Got The Bellyache - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/14 Jake_s Got The Bellyache - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.75,
+    "format": "m4a"
+  },
+  {
+    "title": "Jake's Got The Bellyache - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Jake_s Got The Bellyache - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.75,
+    "format": "m4a"
   },
   {
     "title": "Jaybird Died With A Whooping Cough",
@@ -522,6 +1719,24 @@
     "format": "m4a"
   },
   {
+    "title": "Jenny Ran Away In the Mud In the Night",
+    "artist": "Rayna Gellert & Friends",
+    "key": "A",
+    "url": "Rayna Gellert & Friends/Ways of the World/17 Jenny Ran Away In the Mud In the(1).m4a",
+    "duration": 0,
+    "confidence": 0.97,
+    "format": "m4a"
+  },
+  {
+    "title": "Jenny Ran Away In the Mud In the Night",
+    "artist": "Rayna Gellert & Friends",
+    "key": "A",
+    "url": "Rayna Gellert & Friends/Ways of the World/17 Jenny Ran Away In the Mud In the.m4a",
+    "duration": 0,
+    "confidence": 0.97,
+    "format": "m4a"
+  },
+  {
     "title": "Jim Shank",
     "artist": "Dan Gellert",
     "key": "Am",
@@ -531,6 +1746,33 @@
     "format": "mp3"
   },
   {
+    "title": "Jimmy Shank (feat. Sophie Vitells)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/12 Jimmy Shank (feat. Sophie Vitells.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Jody",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Jody.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "John Browns",
+    "artist": "Light And Hitch",
+    "key": "A",
+    "url": "Light and Hitch/John Browns.m4a",
+    "duration": 0,
+    "confidence": 0.76,
+    "format": "m4a"
+  },
+  {
     "title": "John Henry",
     "artist": "Clyde Davenport",
     "key": "D",
@@ -538,6 +1780,24 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "John Johanna",
+    "artist": "The Mill City Grinders",
+    "key": "G",
+    "url": "The Mill City Grinders/No Corn In The Crib/11 John Johanna.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "John Robinson",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "G",
+    "url": "Bob and Rafe - Old Paint/John Robinson.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
   },
   {
     "title": "Johnny Booker",
@@ -550,12 +1810,48 @@
   },
   {
     "title": "Johnny Come Along",
+    "artist": "The Mill City Grinders",
+    "key": "D",
+    "url": "The Mill City Grinders/No Corn In The Crib/04 Johnny Come Along.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Johnny Come Along",
     "artist": "Clyde Davenport",
     "key": "D",
     "url": "Unknown Album/Johnny_Come_Along.mp3",
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Johnny Court the Widder (feat. Patrick Lind)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/18 Johnny Court the Widder (feat. Pa.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Josio",
+    "artist": "Light And Hitch",
+    "key": "G",
+    "url": "Light and Hitch/Josio.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Julianne Johnson",
+    "artist": "Rayna Gellert & Friends",
+    "key": "D",
+    "url": "Rayna Gellert & Friends/Ways of the World/02 Julianne Johnson.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
   },
   {
     "title": "Katy Hill",
@@ -567,6 +1863,33 @@
     "format": "mp3"
   },
   {
+    "title": "Kentucky Waltz",
+    "artist": "Big Medicine",
+    "key": "D",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - Kentucky Waltz.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Kentucky Whiskey",
+    "artist": "Easy Street String Band",
+    "key": "A",
+    "url": "Easy Street String Band/Money In Both Pockets/13 Kentucky Whiskey.m4a",
+    "duration": 0,
+    "confidence": 0.89,
+    "format": "m4a"
+  },
+  {
+    "title": "Keweenaw Light",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Keweenaw Light.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Kitty Puss",
     "artist": "Clyde Davenport",
     "key": "G",
@@ -574,6 +1897,15 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Kitty Wells",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "G",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/10 Kitty Wells.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
   },
   {
     "title": "Knock Around The Kitchen Until The Cook Comes Home",
@@ -585,6 +1917,15 @@
     "format": "m4a"
   },
   {
+    "title": "L And N Rag",
+    "artist": "Light And Hitch",
+    "key": "G",
+    "url": "Light and Hitch/L And N Rag.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Ladies in the Ballroom",
     "artist": "Clyde Davenport",
     "key": "D",
@@ -592,6 +1933,15 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Ladies On The Steamboat",
+    "artist": "Craig Johnson",
+    "key": "D",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Ladies On The Steamboat.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
   },
   {
     "title": "Ladies On The Steamboat",
@@ -612,6 +1962,42 @@
     "format": "mp3"
   },
   {
+    "title": "Ladies On the Steamboat(feat. Sammy Lind)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "D",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/14 Ladies On the Steamboat(feat. Sam.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Lady Hamilton - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/17 Lady Hamilton - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Lady Hamilton - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Lady Hamilton - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Lady On The Steamboat",
+    "artist": "The Mill City Grinders",
+    "key": "G",
+    "url": "The Mill City Grinders/No Corn In The Crib/12 Lady On The Steamboat.m4a",
+    "duration": 0,
+    "confidence": 0.91,
+    "format": "m4a"
+  },
+  {
     "title": "Laughing Boy (feat. Adrienne Davis, Mark Olitsky & Joseph Dejarnette)",
     "artist": "Fiddlin' Earl White",
     "key": "G",
@@ -619,6 +2005,15 @@
     "duration": 0,
     "confidence": 0.9,
     "format": "mp3"
+  },
+  {
+    "title": "Lazy John",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "A",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/12 Lazy John.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
   },
   {
     "title": "Lazy John",
@@ -631,12 +2026,165 @@
   },
   {
     "title": "Leather Britches",
+    "artist": "Luther Strong",
+    "key": "A",
+    "url": "Luther Strong/Unknown Album/Leather Britches.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Leather Britches",
     "artist": "Clyde Davenport",
     "key": "A",
     "url": "Unknown Album/Leather_Britches.mp3",
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Let Me Fall",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "A",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/06 Let Me Fall.mp3",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "mp3"
+  },
+  {
+    "title": "Let's Hunt The Horses",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Let_s Hunt The Horses.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Liberty",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "D",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Liberty.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Little Boy Working on the Road",
+    "artist": "Rhythm Rats",
+    "key": "A",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Little Boy Working on the Road.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Little Boy, Where'd You Get Your Britches",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "G",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/16 Little Boy, Where_d You Get Your Britches.mp3",
+    "duration": 0,
+    "confidence": 0.95,
+    "format": "mp3"
+  },
+  {
+    "title": "Little Boy, Where'd You Get Your Britches",
+    "artist": "Rhythm Rats",
+    "key": "G",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Little Boy, Where_d You Get Your Britches.m4a",
+    "duration": 0,
+    "confidence": 0.95,
+    "format": "m4a"
+  },
+  {
+    "title": "Little Darling Pal Of Mine",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "G",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Little Darling Pal Of Mine.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Little David",
+    "artist": "Craig Johnson",
+    "key": "D",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Little David.m4a",
+    "duration": 0,
+    "confidence": 0.83,
+    "format": "m4a"
+  },
+  {
+    "title": "Little Gal'l Fool Me",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "D",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Little Gal_l Fool Me.m4a",
+    "duration": 0,
+    "confidence": 0.95,
+    "format": "m4a"
+  },
+  {
+    "title": "Little Girl With the Hair All Down Behind",
+    "artist": "Rayna Gellert & Friends",
+    "key": "A",
+    "url": "Rayna Gellert & Friends/Ways of the World/09 Little Girl With the Hair All Dow.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Little Margaret",
+    "artist": "Big Medicine",
+    "key": "G",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - Little Margaret.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Little Moses",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "G",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Little Moses.m4a",
+    "duration": 0,
+    "confidence": 0.82,
+    "format": "m4a"
+  },
+  {
+    "title": "Little Rose",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "G",
+    "url": "Bob and Rafe - Old Paint/Little Rose.m4a",
+    "duration": 0,
+    "confidence": 0.86,
+    "format": "m4a"
+  },
+  {
+    "title": "Liza Jane",
+    "artist": "Luther Strong",
+    "key": "G",
+    "url": "Luther Strong/Unknown Album/Liza Jane.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Liza Jane - Aeae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/01 Liza Jane - Aeae.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Liza Jane - Aeae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Liza Jane - Aeae.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
   },
   {
     "title": "Liza Jane With Singing",
@@ -648,12 +2196,75 @@
     "format": "mp3"
   },
   {
+    "title": "Lonely Tombs",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "G",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Lonely Tombs.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Lonesome Pine Special",
     "artist": "The  Rockinghams",
-    "key": "?",
+    "key": "G",
     "url": "The  Rockinghams/Shout Lulu/04 Track 04.m4a",
     "duration": 0,
     "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Looking Toward Heaven",
+    "artist": "Big Medicine",
+    "key": "G",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - Looking Toward Heaven.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Lost Babe/Lost And Found",
+    "artist": "Big Medicine",
+    "key": "G",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - Lost Babe Lost And Found.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Lost Girl - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/12 Lost Girl - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Lost Girl - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Lost Girl - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Lost Indian",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "A",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/05 Lost Indian.mp3",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "mp3"
+  },
+  {
+    "title": "Lost Indian",
+    "artist": "Rhythm Rats",
+    "key": "A",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Lost Indian.m4a",
+    "duration": 0,
+    "confidence": 0.9,
     "format": "m4a"
   },
   {
@@ -664,6 +2275,24 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Louisville Burglar",
+    "artist": "Easy Street String Band",
+    "key": "G",
+    "url": "Easy Street String Band/Money In Both Pockets/03 Louisville Burglar.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Man of Constant Sorrow",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "G",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/06 Man of Constant Sorrow.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
   },
   {
     "title": "Marjories Favorite (feat. Adrienne Davis, Mark Olitsky & Joseph Dejarnette)",
@@ -684,12 +2313,30 @@
     "format": "mp3"
   },
   {
+    "title": "Martha Campbell",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "D",
+    "url": "Bob and Rafe - Old Paint/Martha Campbell.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
     "title": "Mary Wants A Lover",
     "artist": "Foghorn String Band",
     "key": "G",
     "url": "Foghorn String Band/Boombox Squaredance/02 Mary Wants A Lover.m4a",
     "duration": 0,
     "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Melinda",
+    "artist": "Rhythm Rats",
+    "key": "G",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Melinda.m4a",
+    "duration": 0,
+    "confidence": 0.0,
     "format": "m4a"
   },
   {
@@ -700,6 +2347,24 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Midnight Serenade - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "D",
+    "url": "Hell And Scissors/08 Midnight Serenade - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.87,
+    "format": "m4a"
+  },
+  {
+    "title": "Midnight Serenade - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "D",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Midnight Serenade - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.87,
+    "format": "m4a"
   },
   {
     "title": "Mississippi Echoes",
@@ -720,10 +2385,100 @@
     "format": "m4a"
   },
   {
+    "title": "Molly Put The Kettle On",
+    "artist": "Light And Hitch",
+    "key": "D",
+    "url": "Light and Hitch/Molly Put The Kettle On.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Money In Both Pockets",
+    "artist": "Easy Street String Band",
+    "key": "A",
+    "url": "Easy Street String Band/Money In Both Pockets/01 Money In Both Pockets.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Monkey On A String/Fish Upon The Hook - Adae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/13 Monkey On A String_Fish Upon The Hook - Adae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Monkey On A String/Fish Upon The Hook - Adae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Monkey On A String Fish Upon The Hook - Adae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Moonlight and Skies",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "G",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/14 Moonlight and Skies.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "More Pretty Girls Than One",
+    "artist": "The Mill City Grinders",
+    "key": "G",
+    "url": "The Mill City Grinders/No Corn In The Crib/13 More Pretty Girls Than One.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Morgan On The Railroad",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "G",
+    "url": "Bob and Rafe - Old Paint/Morgan On The Railroad.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Muddy Boots",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/20 Muddy Boots.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Muddy Creek",
     "artist": "Foghorn String Band",
     "key": "D",
     "url": "Foghorn String Band/Boombox Squaredance/04 Muddy Creek.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Mule Team",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/14 Mule Team.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Muskrat",
+    "artist": "Craig Johnson",
+    "key": "D",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Muskrat.m4a",
     "duration": 0,
     "confidence": 1.0,
     "format": "m4a"
@@ -735,6 +2490,51 @@
     "url": "The  Rockinghams/Shout Lulu/16 Ladies on a steamboat.m4a",
     "duration": 0,
     "confidence": 0.92,
+    "format": "m4a"
+  },
+  {
+    "title": "Nancy Rowlands - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/15 Nancy Rowlands - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Nancy Rowlands - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Nancy Rowlands - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Natchez Under The Hill",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "A",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Natchez Under The Hill.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Never Be As Fast As I Have Been",
+    "artist": "The Mill City Grinders",
+    "key": "G",
+    "url": "The Mill City Grinders/No Corn In The Crib/02 Never Be As Fast As I Have Been.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "New Harmony",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - New Harmony.m4a",
+    "duration": 0,
+    "confidence": 0.0,
     "format": "m4a"
   },
   {
@@ -756,6 +2556,51 @@
     "format": "m4a"
   },
   {
+    "title": "No Corn On Tygart - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/09 No Corn On Tygart - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.87,
+    "format": "m4a"
+  },
+  {
+    "title": "No Corn On Tygart - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - No Corn On Tygart - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.87,
+    "format": "m4a"
+  },
+  {
+    "title": "Number Nine",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "G",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/09 Number Nine.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Oh Mary Don't You Weep",
+    "artist": "Light And Hitch",
+    "key": "G",
+    "url": "Light and Hitch/Oh Mary Don_t You Weep.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Ol' Bob",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "A",
+    "url": "Red Prairie Dawn/11 Ol_ Bob.m4a",
+    "duration": 0,
+    "confidence": 0.92,
+    "format": "m4a"
+  },
+  {
     "title": "Old Baldy",
     "artist": "Snake Chapman",
     "key": "G",
@@ -765,12 +2610,48 @@
     "format": "mp3"
   },
   {
+    "title": "Old Beech Leaves",
+    "artist": "Light And Hitch",
+    "key": "G",
+    "url": "Light and Hitch/Old Beech Leaves.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
     "title": "Old Bunch Of Keys",
     "artist": "Chicken Train",
     "key": "A",
     "url": "Chicken Train/18 Old Bunch Of Keys.m4a",
     "duration": 0,
     "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Old Cat Died",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "G",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Old Cat Died.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Old Cow Died (feat. Dave Mount)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/07 Old Cow Died (feat. Dave Mount).m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Old Dan Tucker",
+    "artist": "Easy Street String Band",
+    "key": "D",
+    "url": "Easy Street String Band/Money In Both Pockets/14 Old Dan Tucker.m4a",
+    "duration": 0,
+    "confidence": 0.9,
     "format": "m4a"
   },
   {
@@ -792,12 +2673,39 @@
     "format": "mp3"
   },
   {
+    "title": "Old Granny Blair(feat. Tatiana Hargreaves)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/06 Old Granny Blair(feat. Tatiana Ha.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Old Joe Clark",
     "artist": "Chicken Train",
     "key": "A",
     "url": "Chicken Train/12 Old Joe Clark.m4a",
     "duration": 0,
     "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Old Joe Clark",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "A",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Old Joe Clark.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Old Joe Clark Reel",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "A",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Old Joe Clark Reel.m4a",
+    "duration": 0,
+    "confidence": 0.9,
     "format": "m4a"
   },
   {
@@ -810,10 +2718,64 @@
     "format": "m4a"
   },
   {
+    "title": "Old Judge Parker (feat. Tony Goldenberg)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/10 Old Judge Parker (feat. Tony Gold.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Old Kentucky Whiskey",
+    "artist": "Light And Hitch",
+    "key": "A",
+    "url": "Light and Hitch/Old Kentucky Whiskey.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
     "title": "Old Man Can Your Dog Catch A Rabbit",
     "artist": "Chicken Train",
     "key": "G",
     "url": "Chicken Train/19 Old Man Can Your Dog Catch A Rabbit.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Old Molly Hare",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "D",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/04 Old Molly Hare.mp3",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "mp3"
+  },
+  {
+    "title": "Old Mother Logo",
+    "artist": "Light And Hitch",
+    "key": "A",
+    "url": "Light and Hitch/Old Mother Logo.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Old Paint",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "G",
+    "url": "Bob and Rafe - Old Paint/Old Paint.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Old Paint",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Old Paint.m4a",
     "duration": 0,
     "confidence": 1.0,
     "format": "m4a"
@@ -837,6 +2799,42 @@
     "format": "mp3"
   },
   {
+    "title": "Old Sledge",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "D",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/19 Old Sledge.mp3",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "mp3"
+  },
+  {
+    "title": "Old Time Sally Ann",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "G",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Old Time Sally Ann.m4a",
+    "duration": 0,
+    "confidence": 0.82,
+    "format": "m4a"
+  },
+  {
+    "title": "Old Time Train 45",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "A",
+    "url": "Bob and Rafe - Old Paint/Old Time Train 45.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Old Yeller Dog Come Trottin Through the Meetinghouse",
+    "artist": "Rayna Gellert & Friends",
+    "key": "G",
+    "url": "Rayna Gellert & Friends/Ways of the World/05 Old Yeller Dog Come Trottin Throu.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Oldtime Fire On the Mountain (feat. Adrienne Davis, Mark Olitsky & Joseph Dejarnette)",
     "artist": "Fiddlin' Earl White",
     "key": "A",
@@ -844,6 +2842,24 @@
     "duration": 0,
     "confidence": 0.9,
     "format": "mp3"
+  },
+  {
+    "title": "Over The Flat Lands",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/02 Over The Flat Lands.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Paddy On The Handcar",
+    "artist": "The Mill City Grinders",
+    "key": "G",
+    "url": "The Mill City Grinders/No Corn In The Crib/01 Paddy On The Handcar.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
   },
   {
     "title": "Paddy Wont You Drink Some Good Old Cider",
@@ -859,6 +2875,15 @@
     "artist": "Chicken Train",
     "key": "G",
     "url": "Chicken Train/04 Pay Day.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Peacock Rag",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "D",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Peacock Rag.m4a",
     "duration": 0,
     "confidence": 1.0,
     "format": "m4a"
@@ -882,6 +2907,24 @@
     "format": "mp3"
   },
   {
+    "title": "Piney Mountains",
+    "artist": "Craig Johnson",
+    "key": "A",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Piney Mountains.m4a",
+    "duration": 0,
+    "confidence": 0.97,
+    "format": "m4a"
+  },
+  {
+    "title": "Piney Woods",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "G",
+    "url": "Bob and Rafe - Old Paint/Piney Woods.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
     "title": "Piney Woods (feat. Adrienne Davis, Mark Olitsky & Joseph Dejarnette)",
     "artist": "Fiddlin' Earl White",
     "key": "G",
@@ -889,6 +2932,15 @@
     "duration": 0,
     "confidence": 0.9,
     "format": "mp3"
+  },
+  {
+    "title": "Piney Woods / Thumping Jesus",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "G",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/01 Piney Woods _ Thumping Jesus.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
   },
   {
     "title": "Piney Woods Gal",
@@ -900,12 +2952,66 @@
     "format": "m4a"
   },
   {
+    "title": "Pleasure Of A Single Life",
+    "artist": "Big Medicine",
+    "key": "G",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - Pleasure Of A Single Life.m4a",
+    "duration": 0,
+    "confidence": 0.98,
+    "format": "m4a"
+  },
+  {
     "title": "Polecat Blues",
     "artist": "Chicken Train",
     "key": "Em",
     "url": "Chicken Train/17 Polecat Blues.m4a",
     "duration": 0,
     "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Polly / Cukoo",
+    "artist": "Light And Hitch",
+    "key": "G",
+    "url": "Light and Hitch/Polly  Cukoo.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Polly Put The Kettle On",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "D",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Polly Put The Kettle On.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Possum In The Well",
+    "artist": "Easy Street String Band",
+    "key": "G",
+    "url": "Easy Street String Band/Money In Both Pockets/10 Possum In The Well.m4a",
+    "duration": 0,
+    "confidence": 0.78,
+    "format": "m4a"
+  },
+  {
+    "title": "Poughkeepsie Waltz",
+    "artist": "Easy Street String Band",
+    "key": "G",
+    "url": "Easy Street String Band/Money In Both Pockets/11 Poughkeepsie Waltz.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Poundcake & Sugar",
+    "artist": "Luther Strong",
+    "key": "A",
+    "url": "Luther Strong/Unknown Album/Poundcake & Sugar.m4a",
+    "duration": 0,
+    "confidence": 0.86,
     "format": "m4a"
   },
   {
@@ -927,6 +3033,33 @@
     "format": "mp3"
   },
   {
+    "title": "Pretty Betty Martin",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/05 Pretty Betty Martin.m4a",
+    "duration": 0,
+    "confidence": 0.86,
+    "format": "m4a"
+  },
+  {
+    "title": "Pretty Crowin' Chicken",
+    "artist": "Rhythm Rats",
+    "key": "G",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Pretty Crowin_ Chicken.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Pretty Little Gal",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "A",
+    "url": "Bob and Rafe - Old Paint/Pretty Little Gal.m4a",
+    "duration": 0,
+    "confidence": 0.91,
+    "format": "m4a"
+  },
+  {
     "title": "Promised Day",
     "artist": "Dan Gellert and Shoofly",
     "key": "G",
@@ -936,6 +3069,33 @@
     "format": "mp3"
   },
   {
+    "title": "Rabbit in the Lowland",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "G",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/01 Rabbit in the Lowland.mp3",
+    "duration": 0,
+    "confidence": 0.83,
+    "format": "mp3"
+  },
+  {
+    "title": "Rabbit, Where's Your Mammy? (feat. Caroline Oakley)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/16 Rabbit, Where_s Your Mammy_ (feat.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Ragtime Annie",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "D",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Ragtime Annie.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
     "title": "Railroading Through the Rocky Mountains",
     "artist": "Dan Gellert and Shoofly",
     "key": "G",
@@ -943,6 +3103,15 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Rake And Rambling Boy",
+    "artist": "Craig Johnson",
+    "key": "A",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Rake And Rambling Boy.m4a",
+    "duration": 0,
+    "confidence": 0.86,
+    "format": "m4a"
   },
   {
     "title": "Raleigh and Spencer",
@@ -963,6 +3132,51 @@
     "format": "mp3"
   },
   {
+    "title": "Rascal Fair",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "G",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/02 Rascal Fair.mp3",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "mp3"
+  },
+  {
+    "title": "Rats Gone To Rest",
+    "artist": "Light And Hitch",
+    "key": "G",
+    "url": "Light and Hitch/Rats Gone To Rest.m4a",
+    "duration": 0,
+    "confidence": 0.97,
+    "format": "m4a"
+  },
+  {
+    "title": "Rattlesnake",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "A",
+    "url": "Bob and Rafe - Old Paint/Rattlesnake.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Rattletrap",
+    "artist": "Easy Street String Band",
+    "key": "G",
+    "url": "Easy Street String Band/Money In Both Pockets/04 Rattletrap.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Rattletrap",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "G",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Rattletrap.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Rattlin Down the Acorns",
     "artist": "Clyde Davenport",
     "key": "C",
@@ -978,6 +3192,24 @@
     "url": "The  Rockinghams/Shout Lulu/19 Track 19.m4a",
     "duration": 0,
     "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Red Bird",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "A",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/11 Red Bird.mp3",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "mp3"
+  },
+  {
+    "title": "Red Prairie Dawn",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/07 Red Prairie Dawn.m4a",
+    "duration": 0,
+    "confidence": 0.0,
     "format": "m4a"
   },
   {
@@ -999,10 +3231,55 @@
     "format": "m4a"
   },
   {
+    "title": "Reuben's Train",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "A",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Reuben_s Train.m4a",
+    "duration": 0,
+    "confidence": 0.93,
+    "format": "m4a"
+  },
+  {
     "title": "Richmond Cotillion",
     "artist": "Chicken Train",
     "key": "D",
     "url": "Chicken Train/14 Richmond Cotillion.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Rickett's Hornpipe",
+    "artist": "Luther Strong",
+    "key": "D",
+    "url": "Luther Strong/Unknown Album/Rickett_s Hornpipe.m4a",
+    "duration": 0,
+    "confidence": 0.78,
+    "format": "m4a"
+  },
+  {
+    "title": "Road To Malvern",
+    "artist": "Light And Hitch",
+    "key": "A",
+    "url": "Light and Hitch/Road To Malvern.m4a",
+    "duration": 0,
+    "confidence": 0.86,
+    "format": "m4a"
+  },
+  {
+    "title": "Road To Westfield",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "A",
+    "url": "Red Prairie Dawn/03 Road To Westfield.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Rocky Mountain Goat",
+    "artist": "Light And Hitch",
+    "key": "D",
+    "url": "Light and Hitch/Rocky Mountain Goat.m4a",
     "duration": 0,
     "confidence": 1.0,
     "format": "m4a"
@@ -1015,6 +3292,60 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Rocky Road To Dublin",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "G",
+    "url": "Bob and Rafe - Old Paint/Rocky Road To Dublin.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Roll 'Em, Boys",
+    "artist": "Easy Street String Band",
+    "key": "G",
+    "url": "Easy Street String Band/Money In Both Pockets/09 Roll _Em, Boys.m4a",
+    "duration": 0,
+    "confidence": 0.96,
+    "format": "m4a"
+  },
+  {
+    "title": "Roll On Buddy-Hickory Jack-Give the Fiddler a Dram",
+    "artist": "Luther Strong",
+    "key": "A",
+    "url": "Luther Strong/Unknown Album/Roll On Buddy-Hickory Jack-Give the Fiddler a Dram.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Rolling Mills",
+    "artist": "Big Medicine",
+    "key": "G",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - Rolling Mills.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Roosian Rabbit",
+    "artist": "Rhythm Rats",
+    "key": "G",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Roosian Rabbit.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Round Barn",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/01 Round Barn (deleted 4debb26c-577ccb-ce17baf8).m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
   },
   {
     "title": "Roustabout",
@@ -1033,6 +3364,33 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Rye Straw",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "D",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/15 Rye Straw.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Rye Straw",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "D",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/01 Rye Straw.mp3",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "mp3"
+  },
+  {
+    "title": "Ryestraw / John Sharp's Tune",
+    "artist": "Light And Hitch",
+    "key": "G",
+    "url": "Light and Hitch/Ryestraw  John Sharp_s Tune.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
   },
   {
     "title": "Saddle Up the Grey",
@@ -1054,12 +3412,75 @@
   },
   {
     "title": "Sail Away Ladies",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "A",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Sail Away Ladies.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Sail Away Ladies",
     "artist": "Chicken Train",
     "key": "A",
     "url": "Chicken Train/02 Sail Away Ladies.m4a",
     "duration": 0,
     "confidence": 1.0,
     "format": "m4a"
+  },
+  {
+    "title": "Sail Away, Ladies",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Sail Away, Ladies.m4a",
+    "duration": 0,
+    "confidence": 0.97,
+    "format": "m4a"
+  },
+  {
+    "title": "Sally Ann",
+    "artist": "Dirk Powell",
+    "key": "D",
+    "url": "Bob and Rafe - Old Paint/Sally Ann.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Sally Ann",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "D",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Sally Ann.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Sally Ann (feat. Kori Miyanishi)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/03 Sally Ann (feat. Kori Miyanishi).m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Sally Coming Through the Rye",
+    "artist": "Rayna Gellert & Friends",
+    "key": "G",
+    "url": "Rayna Gellert & Friends/Ways of the World/14 Sally Coming Through the Rye.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Sally Johnson",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "A",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/03 Sally Johnson.mp3",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "mp3"
   },
   {
     "title": "Sally Johnson",
@@ -1069,6 +3490,87 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Salt River",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "A",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/20 Salt River.mp3",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "mp3"
+  },
+  {
+    "title": "Same Time Today As It Was Yesterday - Adae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/10 Same Time Today As It Was Yesterday - Adae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Same Time Today As It Was Yesterday - Adae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Same Time Today As It Was Yesterday - Adae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Sandy Land",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "G",
+    "url": "Bob and Rafe - Old Paint/Sandy Land.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Saro",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "G",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/08 Saro.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Say, Darling, Say",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "D",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/14 Say, Darling, Say.mp3",
+    "duration": 0,
+    "confidence": 0.94,
+    "format": "mp3"
+  },
+  {
+    "title": "Say, Old Man",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "G",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/03 Say, Old Man.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Sharp's Three Way Hornpipe",
+    "artist": "Big Medicine",
+    "key": "A",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - Sharp_s Three Way Hornpipe.m4a",
+    "duration": 0,
+    "confidence": 0.82,
+    "format": "m4a"
+  },
+  {
+    "title": "She Lied to Me",
+    "artist": "Rayna Gellert & Friends",
+    "key": "G",
+    "url": "Rayna Gellert & Friends/Ways of the World/19 She Lied to Me.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
   },
   {
     "title": "Sheep Shuckin' Corn",
@@ -1089,10 +3591,55 @@
     "format": "mp3"
   },
   {
+    "title": "Shipping Port(feat.Michael Ismerio)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/17 Shipping Port(feat.Michael Ismeri.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Shortenin' Bread",
+    "artist": "Rhythm Rats",
+    "key": "G",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Shortenin_ Bread.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
     "title": "Shortenin' Bread",
     "artist": "Red Mule String Band",
     "key": "G",
     "url": "Shortenin_ Bread.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Shortening Bread",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "A",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Shortening Bread.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Shout Lula",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "D",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/04 Shout Lula.mp3",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "mp3"
+  },
+  {
+    "title": "Shout Lulu",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "G",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Shout Lulu.m4a",
     "duration": 0,
     "confidence": 1.0,
     "format": "m4a"
@@ -1116,12 +3663,30 @@
     "format": "mp3"
   },
   {
+    "title": "Silver Lake",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "D",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/06 Silver Lake.mp3",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "mp3"
+  },
+  {
     "title": "Silverlake Waltz",
     "artist": "Foghorn String Band",
     "key": "D",
     "url": "Foghorn String Band/Boombox Squaredance/11 Silverlake Waltz.m4a",
     "duration": 0,
     "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Six Months Ain't Long",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Six Months Ain_t Long.m4a",
+    "duration": 0,
+    "confidence": 0.0,
     "format": "m4a"
   },
   {
@@ -1134,6 +3699,15 @@
     "format": "m4a"
   },
   {
+    "title": "Slidin' Jenny",
+    "artist": "Luther Strong",
+    "key": "D",
+    "url": "Luther Strong/Unknown Album/Slidin_ Jenny.m4a",
+    "duration": 0,
+    "confidence": 0.96,
+    "format": "m4a"
+  },
+  {
     "title": "Smokey Hornnpipe",
     "artist": "Clyde Davenport",
     "key": "D",
@@ -1141,6 +3715,60 @@
     "duration": 0,
     "confidence": 1.0,
     "format": "mp3"
+  },
+  {
+    "title": "Soldier's Joy",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "D",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Soldier_s Joy.m4a",
+    "duration": 0,
+    "confidence": 0.96,
+    "format": "m4a"
+  },
+  {
+    "title": "Soldier's Joy",
+    "artist": "Luther Strong",
+    "key": "D",
+    "url": "Luther Strong/Unknown Album/Soldier_s Joy.m4a",
+    "duration": 0,
+    "confidence": 0.96,
+    "format": "m4a"
+  },
+  {
+    "title": "Soldier's Joy/Arkansas Traveller",
+    "artist": "Easy Street String Band",
+    "key": "G",
+    "url": "Easy Street String Band/Money In Both Pockets/08 Soldier_s Joy_Arkansas Traveller.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Speed of the Plow",
+    "artist": "Rhythm Rats",
+    "key": "A",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Speed of the Plow.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Steam Machine",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/08 Steam Machine.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Stone's Rag",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "G",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Stone_s Rag.m4a",
+    "duration": 0,
+    "confidence": 0.91,
+    "format": "m4a"
   },
   {
     "title": "Sugar Hill",
@@ -1153,9 +3781,81 @@
   },
   {
     "title": "Sugar Hill",
+    "artist": "Easy Street String Band",
+    "key": "D",
+    "url": "Easy Street String Band/Money In Both Pockets/12 Sugar Hill.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Sugar Hill",
     "artist": "The  Rockinghams",
     "key": "D",
     "url": "The  Rockinghams/Shout Lulu/11 Track 11.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Sugar In the Gourd",
+    "artist": "Rayna Gellert & Friends",
+    "key": "A",
+    "url": "Rayna Gellert & Friends/Ways of the World/11 Sugar In the Gourd.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Sun's Gonna Shine",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "G",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/15 Sun_s Gonna Shine.mp3",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "mp3"
+  },
+  {
+    "title": "Susan's Gone",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "G",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/13 Susan_s Gone.mp3",
+    "duration": 0,
+    "confidence": 0.92,
+    "format": "mp3"
+  },
+  {
+    "title": "Susanna Gal",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "G",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Susanna Gal.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Swannanoa Waltz",
+    "artist": "Rayna Gellert & Friends",
+    "key": "G",
+    "url": "Rayna Gellert & Friends/Ways of the World/15 Swannanoa Waltz.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Sweet Marie",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "D",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Sweet Marie.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Sweet Susan",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "G",
+    "url": "Bob and Rafe - Old Paint/Sweet Susan.m4a",
     "duration": 0,
     "confidence": 1.0,
     "format": "m4a"
@@ -1170,6 +3870,60 @@
     "format": "m4a"
   },
   {
+    "title": "Take This Hammer",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - Take This Hammer.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Temperance Reel - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/02 Temperance Reel - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.86,
+    "format": "m4a"
+  },
+  {
+    "title": "Temperance Reel - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Temperance Reel - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.86,
+    "format": "m4a"
+  },
+  {
+    "title": "Tempie",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "D",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Tempie.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Tennessee Breakdown",
+    "artist": "Big Medicine",
+    "key": "G",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - Tennessee Breakdown.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Tennessee Mountain Fox Chase",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "A",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/14 Tennessee Mountain Fox Chase.mp3",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "mp3"
+  },
+  {
     "title": "Texas Barbed Wire (feat. Adrienne Davis, Mark Olitsky & Joseph Dejarnette)",
     "artist": "Fiddlin' Earl White",
     "key": "A",
@@ -1177,6 +3931,15 @@
     "duration": 0,
     "confidence": 0.9,
     "format": "mp3"
+  },
+  {
+    "title": "Texas Breakdown",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "G",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Texas Breakdown.m4a",
+    "duration": 0,
+    "confidence": 0.8,
+    "format": "m4a"
   },
   {
     "title": "Texas Gales",
@@ -1215,6 +3978,114 @@
     "format": "m4a"
   },
   {
+    "title": "The Eighteenth of September",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "G",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/16 The Eighteenth of September.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "The Girl Behind The Bar",
+    "artist": "Big Medicine",
+    "key": "G",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - The Girl Behind The Bar.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "The Hog Eyed Man",
+    "artist": "Luther Strong",
+    "key": "G",
+    "url": "Luther Strong/Unknown Album/The Hog Eyed Man.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "The Hog Went Through the Fence Yoke and All-The Old Hen Cackled",
+    "artist": "Luther Strong",
+    "key": "G",
+    "url": "Luther Strong/Unknown Album/The Hog Went Through the Fence Yoke and All-The Old Hen Cackled.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "The Last of Callahan",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "G",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/08 The Last of Callahan.mp3",
+    "duration": 0,
+    "confidence": 0.8,
+    "format": "mp3"
+  },
+  {
+    "title": "The Little Brown Bull",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - The Little Brown Bull.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "The Love Of Polly And Jack Monroe",
+    "artist": "Big Medicine",
+    "key": "G",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - The Love Of Polly And Jack Monroe.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "The Old Grey Mare",
+    "artist": "Big Medicine",
+    "key": "A",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - The Old Grey Mare.m4a",
+    "duration": 0,
+    "confidence": 0.87,
+    "format": "m4a"
+  },
+  {
+    "title": "The Rolling Mills",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - The Rolling Mills.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "The Scolding Wife - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/07 The Scolding Wife - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "The Scolding Wife - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - The Scolding Wife - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "The Titanic",
+    "artist": "Rhythm Rats",
+    "key": "G",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/The Titanic.m4a",
+    "duration": 0,
+    "confidence": 0.78,
+    "format": "m4a"
+  },
+  {
     "title": "The Tom Big Bee River",
     "artist": "Dan Gellert and Shoofly",
     "key": "G",
@@ -1224,10 +4095,55 @@
     "format": "mp3"
   },
   {
+    "title": "The Vance Song",
+    "artist": "Craig Johnson",
+    "key": "G",
+    "url": "Craig Johnson/Away Down The Road/Away Down The Road - Craig Johnson - The Vance Song.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "The Winding Stream",
     "artist": "The  Rockinghams",
-    "key": "?",
+    "key": "G",
     "url": "The  Rockinghams/Shout Lulu/07 Track 07.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "This And That",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "A",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - This And That.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Three Forks Of Cheat",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "A",
+    "url": "Bob and Rafe - Old Paint/Three Forks Of Cheat.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Tomahawk",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "A",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Tomahawk.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Tomorrow Noon",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/19 Tomorrow Noon.m4a",
     "duration": 0,
     "confidence": 0.0,
     "format": "m4a"
@@ -1237,6 +4153,15 @@
     "artist": "Chicken Train",
     "key": "A",
     "url": "Chicken Train/20 Train 45.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Train 45",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "A",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Train 45.m4a",
     "duration": 0,
     "confidence": 1.0,
     "format": "m4a"
@@ -1260,6 +4185,15 @@
     "format": "m4a"
   },
   {
+    "title": "Troublesome Waters",
+    "artist": "Brad Leftwich, Linda Higginbotham",
+    "key": "G",
+    "url": "Brad Leftwich, Linda Higginbotham/Say, Old Man/02 Troublesome Waters.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Turkey in the Peapatch (feat. Adrienne Davis, Mark Olitsky & Joseph Dejarnette)",
     "artist": "Fiddlin' Earl White",
     "key": "A",
@@ -1269,10 +4203,172 @@
     "format": "mp3"
   },
   {
+    "title": "Twin Sisters",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "G",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/02 Twin Sisters.mp3",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "mp3"
+  },
+  {
+    "title": "Twin Sisters",
+    "artist": "The Mill City Grinders",
+    "key": "G",
+    "url": "The Mill City Grinders/No Corn In The Crib/07 Twin Sisters.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Uncle Charlie's Breakdown - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/20 Uncle Charlie_s Breakdown - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.87,
+    "format": "m4a"
+  },
+  {
+    "title": "Uncle Charlie's Breakdown - Gdae",
+    "artist": "Stefanini, Rafe",
+    "key": "G",
+    "url": "Hell And Scissors/Hell And Scissors - Stefanini, Rafe - Uncle Charlie_s Breakdown - Gdae.m4a",
+    "duration": 0,
+    "confidence": 0.87,
+    "format": "m4a"
+  },
+  {
+    "title": "Wagoner (feat. Erynn Marshall)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/09 Wagoner (feat. Erynn Marshall).m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Wagoner One-Step",
+    "artist": "Rayna Gellert & Friends",
+    "key": "G",
+    "url": "Rayna Gellert & Friends/Ways of the World/16 Wagoner One-Step(1).m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Wagoner One-Step",
+    "artist": "Rayna Gellert & Friends",
+    "key": "G",
+    "url": "Rayna Gellert & Friends/Ways of the World/16 Wagoner One-Step.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Walk Chalk Chicken With A Necktie On (feat. Karen Celia Heil)",
+    "artist": "Jason & Pharis Romero and friends",
+    "key": "G",
+    "url": "Jason & Pharis Romero and friends/Back Up and Push/04 Walk Chalk Chicken With A Necktie.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Walking In The Parlor",
+    "artist": "Roan Mountain Hilltoppers",
+    "key": "D",
+    "url": "Roan Mountain Hilltoppers/Down Home/Down Home - Roan Mountain Hilltoppers - Walking In The Parlor.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Washington's March",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "D",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/15 Washington_s March.mp3",
+    "duration": 0,
+    "confidence": 0.94,
+    "format": "mp3"
+  },
+  {
+    "title": "Waves On The Sea",
+    "artist": "The Mill City Grinders",
+    "key": "G",
+    "url": "The Mill City Grinders/No Corn In The Crib/06 Waves On The Sea.m4a",
+    "duration": 0,
+    "confidence": 0.88,
+    "format": "m4a"
+  },
+  {
+    "title": "Waynesboro",
+    "artist": "Rhys Jones, Jeff Miller, and Jim Nelson",
+    "key": "G",
+    "url": "Rhys Jones, Jeff Miller, and Jim Nelson/All I_ve Gots Done Gone/12 Waynesboro.mp3",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "mp3"
+  },
+  {
+    "title": "Ways of the World",
+    "artist": "Rayna Gellert & Friends",
+    "key": "D",
+    "url": "Rayna Gellert & Friends/Ways of the World/07 Ways of the World.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "We Shall All Be Reunited",
+    "artist": "Big Medicine",
+    "key": "G",
+    "url": "Big Medicine/Fever In The South/Fever In The South - Big Medicine - We Shall All Be Reunited.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Welcome Table",
+    "artist": "Easy Street String Band",
+    "key": "G",
+    "url": "Easy Street String Band/Money In Both Pockets/07 Welcome Table.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Western Country",
     "artist": "The  Rockinghams",
     "key": "D",
     "url": "The  Rockinghams/Shout Lulu/03 Susanna Gal.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Where's That Preacher With the Rabbi's Wife",
+    "artist": "Rayna Gellert & Friends",
+    "key": "G",
+    "url": "Rayna Gellert & Friends/Ways of the World/13 Where_s That Preacher With the Ra.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Whistlin' Rufus",
+    "artist": "Benton Flippen & Smokey Valley Boys",
+    "key": "A",
+    "url": "Benton Flippen & Smokey Valley Boys/Fiddler_s Dream/Fiddler_s Dream - Benton Flippen & Smokey Valley Boys - Whistlin_ Rufus.m4a",
+    "duration": 0,
+    "confidence": 0.97,
+    "format": "m4a"
+  },
+  {
+    "title": "Whitesburg",
+    "artist": "Rhythm Rats",
+    "key": "A",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Whitesburg.m4a",
     "duration": 0,
     "confidence": 1.0,
     "format": "m4a"
@@ -1287,6 +4383,33 @@
     "format": "m4a"
   },
   {
+    "title": "Who's on the Way?",
+    "artist": "Brad Leftwich and the Hogwire Stringband",
+    "key": "G",
+    "url": "Brad Leftwich and the Hogwire Stringband/Rascal Fair/07 Who_s on the Way_.mp3",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "mp3"
+  },
+  {
+    "title": "Whoa Mule",
+    "artist": "Easy Street String Band",
+    "key": "D",
+    "url": "Easy Street String Band/Money In Both Pockets/02 Whoa Mule.m4a",
+    "duration": 0,
+    "confidence": 0.9,
+    "format": "m4a"
+  },
+  {
+    "title": "Why Do A Preacher Like Chicken So",
+    "artist": "Gary Harrison And The Mule Team",
+    "key": "G",
+    "url": "Red Prairie Dawn/04 Why Do A Preacher Like Chicken So.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Wild Hog in the Woods/Chinese Breakdown",
     "artist": "Dan Gellert and Shoofly",
     "key": "D",
@@ -1296,10 +4419,64 @@
     "format": "mp3"
   },
   {
+    "title": "Willie Moore",
+    "artist": "Rhythm Rats",
+    "key": "G",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Willie Moore.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Willow Garden",
+    "artist": "Rhythm Rats",
+    "key": "D",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Willow Garden.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Willow Garden maybe",
+    "artist": "Rhythm Rats",
+    "key": "D",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Willow Garden maybe.m4a",
+    "duration": 0,
+    "confidence": 0.81,
+    "format": "m4a"
+  },
+  {
+    "title": "Willow On the Lake",
+    "artist": "Rayna Gellert & Friends",
+    "key": "G",
+    "url": "Rayna Gellert & Friends/Ways of the World/08 Willow On the Lake.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Winder Slide",
+    "artist": "Rayna Gellert & Friends",
+    "key": "G",
+    "url": "Rayna Gellert & Friends/Ways of the World/20 Winder Slide.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
     "title": "Wolf And Lamb",
     "artist": "Chicken Train",
     "key": "A",
     "url": "Chicken Train/10 Wolf And Lamb.m4a",
+    "duration": 0,
+    "confidence": 1.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Wolf Creek",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "D",
+    "url": "Bob and Rafe - Old Paint/Wolf Creek.m4a",
     "duration": 0,
     "confidence": 1.0,
     "format": "m4a"
@@ -1323,6 +4500,24 @@
     "format": "mp3"
   },
   {
+    "title": "Yearlings In The Canebrake",
+    "artist": "Bob Herring & Rafe Stefanini",
+    "key": "G",
+    "url": "Bob and Rafe - Old Paint/Yearlings In The Canebrake.m4a",
+    "duration": 0,
+    "confidence": 0.0,
+    "format": "m4a"
+  },
+  {
+    "title": "Yelling in the Shoats",
+    "artist": "Rhythm Rats",
+    "key": "D",
+    "url": "Rhythm Rats/Pretty Crowing Chicken/Yelling in the Shoats.m4a",
+    "duration": 0,
+    "confidence": 0.92,
+    "format": "m4a"
+  },
+  {
     "title": "Yew Piney Mountain (feat. Adrienne Davis, Mark Olitsky & Joseph Dejarnette)",
     "artist": "Fiddlin' Earl White",
     "key": "A",
@@ -1334,7 +4529,7 @@
   {
     "title": "Young And Tender Ladies",
     "artist": "The  Rockinghams",
-    "key": "?",
+    "key": "G",
     "url": "The  Rockinghams/Shout Lulu/09 Track 09.m4a",
     "duration": 0,
     "confidence": 0.0,

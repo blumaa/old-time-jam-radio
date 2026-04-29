@@ -306,6 +306,9 @@ def find_key(title, reference=None):
         ref_key = reference[norm]
         if "," not in ref_key:
             return ref_key, 1.0
+        keys = [k.strip() for k in ref_key.split(",")]
+        mode_key = max(set(keys), key=keys.count)
+        return mode_key, 0.9
 
     # Tier 1b: fuzzy match against reference
     try:
@@ -323,7 +326,7 @@ def find_key(title, reference=None):
             best_score = score
             best_key = ref_key
 
-    if best_score >= 0.85 and best_key:
+    if best_score >= 0.75 and best_key:
         return best_key, best_score
 
     return None, best_score
@@ -375,7 +378,7 @@ def main():
 
         tune_key, confidence = find_key(title, reference)
         if not tune_key:
-            tune_key = "?"
+            tune_key = "G"
             confidence = 0.0
 
         manifest.append({
@@ -408,10 +411,10 @@ def main():
         for f in no_artist:
             print(f"  - {f}")
 
-    unmatched = [t for t in manifest if t["key"] == "?"]
-    if unmatched:
-        print(f"\nUnmatched keys ({len(unmatched)}):")
-        for t in unmatched:
+    defaulted = [t for t in manifest if t["confidence"] == 0.0]
+    if defaulted:
+        print(f"\nDefaulted to G (confidence 0, fix in admin) ({len(defaulted)}):")
+        for t in defaulted:
             print(f"  - {t['title']} ({t['url']})")
 
     # Write local
