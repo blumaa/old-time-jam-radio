@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "@/styles/global.css";
 import ServiceWorkerRegistrar from "./ServiceWorkerRegistrar";
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
   title: "The Old-Time Dial",
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body>
           <ServiceWorkerRegistrar />
           {children}
+          <Analytics />
         </body>
     </html>
   );
