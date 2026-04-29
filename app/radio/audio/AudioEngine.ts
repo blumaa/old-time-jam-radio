@@ -28,6 +28,8 @@ export class AudioEngine {
   async loadAndPlay(url: string): Promise<void> {
     this.stop();
 
+    await this.audioContext.resume();
+
     const response = await fetch(url);
     const arrayBuffer = await response.arrayBuffer();
     const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
@@ -51,7 +53,6 @@ export class AudioEngine {
     });
 
     this.shifter.connect(this.gainNode);
-    await this.audioContext.resume();
     this._playing = true;
   }
 
@@ -116,6 +117,15 @@ export class AudioEngine {
 
   isPaused(): boolean {
     return this.audioContext.state === "suspended" && this.shifter !== null;
+  }
+
+  async unlock(): Promise<void> {
+    const buffer = this.audioContext.createBuffer(1, 1, this.audioContext.sampleRate);
+    const source = this.audioContext.createBufferSource();
+    source.buffer = buffer;
+    source.connect(this.audioContext.destination);
+    source.start();
+    await this.audioContext.resume();
   }
 
   async resume(): Promise<void> {

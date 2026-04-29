@@ -27,7 +27,7 @@ export function useAudioEngine() {
   const play = useCallback(
     async (url: string) => {
       const engine = getEngine();
-      await engine.resume();
+      await engine.unlock();
       await engine.loadAndPlay(url);
     },
     [getEngine]
@@ -73,7 +73,7 @@ export function useAudioEngine() {
   const playStaticBurst = useCallback(
     async (durationMs = 400) => {
       const engine = getEngine();
-      await engine.resume();
+      await engine.unlock();
       await engine.playStaticBurst(durationMs);
     },
     [getEngine]

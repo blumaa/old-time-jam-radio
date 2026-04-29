@@ -109,6 +109,41 @@ describe("AudioEngine", () => {
     expect(resumeSpy).toHaveBeenCalled();
   });
 
+  it("should unlock audio context by playing a silent buffer and resuming", async () => {
+    const ctx = (engine as unknown as { audioContext: AudioContext }).audioContext;
+    const resumeSpy = vi.fn().mockResolvedValue(undefined);
+    ctx.resume = resumeSpy;
+
+    await engine.unlock();
+
+    expect(resumeSpy).toHaveBeenCalled();
+  });
+
+  it("should resume context before decoding audio in loadAndPlay", async () => {
+    const ctx = (engine as unknown as { audioContext: AudioContext }).audioContext;
+    const callOrder: string[] = [];
+
+    const resumeSpy = vi.fn().mockImplementation(async () => {
+      callOrder.push("resume");
+    });
+    const decodeSpy = vi.fn().mockImplementation(async () => {
+      callOrder.push("decode");
+      return ctx.createBuffer(1, 1, 44100);
+    });
+
+    ctx.resume = resumeSpy;
+    ctx.decodeAudioData = decodeSpy;
+
+    vi.spyOn(global, "fetch").mockResolvedValue({
+      arrayBuffer: () => Promise.resolve(new ArrayBuffer(1024)),
+    } as Response);
+
+    await engine.loadAndPlay("https://example.com/tune.mp3");
+
+    expect(callOrder[0]).toBe("resume");
+    expect(callOrder[1]).toBe("decode");
+  });
+
   it("should register onEnded callback", () => {
     const callback = vi.fn();
     engine.onEnded(callback);

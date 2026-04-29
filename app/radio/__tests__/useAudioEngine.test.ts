@@ -4,6 +4,7 @@ import { useAudioEngine } from "../hooks/useAudioEngine";
 
 const mockEngine = {
   resume: vi.fn().mockResolvedValue(undefined),
+  unlock: vi.fn().mockResolvedValue(undefined),
   loadAndPlay: vi.fn().mockResolvedValue(undefined),
   stop: vi.fn(),
   setTempo: vi.fn(),
@@ -59,14 +60,14 @@ describe("useAudioEngine", () => {
     expect(constructorCallCount).toBe(1);
   });
 
-  it("should call resume and loadAndPlay on play", async () => {
+  it("should call unlock and loadAndPlay on play", async () => {
     const { result } = renderHook(() => useAudioEngine());
 
     await act(async () => {
       await result.current.play("https://example.com/tune.mp3");
     });
 
-    expect(mockEngine.resume).toHaveBeenCalled();
+    expect(mockEngine.unlock).toHaveBeenCalled();
     expect(mockEngine.loadAndPlay).toHaveBeenCalledWith(
       "https://example.com/tune.mp3"
     );
