@@ -6,9 +6,7 @@ import "../styles/radio.css";
 import "../styles/themes.css";
 import "../styles/loading-spinner.css";
 
-const withTheme: Decorator = (Story, context) => {
-  const theme = (context.globals.theme as string) ?? "walnut";
-
+function ThemeProvider({ theme, children }: { theme: string; children: React.ReactNode }) {
   useEffect(() => {
     const root = document.documentElement;
     if (theme === "walnut") {
@@ -23,7 +21,16 @@ const withTheme: Decorator = (Story, context) => {
     };
   }, [theme]);
 
-  return <Story />;
+  return <>{children}</>;
+}
+
+const withTheme: Decorator = (Story, context) => {
+  const theme = (context.globals.theme as string) ?? "walnut";
+  return (
+    <ThemeProvider theme={theme}>
+      <Story />
+    </ThemeProvider>
+  );
 };
 
 const preview: Preview = {
