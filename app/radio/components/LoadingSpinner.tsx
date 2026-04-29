@@ -20,7 +20,6 @@ export default function LoadingSpinner() {
           &#9834;
         </text>
       </svg>
-      <p className="loading-spinner__text">Tuning in...</p>
     </div>
   );
 }
