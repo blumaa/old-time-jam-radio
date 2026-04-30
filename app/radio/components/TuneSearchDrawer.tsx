@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
 import type { Tune } from "../types";
 import TuneSearch from "./TuneSearch";
 
@@ -21,35 +20,10 @@ export default function TuneSearchDrawer({
   onSelectTune,
   onClose,
 }: TuneSearchDrawerProps) {
-  const [mounted, setMounted] = useState(false);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      setMounted(true);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setVisible(true);
-        });
-      });
-    } else {
-      setVisible(false);
-    }
-  }, [isOpen]);
-
-  const handleTransitionEnd = useCallback(() => {
-    if (!visible) {
-      setMounted(false);
-    }
-  }, [visible]);
-
-  if (!mounted) return null;
-
   return (
     <div
-      className={`tune-search-drawer ${visible ? "tune-search-drawer--open" : ""}`}
+      className={`tune-search-drawer ${isOpen ? "tune-search-drawer--open" : ""}`}
       data-testid="tune-search-drawer"
-      onTransitionEnd={handleTransitionEnd}
     >
       <div
         className="tune-search-drawer__backdrop"
@@ -58,7 +32,7 @@ export default function TuneSearchDrawer({
       />
       <div className="tune-search-drawer__panel">
         <TuneSearch
-          isOpen={true}
+          isOpen={isOpen}
           query={query}
           results={results}
           onQueryChange={onQueryChange}

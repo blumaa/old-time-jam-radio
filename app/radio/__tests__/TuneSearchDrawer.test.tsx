@@ -21,8 +21,8 @@ const mockResults: Tune[] = [
 ];
 
 describe("TuneSearchDrawer", () => {
-  it("renders nothing when isOpen is false", () => {
-    const { container } = render(
+  it("renders without open class when isOpen is false", () => {
+    render(
       <TuneSearchDrawer
         isOpen={false}
         query=""
@@ -32,7 +32,8 @@ describe("TuneSearchDrawer", () => {
         onClose={() => {}}
       />
     );
-    expect(container.firstChild).toBeNull();
+    const drawer = screen.getByTestId("tune-search-drawer");
+    expect(drawer).not.toHaveClass("tune-search-drawer--open");
   });
 
   it("renders backdrop and panel when open", () => {

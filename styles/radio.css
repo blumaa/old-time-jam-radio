@@ -609,6 +609,14 @@
   justify-content: flex-end;
   border-radius: var(--radius-xl);
   overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility var(--duration-normal) ease;
+}
+
+.tune-search-drawer--open {
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .tune-search-drawer__backdrop {
