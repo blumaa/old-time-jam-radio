@@ -44,6 +44,7 @@ export default function Radio() {
   } = usePersistedSettings();
 
   const {
+    init,
     play,
     stop,
     pause,
@@ -76,27 +77,35 @@ export default function Radio() {
     stations,
     switchStation,
     replayTune: jamReplayTune,
+    handleTuneEnded: jamHandleTuneEnded,
   } = useStationPlayback({
     manifest: manifest ?? [],
     play,
     stop,
     playStaticBurst,
-    onEnded,
     r2PublicUrl: R2_PUBLIC_URL,
-    enabled: mode === "jam",
   });
 
   const learning = useLearningPlayback({
     manifest: manifest ?? [],
     play,
     stop,
-    onEnded,
     r2PublicUrl: R2_PUBLIC_URL,
-    enabled: mode === "learn",
     initialTune: learningTune,
   });
 
   const currentTune = mode === "jam" ? jamCurrentTune : learning.currentTune;
+
+  useEffect(() => {
+    if (!isPoweredOn) return;
+    onEnded(() => {
+      if (mode === "jam") {
+        jamHandleTuneEnded();
+      } else {
+        learning.handleTuneEnded();
+      }
+    });
+  }, [isPoweredOn, mode, onEnded, jamHandleTuneEnded, learning]);
 
   useEffect(() => {
     if (!isPoweredOn) return;
@@ -112,13 +121,14 @@ export default function Radio() {
     };
   }, [isPoweredOn, getProgress]);
 
-  const handlePowerToggle = useCallback(() => {
+  const handlePowerToggle = useCallback(async () => {
     if (isPoweredOn) {
       stop();
       setIsPoweredOn(false);
       setIsPaused(false);
       setProgress(0);
     } else {
+      await init();
       setIsPoweredOn(true);
       setIsPaused(false);
       setEngineVolume(volume);
@@ -131,9 +141,11 @@ export default function Radio() {
         if (startStation) {
           switchStation(startStation);
         }
+      } else if (mode === "learn" && learningTune) {
+        learning.selectTune(learningTune);
       }
     }
-  }, [isPoweredOn, stop, persistedStation, stations, switchStation, setEngineVolume, volume, setTempo, speed, mode]);
+  }, [isPoweredOn, stop, init, persistedStation, stations, switchStation, setEngineVolume, volume, setTempo, speed, mode, learningTune, learning]);
 
   const handleStationChange = useCallback(
     (station: string) => {
@@ -197,6 +209,33 @@ export default function Radio() {
     }
   }, [isPaused, pause, unpause]);
 
+  useEffect(() => {
+    if (!("mediaSession" in navigator)) return;
+
+    if (!isPoweredOn) {
+      navigator.mediaSession.playbackState = "none";
+      navigator.mediaSession.setActionHandler("play", null);
+      navigator.mediaSession.setActionHandler("pause", null);
+      return;
+    }
+
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: currentTune?.title ?? "Old-Time Radio",
+      artist: currentTune?.artist ?? "",
+    });
+
+    navigator.mediaSession.playbackState = isPaused ? "paused" : "playing";
+
+    navigator.mediaSession.setActionHandler("play", () => handlePause());
+    navigator.mediaSession.setActionHandler("pause", () => handlePause());
+
+    return () => {
+      navigator.mediaSession.setActionHandler("play", null);
+      navigator.mediaSession.setActionHandler("pause", null);
+      navigator.mediaSession.playbackState = "none";
+    };
+  }, [isPoweredOn, isPaused, handlePause, currentTune]);
+
   const handleRestart = useCallback(async () => {
     if (mode === "jam") {
       await jamReplayTune();
@@ -205,12 +244,6 @@ export default function Radio() {
     }
     setIsPaused(false);
   }, [mode, jamReplayTune, learning]);
-
-  const handleDisplayClick = useCallback(() => {
-    if (mode === "learn") {
-      learning.openSearch();
-    }
-  }, [mode, learning]);
 
   const handleSelectTune = useCallback(
     async (tune: typeof learning.searchResults[number]) => {
@@ -234,9 +267,8 @@ export default function Radio() {
             </span>
           </div>
           <button
-            className="station-selector__button"
+            className="station-selector__button radio-display__retry-button"
             onClick={() => window.location.reload()}
-            style={{ marginTop: "var(--space-sm)", alignSelf: "center" }}
           >
             Try Again
           </button>
@@ -249,13 +281,8 @@ export default function Radio() {
     return <LoadingSpinner />;
   }
 
-  const displayTuneName = isPlayingStatic
-    ? "Tuning..."
-    : (currentTune?.title ?? null);
-
-  const displayArtist = isPlayingStatic
-    ? null
-    : (currentTune?.artist ?? null);
+  const displayTuneName = currentTune?.title ?? null;
+  const displayArtist = currentTune?.artist ?? null;
 
   return (
     <div data-testid="radio">
@@ -267,9 +294,9 @@ export default function Radio() {
           speed={speed}
           progress={progress}
           isPoweredOn={isPoweredOn}
+          isPlayingStatic={isPlayingStatic}
           mode={mode}
           playCount={learning.playCount}
-          onDisplayClick={handleDisplayClick}
         />
         <StationSelector
           stations={stations}
@@ -288,9 +315,9 @@ export default function Radio() {
           disabled={!isPoweredOn}
         />
         <div className="radio-transport">
-          {mode === "learn" ? (
+          <div className={`transport-button-slot radio-transport__search ${mode === "jam" ? "transport-button-slot--hidden" : ""}`}>
             <button
-              className="transport-button radio-transport__search"
+              className="transport-button"
               onClick={() => learning.openSearch()}
               disabled={!isPoweredOn}
               aria-label="Search tunes"
@@ -301,20 +328,22 @@ export default function Radio() {
                 <line x1="14.5" y1="14.5" x2="20" y2="20" />
               </svg>
             </button>
-          ) : (
-            <span className="radio-transport__search" />
-          )}
+          </div>
           <div className="radio-transport__controls">
-            <RestartButton
-              onClick={handleRestart}
-              disabled={!isPoweredOn || !currentTune}
-            />
+            <div className={`transport-button-slot ${mode === "jam" ? "transport-button-slot--hidden" : ""}`}>
+              <RestartButton
+                onClick={handleRestart}
+                disabled={!isPoweredOn || !currentTune}
+              />
+            </div>
             <PowerButton isPoweredOn={isPoweredOn} onClick={handlePowerToggle} />
-            <PauseButton
-              isPaused={isPaused}
-              onClick={handlePause}
-              disabled={!isPoweredOn || !currentTune}
-            />
+            <div className="transport-button-slot">
+              <PauseButton
+                isPaused={isPaused}
+                onClick={handlePause}
+                disabled={!isPoweredOn || !currentTune}
+              />
+            </div>
           </div>
           <ModeToggle
             mode={mode}

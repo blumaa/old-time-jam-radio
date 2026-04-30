@@ -108,6 +108,10 @@
   border-radius: var(--radius-sm);
 }
 
+.radio-display__key--hidden {
+  visibility: hidden;
+}
+
 .radio-display__speed {
   font-size: var(--text-sm);
   color: var(--radio-display-text);
@@ -116,11 +120,13 @@
 
 /* Marquee container for title + artist */
 .radio-display__marquee {
+  position: relative;
   overflow: hidden;
   white-space: nowrap;
   display: flex;
   width: 100%;
   min-width: 0;
+  min-height: 1.5em;
 }
 
 .radio-display__marquee-content {
@@ -142,6 +148,15 @@
   100% { transform: translateX(-100%); }
 }
 
+/* Static waveform (shown during station switching) */
+.radio-display__static-waveform {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /* Progress bar */
 .radio-display__progress {
   position: absolute;
@@ -154,6 +169,7 @@
 
 .radio-display__progress-fill {
   height: 100%;
+  width: var(--progress, 0%);
   background: var(--radio-accent);
   transition: width var(--duration-normal) linear;
 }
@@ -377,6 +393,17 @@
   gap: var(--space-md);
 }
 
+/* Transport Button Slot (animated visibility) */
+.transport-button-slot {
+  transition: opacity var(--duration-normal) ease, transform var(--duration-normal) ease;
+}
+
+.transport-button-slot--hidden {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
 /* Transport Buttons (pause, restart) */
 .transport-button {
   position: relative;
@@ -485,31 +512,13 @@
   transform: translateX(10px);
 }
 
+/* RadioDisplay retry button (error state) */
+.radio-display__retry-button {
+  margin-top: var(--space-sm);
+  align-self: center;
+}
+
 /* RadioDisplay Learn Mode */
-.radio-display--interactive {
-  cursor: pointer;
-}
-
-.radio-display__idle-prompt {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2xs);
-  padding: var(--space-sm) 0;
-}
-
-.radio-display__idle-title {
-  font-size: var(--text-md);
-  font-weight: 600;
-  color: var(--radio-display-text);
-}
-
-.radio-display__idle-subtitle {
-  font-size: var(--text-xs);
-  color: var(--radio-display-text);
-  opacity: 0.6;
-}
 
 .radio-display__loop-indicator {
   font-size: var(--text-sm);
@@ -606,6 +615,12 @@
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity var(--duration-normal) ease;
+}
+
+.tune-search-drawer--open .tune-search-drawer__backdrop {
+  opacity: 1;
 }
 
 .tune-search-drawer__panel {
@@ -619,4 +634,10 @@
   padding: var(--space-md) var(--space-lg);
   max-height: 65%;
   overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform var(--duration-normal) ease;
+}
+
+.tune-search-drawer--open .tune-search-drawer__panel {
+  transform: translateY(0);
 }

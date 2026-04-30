@@ -24,10 +24,14 @@ export function useAudioEngine() {
     };
   }, []);
 
+  const init = useCallback(async () => {
+    const engine = getEngine();
+    await engine.init();
+  }, [getEngine]);
+
   const play = useCallback(
     async (url: string) => {
       const engine = getEngine();
-      await engine.unlock();
       await engine.loadAndPlay(url);
     },
     [getEngine]
@@ -73,13 +77,13 @@ export function useAudioEngine() {
   const playStaticBurst = useCallback(
     async (durationMs = 400) => {
       const engine = getEngine();
-      await engine.unlock();
       await engine.playStaticBurst(durationMs);
     },
     [getEngine]
   );
 
   return {
+    init,
     play,
     stop,
     pause,

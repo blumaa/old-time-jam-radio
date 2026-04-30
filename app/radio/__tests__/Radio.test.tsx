@@ -2,24 +2,6 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import Radio from "../Radio";
 
-vi.mock("gsap", () => ({
-  default: {
-    registerPlugin: vi.fn(),
-    set: vi.fn(),
-    to: vi.fn(),
-  },
-}));
-
-vi.mock("gsap/Draggable", () => ({
-  default: { create: vi.fn().mockReturnValue([{ rotation: 0 }]) },
-  Draggable: { create: vi.fn().mockReturnValue([{ rotation: 0 }]) },
-}));
-
-vi.mock("gsap/InertiaPlugin", () => ({
-  default: {},
-  InertiaPlugin: {},
-}));
-
 vi.mock("soundtouchjs", () => ({
   PitchShifter: class {
     tempo = 1;

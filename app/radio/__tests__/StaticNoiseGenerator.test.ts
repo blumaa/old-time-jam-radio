@@ -70,4 +70,45 @@ describe("StaticNoiseGenerator", () => {
 
     vi.useRealTimers();
   });
+
+  it("should cancel in-flight burst when stop is called", async () => {
+    vi.useFakeTimers();
+
+    const promise = generator.play(400);
+    let resolved = false;
+    promise.then(() => {
+      resolved = true;
+    });
+
+    await vi.advanceTimersByTimeAsync(100);
+    expect(resolved).toBe(false);
+
+    generator.stop();
+    await Promise.resolve();
+    expect(resolved).toBe(true);
+
+    vi.useRealTimers();
+  });
+
+  it("should cancel previous burst when play is called again", async () => {
+    vi.useFakeTimers();
+
+    const firstPromise = generator.play(400);
+    let firstResolved = false;
+    firstPromise.then(() => {
+      firstResolved = true;
+    });
+
+    await vi.advanceTimersByTimeAsync(100);
+    generator.play(400);
+    await Promise.resolve();
+
+    expect(firstResolved).toBe(true);
+
+    vi.useRealTimers();
+  });
+
+  it("should be safe to call stop when nothing is playing", () => {
+    expect(() => generator.stop()).not.toThrow();
+  });
 });

@@ -3,15 +3,14 @@
 import { useState, useCallback, useRef, useEffect, useMemo } from "react";
 import type { Tune, Manifest } from "../types";
 import { buildStationMap, getShuffledQueue, getNextTune } from "./stationPlayback";
+import { buildTuneUrl } from "../utils/buildTuneUrl";
 
 interface UseStationPlaybackOptions {
   manifest: Manifest;
   play: (url: string) => Promise<void>;
   stop: () => void;
   playStaticBurst: (durationMs?: number) => Promise<void>;
-  onEnded: (callback: () => void) => void;
   r2PublicUrl: string;
-  enabled?: boolean;
 }
 
 export function useStationPlayback({
@@ -19,9 +18,7 @@ export function useStationPlayback({
   play,
   stop,
   playStaticBurst,
-  onEnded,
   r2PublicUrl,
-  enabled = true,
 }: UseStationPlaybackOptions) {
   const [currentStation, setCurrentStation] = useState<string | null>(null);
   const [currentTune, setCurrentTune] = useState<Tune | null>(null);
@@ -55,19 +52,12 @@ export function useStationPlayback({
     queueRef.current = remaining;
     setCurrentTune(tune);
 
-    const url = `${r2PublicUrl}/${tune.url.split("/").map(encodeURIComponent).join("/")}`;
-    await play(url);
+    await play(buildTuneUrl(r2PublicUrl, tune));
   }, [play, r2PublicUrl]);
 
-  useEffect(() => {
-    if (enabled) {
-      onEnded(() => {
-        playNextTune();
-      });
-    } else {
-      onEnded(() => {});
-    }
-  }, [onEnded, playNextTune, enabled]);
+  const handleTuneEnded = useCallback(async () => {
+    await playNextTune();
+  }, [playNextTune]);
 
   const switchStation = useCallback(
     async (station: string) => {
@@ -104,8 +94,7 @@ export function useStationPlayback({
     const tune = currentTuneRef.current;
     if (!tune) return;
     stop();
-    const url = `${r2PublicUrl}/${tune.url.split("/").map(encodeURIComponent).join("/")}`;
-    await play(url);
+    await play(buildTuneUrl(r2PublicUrl, tune));
   }, [stop, play, r2PublicUrl]);
 
   const stations = useMemo(() => Array.from(stationMap.keys()), [stationMap]);
@@ -118,5 +107,6 @@ export function useStationPlayback({
     switchStation,
     skipTune,
     replayTune,
+    handleTuneEnded,
   };
 }

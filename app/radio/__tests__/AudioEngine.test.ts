@@ -82,7 +82,10 @@ describe("AudioEngine", () => {
 
     await engine.loadAndPlay("https://example.com/tune.mp3");
 
-    expect(global.fetch).toHaveBeenCalledWith("https://example.com/tune.mp3");
+    expect(global.fetch).toHaveBeenCalledWith(
+      "https://example.com/tune.mp3",
+      expect.objectContaining({ signal: expect.any(AbortSignal) })
+    );
   });
 
   it("should stop playback", async () => {
@@ -100,48 +103,25 @@ describe("AudioEngine", () => {
     expect(engine.isPlaying()).toBe(false);
   });
 
-  it("should resume audio context for iOS Safari", async () => {
-    const resumeSpy = vi.fn().mockResolvedValue(undefined);
-    (engine as unknown as { audioContext: { resume: typeof resumeSpy } }).audioContext.resume =
-      resumeSpy;
-
-    await engine.resume();
-    expect(resumeSpy).toHaveBeenCalled();
-  });
-
-  it("should unlock audio context by playing a silent buffer and resuming", async () => {
+  it("should init by playing silent buffer and resuming AudioContext", async () => {
     const ctx = (engine as unknown as { audioContext: AudioContext }).audioContext;
     const resumeSpy = vi.fn().mockResolvedValue(undefined);
     ctx.resume = resumeSpy;
 
-    await engine.unlock();
+    await engine.init();
 
     expect(resumeSpy).toHaveBeenCalled();
   });
 
-  it("should resume context before decoding audio in loadAndPlay", async () => {
+  it("should only init once (idempotent)", async () => {
     const ctx = (engine as unknown as { audioContext: AudioContext }).audioContext;
-    const callOrder: string[] = [];
-
-    const resumeSpy = vi.fn().mockImplementation(async () => {
-      callOrder.push("resume");
-    });
-    const decodeSpy = vi.fn().mockImplementation(async () => {
-      callOrder.push("decode");
-      return ctx.createBuffer(1, 1, 44100);
-    });
-
+    const resumeSpy = vi.fn().mockResolvedValue(undefined);
     ctx.resume = resumeSpy;
-    ctx.decodeAudioData = decodeSpy;
 
-    vi.spyOn(global, "fetch").mockResolvedValue({
-      arrayBuffer: () => Promise.resolve(new ArrayBuffer(1024)),
-    } as Response);
+    await engine.init();
+    await engine.init();
 
-    await engine.loadAndPlay("https://example.com/tune.mp3");
-
-    expect(callOrder[0]).toBe("resume");
-    expect(callOrder[1]).toBe("decode");
+    expect(resumeSpy).toHaveBeenCalledTimes(1);
   });
 
   it("should register onEnded callback", () => {
@@ -153,5 +133,76 @@ describe("AudioEngine", () => {
   it("should clean up on destroy", () => {
     engine.destroy();
     expect(engine.isPlaying()).toBe(false);
+  });
+
+  it("should abort previous loadAndPlay when called again", async () => {
+    let fetchCount = 0;
+    vi.spyOn(global, "fetch").mockImplementation(
+      () => {
+        fetchCount++;
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve({
+              arrayBuffer: () => Promise.resolve(new ArrayBuffer(1024)),
+            } as Response);
+          }, 100);
+        });
+      }
+    );
+
+    vi.useFakeTimers();
+
+    const first = engine.loadAndPlay("https://example.com/tune1.mp3");
+    const second = engine.loadAndPlay("https://example.com/tune2.mp3");
+
+    await vi.advanceTimersByTimeAsync(200);
+    await Promise.allSettled([first, second]);
+
+    expect(fetchCount).toBe(2);
+    expect(engine.isPlaying()).toBe(true);
+
+    vi.useRealTimers();
+  });
+
+  it("should abort in-flight load when stop is called", async () => {
+    const abortSpy = vi.fn();
+    vi.spyOn(global, "fetch").mockImplementation(
+      (_url, options) => {
+        options?.signal?.addEventListener("abort", abortSpy);
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve({
+              arrayBuffer: () => Promise.resolve(new ArrayBuffer(1024)),
+            } as Response);
+          }, 100);
+        });
+      }
+    );
+
+    vi.useFakeTimers();
+    const loadPromise = engine.loadAndPlay("https://example.com/tune.mp3");
+    engine.stop();
+
+    expect(abortSpy).toHaveBeenCalled();
+
+    await vi.advanceTimersByTimeAsync(200);
+    await loadPromise;
+
+    expect(engine.isPlaying()).toBe(false);
+    vi.useRealTimers();
+  });
+
+  it("should stop static noise when stop is called", async () => {
+    vi.useFakeTimers();
+    const staticPromise = engine.playStaticBurst(400);
+
+    let resolved = false;
+    staticPromise.then(() => { resolved = true; });
+
+    engine.stop();
+    await vi.advanceTimersByTimeAsync(0);
+
+    expect(resolved).toBe(true);
+    vi.useRealTimers();
   });
 });

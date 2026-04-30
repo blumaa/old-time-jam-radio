@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import type { RadioMode } from "../types";
+import StaticWaveform from "./StaticWaveform";
 
 interface RadioDisplayProps {
   tuneName: string | null;
@@ -10,9 +11,9 @@ interface RadioDisplayProps {
   speed: number;
   progress: number;
   isPoweredOn: boolean;
+  isPlayingStatic?: boolean;
   mode?: RadioMode;
   playCount?: number;
-  onDisplayClick?: () => void;
 }
 
 function formatDisplayText(tuneName: string | null, artist: string | null): string {
@@ -28,12 +29,13 @@ export default function RadioDisplay({
   speed,
   progress,
   isPoweredOn,
+  isPlayingStatic = false,
   mode = "jam",
   playCount = 0,
-  onDisplayClick,
 }: RadioDisplayProps) {
   const measureRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const progressFillRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
 
   const displayText = formatDisplayText(tuneName, artist);
@@ -54,45 +56,37 @@ export default function RadioDisplay({
     return () => observer.disconnect();
   }, [checkOverflow]);
 
-  const isLearn = mode === "learn";
-  const isLearnIdle = isLearn && !tuneName;
-  const isLearnPlaying = isLearn && !!tuneName;
-  const isInteractive = isLearn && isPoweredOn;
+  useEffect(() => {
+    progressFillRef.current?.style.setProperty("--progress", `${progress * 100}%`);
+  }, [progress]);
+
+  const isLearnPlaying = mode === "learn" && !!tuneName;
 
   return (
     <div
-      className={`radio-display ${isPoweredOn ? "radio-display--on" : "radio-display--off"}${isInteractive ? " radio-display--interactive" : ""}`}
+      className={`radio-display ${isPoweredOn ? "radio-display--on" : "radio-display--off"}`}
       data-testid="radio-display"
-      onClick={isInteractive ? onDisplayClick : undefined}
     >
-      {isLearnIdle && isPoweredOn && (
-        <div className="radio-display__idle-prompt">
-          <span className="radio-display__idle-title">Find a tune</span>
-          <span className="radio-display__idle-subtitle">tap to search</span>
-        </div>
-      )}
-
-      {(!isLearnIdle || !isPoweredOn) && (
-        <>
-          <div className="radio-display__info">
-            <span
-              className="radio-display__key"
-              style={{ visibility: stationKey ? "visible" : "hidden" }}
-            >
-              {stationKey ?? " "}
-            </span>
-            {isLearnPlaying && playCount > 0 && (
-              <span className="radio-display__loop-indicator" data-testid="loop-indicator">
-                ↻ ×{playCount}
-              </span>
-            )}
-            <span className="radio-display__speed">{speed.toFixed(2)}x</span>
-          </div>
-          <div
-            className={`radio-display__marquee${isOverflowing ? " radio-display__marquee--scrolling" : ""}`}
-            ref={containerRef}
-            data-testid="radio-marquee"
-          >
+      <div className="radio-display__info">
+        <span className={`radio-display__key${stationKey ? "" : " radio-display__key--hidden"}`}>
+          {stationKey ?? " "}
+        </span>
+        {isLearnPlaying && playCount > 0 && (
+          <span className="radio-display__loop-indicator" data-testid="loop-indicator">
+            ↻ ×{playCount}
+          </span>
+        )}
+        <span className="radio-display__speed">{speed.toFixed(2)}x</span>
+      </div>
+      <div
+        className={`radio-display__marquee${!isPlayingStatic && isOverflowing ? " radio-display__marquee--scrolling" : ""}`}
+        ref={containerRef}
+        data-testid="radio-marquee"
+      >
+        {isPlayingStatic ? (
+          <StaticWaveform className="radio-display__static-waveform" />
+        ) : (
+          <>
             <span
               className="radio-display__marquee-content"
               ref={measureRef}
@@ -105,15 +99,15 @@ export default function RadioDisplay({
                 {displayText}
               </span>
             )}
-          </div>
-          <div className="radio-display__progress" data-testid="radio-progress">
-            <div
-              className="radio-display__progress-fill"
-              style={{ width: `${progress * 100}%` }}
-            />
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
+      <div className="radio-display__progress" data-testid="radio-progress">
+        <div
+          className="radio-display__progress-fill"
+          ref={progressFillRef}
+        />
+      </div>
     </div>
   );
 }

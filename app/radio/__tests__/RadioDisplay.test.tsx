@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import RadioDisplay from "../components/RadioDisplay";
 
 describe("RadioDisplay", () => {
@@ -134,22 +133,6 @@ describe("RadioDisplay", () => {
     expect(marquee.textContent).toContain("No signal...");
   });
 
-  it("in learn mode idle, shows 'Find a tune' prompt", () => {
-    render(
-      <RadioDisplay
-        tuneName={null}
-        artist={null}
-        stationKey={null}
-        speed={1.0}
-        progress={0}
-        isPoweredOn={true}
-        mode="learn"
-      />
-    );
-
-    expect(screen.getByText("Find a tune")).toBeInTheDocument();
-  });
-
   it("in learn mode playing, shows loop icon and play count", () => {
     render(
       <RadioDisplay
@@ -168,23 +151,39 @@ describe("RadioDisplay", () => {
     expect(screen.getByTestId("loop-indicator")).toHaveTextContent("×3");
   });
 
-  it("in learn mode, clicking display calls onDisplayClick", async () => {
-    const onDisplayClick = vi.fn();
+  it("should show static waveform when isPlayingStatic is true", () => {
     render(
       <RadioDisplay
         tuneName={null}
         artist={null}
-        stationKey={null}
+        stationKey="G"
         speed={1.0}
         progress={0}
         isPoweredOn={true}
-        mode="learn"
-        onDisplayClick={onDisplayClick}
+        isPlayingStatic={true}
       />
     );
 
-    await userEvent.click(screen.getByTestId("radio-display"));
-    expect(onDisplayClick).toHaveBeenCalledOnce();
+    expect(screen.getByTestId("static-waveform")).toBeInTheDocument();
+    expect(screen.getByTestId("radio-marquee")).toBeInTheDocument();
+  });
+
+  it("should show marquee text when isPlayingStatic is false", () => {
+    render(
+      <RadioDisplay
+        tuneName="Salt Creek"
+        artist="Traditional"
+        stationKey="A"
+        speed={1.0}
+        progress={0}
+        isPoweredOn={true}
+        isPlayingStatic={false}
+      />
+    );
+
+    expect(screen.queryByTestId("static-waveform")).not.toBeInTheDocument();
+    expect(screen.getByTestId("radio-marquee")).toBeInTheDocument();
+    expect(screen.getByText(/Salt Creek/)).toBeInTheDocument();
   });
 
   it("in jam mode with default new props, renders identically to existing behavior", () => {

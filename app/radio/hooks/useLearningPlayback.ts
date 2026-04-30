@@ -3,14 +3,13 @@
 import { useState, useCallback, useRef, useEffect, useMemo } from "react";
 import type { Tune, Manifest } from "../types";
 import { searchTunes } from "./learningPlayback";
+import { buildTuneUrl } from "../utils/buildTuneUrl";
 
 interface UseLearningPlaybackOptions {
   manifest: Manifest;
   play: (url: string) => Promise<void>;
   stop: () => void;
-  onEnded: (callback: () => void) => void;
   r2PublicUrl: string;
-  enabled: boolean;
   initialTune: Tune | null;
 }
 
@@ -18,9 +17,7 @@ export function useLearningPlayback({
   manifest,
   play,
   stop,
-  onEnded,
   r2PublicUrl,
-  enabled,
   initialTune,
 }: UseLearningPlaybackOptions) {
   const [currentTune, setCurrentTune] = useState<Tune | null>(initialTune);
@@ -34,29 +31,17 @@ export function useLearningPlayback({
     currentTuneRef.current = currentTune;
   }, [currentTune]);
 
-  const buildUrl = useCallback(
-    (tune: Tune) =>
-      `${r2PublicUrl}/${tune.url.split("/").map(encodeURIComponent).join("/")}`,
-    [r2PublicUrl]
-  );
-
   const replayCurrentTune = useCallback(async () => {
     const tune = currentTuneRef.current;
     if (!tune) return;
     stop();
-    await play(buildUrl(tune));
-  }, [stop, play, buildUrl]);
+    await play(buildTuneUrl(r2PublicUrl, tune));
+  }, [stop, play, r2PublicUrl]);
 
-  useEffect(() => {
-    if (enabled) {
-      onEnded(() => {
-        setPlayCount((c) => c + 1);
-        replayCurrentTune();
-      });
-    } else {
-      onEnded(() => {});
-    }
-  }, [onEnded, enabled, replayCurrentTune]);
+  const handleTuneEnded = useCallback(async () => {
+    setPlayCount((c) => c + 1);
+    await replayCurrentTune();
+  }, [replayCurrentTune]);
 
   const selectTune = useCallback(
     async (tune: Tune) => {
@@ -65,9 +50,9 @@ export function useLearningPlayback({
       currentTuneRef.current = tune;
       setPlayCount(1);
       setIsSearchOpen(false);
-      await play(buildUrl(tune));
+      await play(buildTuneUrl(r2PublicUrl, tune));
     },
-    [stop, play, buildUrl]
+    [stop, play, r2PublicUrl]
   );
 
   const openSearch = useCallback(() => setIsSearchOpen(true), []);
@@ -94,5 +79,6 @@ export function useLearningPlayback({
     setSearchQuery,
     setStationFilter,
     replayTune,
+    handleTuneEnded,
   };
 }

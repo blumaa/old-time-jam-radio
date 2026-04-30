@@ -10,6 +10,8 @@ export class AudioEngine {
   private _onEndedCallback: (() => void) | null = null;
   private _progress = 0;
   private staticNoise: StaticNoiseGenerator;
+  private _initialized = false;
+  private loadAbortController: AbortController | null = null;
 
   constructor() {
     const AudioCtx =
@@ -25,38 +27,61 @@ export class AudioEngine {
     );
   }
 
-  async loadAndPlay(url: string): Promise<void> {
-    this.stop();
-
+  async init(): Promise<void> {
+    if (this._initialized) return;
+    const buffer = this.audioContext.createBuffer(1, 1, this.audioContext.sampleRate);
+    const source = this.audioContext.createBufferSource();
+    source.buffer = buffer;
+    source.connect(this.audioContext.destination);
+    source.start();
     await this.audioContext.resume();
-
-    const response = await fetch(url);
-    const arrayBuffer = await response.arrayBuffer();
-    const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
-
-    this.shifter = new PitchShifter(
-      this.audioContext,
-      audioBuffer,
-      16384,
-      () => {
-        this._playing = false;
-        this._progress = 0;
-        this._onEndedCallback?.();
-      }
-    );
-
-    this.shifter.tempo = this._tempo;
-    this.shifter.pitch = 1;
-
-    this.shifter.on("play", (detail: { percentagePlayed: number }) => {
-      this._progress = detail.percentagePlayed / 100;
-    });
-
-    this.shifter.connect(this.gainNode);
-    this._playing = true;
+    this._initialized = true;
   }
 
-  stop(): void {
+  async loadAndPlay(url: string): Promise<void> {
+    this.loadAbortController?.abort();
+    const controller = new AbortController();
+    this.loadAbortController = controller;
+
+    this.stopPlayback();
+
+    try {
+      const response = await fetch(url, { signal: controller.signal });
+      if (controller.signal.aborted) return;
+
+      const arrayBuffer = await response.arrayBuffer();
+      if (controller.signal.aborted) return;
+
+      const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
+      if (controller.signal.aborted) return;
+
+      this.shifter = new PitchShifter(
+        this.audioContext,
+        audioBuffer,
+        16384,
+        () => {
+          this._playing = false;
+          this._progress = 0;
+          this._onEndedCallback?.();
+        }
+      );
+
+      this.shifter.tempo = this._tempo;
+      this.shifter.pitch = 1;
+
+      this.shifter.on("play", (detail: { percentagePlayed: number }) => {
+        this._progress = detail.percentagePlayed / 100;
+      });
+
+      this.shifter.connect(this.gainNode);
+      this._playing = true;
+    } catch (e: unknown) {
+      if (e instanceof DOMException && e.name === "AbortError") return;
+      throw e;
+    }
+  }
+
+  private stopPlayback(): void {
     if (this.shifter) {
       this.shifter.disconnect();
       this.shifter.off();
@@ -64,6 +89,13 @@ export class AudioEngine {
     }
     this._playing = false;
     this._progress = 0;
+  }
+
+  stop(): void {
+    this.loadAbortController?.abort();
+    this.loadAbortController = null;
+    this.staticNoise.stop();
+    this.stopPlayback();
   }
 
   async playStaticBurst(durationMs = 400): Promise<void> {
@@ -117,19 +149,6 @@ export class AudioEngine {
 
   isPaused(): boolean {
     return this.audioContext.state === "suspended" && this.shifter !== null;
-  }
-
-  async unlock(): Promise<void> {
-    const buffer = this.audioContext.createBuffer(1, 1, this.audioContext.sampleRate);
-    const source = this.audioContext.createBufferSource();
-    source.buffer = buffer;
-    source.connect(this.audioContext.destination);
-    source.start();
-    await this.audioContext.resume();
-  }
-
-  async resume(): Promise<void> {
-    await this.audioContext.resume();
   }
 
   destroy(): void {

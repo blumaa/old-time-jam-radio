@@ -25,22 +25,19 @@ function createMocks() {
   return {
     play: vi.fn().mockResolvedValue(undefined),
     stop: vi.fn(),
-    onEnded: vi.fn(),
   };
 }
 
 function renderLearningHook(
   mocks: ReturnType<typeof createMocks>,
-  opts: { enabled?: boolean; initialTune?: Tune | null } = {}
+  opts: { initialTune?: Tune | null } = {}
 ) {
   return renderHook(() =>
     useLearningPlayback({
       manifest: mockManifest,
       play: mocks.play,
       stop: mocks.stop,
-      onEnded: mocks.onEnded,
       r2PublicUrl: "https://r2.example.com",
-      enabled: opts.enabled ?? true,
       initialTune: opts.initialTune ?? null,
     })
   );
@@ -94,8 +91,8 @@ describe("useLearningPlayback", () => {
     expect(result.current.isSearchOpen).toBe(false);
   });
 
-  it("increments playCount and replays on track end when enabled", async () => {
-    const { result } = renderLearningHook(mocks, { enabled: true });
+  it("handleTuneEnded increments playCount and replays", async () => {
+    const { result } = renderLearningHook(mocks);
 
     await act(async () => {
       await result.current.selectTune(mockManifest[0]);
@@ -103,22 +100,12 @@ describe("useLearningPlayback", () => {
 
     expect(result.current.playCount).toBe(1);
 
-    const onEndedCallback = mocks.onEnded.mock.calls.at(-1)?.[0];
     await act(async () => {
-      await onEndedCallback();
+      await result.current.handleTuneEnded();
     });
 
     expect(result.current.playCount).toBe(2);
     expect(mocks.play).toHaveBeenCalledTimes(2);
-  });
-
-  it("does not register active onEnded when disabled", () => {
-    renderLearningHook(mocks, { enabled: false });
-
-    const lastCallback = mocks.onEnded.mock.calls.at(-1)?.[0];
-    expect(lastCallback).toBeDefined();
-    lastCallback();
-    expect(mocks.play).not.toHaveBeenCalled();
   });
 
   it("openSearch and closeSearch toggle isSearchOpen", () => {

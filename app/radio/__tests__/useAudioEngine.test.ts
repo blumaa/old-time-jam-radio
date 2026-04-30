@@ -3,8 +3,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { useAudioEngine } from "../hooks/useAudioEngine";
 
 const mockEngine = {
-  resume: vi.fn().mockResolvedValue(undefined),
-  unlock: vi.fn().mockResolvedValue(undefined),
+  init: vi.fn().mockResolvedValue(undefined),
   loadAndPlay: vi.fn().mockResolvedValue(undefined),
   stop: vi.fn(),
   setTempo: vi.fn(),
@@ -35,49 +34,50 @@ describe("useAudioEngine", () => {
     constructorCallCount = 0;
   });
 
-  it("should lazily create AudioEngine on first play", async () => {
+  it("should lazily create AudioEngine on first init", async () => {
     const { result } = renderHook(() => useAudioEngine());
 
     expect(constructorCallCount).toBe(0);
 
     await act(async () => {
-      await result.current.play("https://example.com/tune.mp3");
+      await result.current.init();
     });
 
     expect(constructorCallCount).toBe(1);
+    expect(mockEngine.init).toHaveBeenCalled();
   });
 
   it("should reuse the same AudioEngine instance across calls", async () => {
     const { result } = renderHook(() => useAudioEngine());
 
     await act(async () => {
-      await result.current.play("https://example.com/tune1.mp3");
+      await result.current.init();
     });
     await act(async () => {
-      await result.current.play("https://example.com/tune2.mp3");
+      await result.current.play("https://example.com/tune.mp3");
     });
 
     expect(constructorCallCount).toBe(1);
   });
 
-  it("should call unlock and loadAndPlay on play", async () => {
+  it("should call loadAndPlay on play without init/unlock", async () => {
     const { result } = renderHook(() => useAudioEngine());
 
     await act(async () => {
       await result.current.play("https://example.com/tune.mp3");
     });
 
-    expect(mockEngine.unlock).toHaveBeenCalled();
     expect(mockEngine.loadAndPlay).toHaveBeenCalledWith(
       "https://example.com/tune.mp3"
     );
+    expect(mockEngine.init).not.toHaveBeenCalled();
   });
 
   it("should call engine.stop on stop", async () => {
     const { result } = renderHook(() => useAudioEngine());
 
     await act(async () => {
-      await result.current.play("https://example.com/tune.mp3");
+      await result.current.init();
     });
 
     act(() => {
@@ -98,7 +98,7 @@ describe("useAudioEngine", () => {
     expect(mockEngine.onEnded).not.toHaveBeenCalled();
 
     await act(async () => {
-      await result.current.play("https://example.com/tune.mp3");
+      await result.current.init();
     });
 
     expect(mockEngine.onEnded).toHaveBeenCalledWith(callback);
@@ -108,7 +108,7 @@ describe("useAudioEngine", () => {
     const { result } = renderHook(() => useAudioEngine());
 
     await act(async () => {
-      await result.current.play("https://example.com/tune.mp3");
+      await result.current.init();
     });
 
     const callback = vi.fn();
@@ -123,7 +123,7 @@ describe("useAudioEngine", () => {
     const { result, unmount } = renderHook(() => useAudioEngine());
 
     await act(async () => {
-      await result.current.play("https://example.com/tune.mp3");
+      await result.current.init();
     });
 
     unmount();

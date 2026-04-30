@@ -1,6 +1,9 @@
 export class StaticNoiseGenerator {
   private audioContext: AudioContext;
   private gainNode: GainNode;
+  private currentSource: AudioBufferSourceNode | null = null;
+  private currentTimeout: ReturnType<typeof setTimeout> | null = null;
+  private currentResolve: (() => void) | null = null;
 
   constructor(audioContext: AudioContext, gainNode: GainNode) {
     this.audioContext = audioContext;
@@ -8,6 +11,8 @@ export class StaticNoiseGenerator {
   }
 
   play(durationMs: number): Promise<void> {
+    this.stop();
+
     const sampleRate = this.audioContext.sampleRate;
     const length = Math.floor((durationMs / 1000) * sampleRate);
     const buffer = this.audioContext.createBuffer(1, length, sampleRate);
@@ -30,13 +35,34 @@ export class StaticNoiseGenerator {
     source.buffer = buffer;
     source.connect(this.gainNode);
     source.start();
+    this.currentSource = source;
 
     return new Promise((resolve) => {
-      setTimeout(() => {
+      this.currentResolve = resolve;
+      this.currentTimeout = setTimeout(() => {
         source.stop();
         source.disconnect();
+        this.currentSource = null;
+        this.currentTimeout = null;
+        this.currentResolve = null;
         resolve();
       }, durationMs);
     });
+  }
+
+  stop(): void {
+    if (this.currentSource) {
+      this.currentSource.stop();
+      this.currentSource.disconnect();
+      this.currentSource = null;
+    }
+    if (this.currentTimeout) {
+      clearTimeout(this.currentTimeout);
+      this.currentTimeout = null;
+    }
+    if (this.currentResolve) {
+      this.currentResolve();
+      this.currentResolve = null;
+    }
   }
 }
