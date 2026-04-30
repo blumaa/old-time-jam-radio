@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import type { Tune, Manifest } from "@/app/radio/types";
 import TuneList from "./components/TuneList";
 import TuneEditor from "./components/TuneEditor";
 
 const R2_PUBLIC_URL = process.env.NEXT_PUBLIC_R2_URL ?? "";
+const PAGE_SIZE = 25;
+
+type SortDirection = "asc" | "desc" | null;
 
 export default function AdminPanel() {
   const [manifest, setManifest] = useState<Manifest>([]);
@@ -13,6 +16,8 @@ export default function AdminPanel() {
   const [filterKey, setFilterKey] = useState<string>("all");
   const [editingTune, setEditingTune] = useState<Tune | null>(null);
   const [loading, setLoading] = useState(true);
+  const [sortDirection, setSortDirection] = useState<SortDirection>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     let cancelled = false;
@@ -32,19 +37,57 @@ export default function AdminPanel() {
     };
   }, []);
 
-  const filteredTunes = manifest.filter((tune) => {
-    const matchesText = tune.title
-      .toLowerCase()
-      .includes(filter.toLowerCase());
-    const matchesKey = filterKey === "all" || tune.key === filterKey;
-    return matchesText && matchesKey;
-  });
+  const filteredTunes = useMemo(() => {
+    return manifest.filter((tune) => {
+      const matchesText =
+        tune.title.toLowerCase().includes(filter.toLowerCase()) ||
+        tune.artist.toLowerCase().includes(filter.toLowerCase());
+      const matchesKey = filterKey === "all" || tune.key === filterKey;
+      return matchesText && matchesKey;
+    });
+  }, [manifest, filter, filterKey]);
+
+  const sortedTunes = useMemo(() => {
+    if (!sortDirection) return filteredTunes;
+    return [...filteredTunes].sort((a, b) => {
+      const diff = a.confidence - b.confidence;
+      return sortDirection === "asc" ? diff : -diff;
+    });
+  }, [filteredTunes, sortDirection]);
+
+  const totalPages = Math.max(1, Math.ceil(sortedTunes.length / PAGE_SIZE));
+  const safePage = Math.min(currentPage, totalPages);
+  const pagedTunes = sortedTunes.slice(
+    (safePage - 1) * PAGE_SIZE,
+    safePage * PAGE_SIZE
+  );
 
   const keys = Array.from(new Set(manifest.map((t) => t.key))).sort();
 
+  function handleSortByConfidence() {
+    setSortDirection((prev) => {
+      if (prev === null) return "asc";
+      if (prev === "asc") return "desc";
+      return null;
+    });
+    setCurrentPage(1);
+  }
+
+  function handleFilterChange(value: string) {
+    setFilter(value);
+    setCurrentPage(1);
+  }
+
+  function handleKeyFilterChange(value: string) {
+    setFilterKey(value);
+    setCurrentPage(1);
+  }
+
   async function handleSave(updated: Tune) {
+    const verified = { ...updated, confidence: 1.0 };
+
     const newManifest = manifest.map((t) =>
-      t.url === updated.url ? updated : t
+      t.url === updated.url ? verified : t
     );
 
     const response = await fetch("/api/manifest", {
@@ -83,6 +126,9 @@ export default function AdminPanel() {
       <h1 className="admin-panel__title">Tune Manager</h1>
       <div className="admin-panel__stats">
         {manifest.length} tunes &middot; {keys.length} keys
+        {sortedTunes.length !== manifest.length && (
+          <> &middot; {sortedTunes.length} shown</>
+        )}
       </div>
       <div className="admin-panel__filters">
         <input
@@ -90,12 +136,12 @@ export default function AdminPanel() {
           type="text"
           placeholder="Search tunes..."
           value={filter}
-          onChange={(e) => setFilter(e.target.value)}
+          onChange={(e) => handleFilterChange(e.target.value)}
         />
         <select
           className="admin-panel__key-filter"
           value={filterKey}
-          onChange={(e) => setFilterKey(e.target.value)}
+          onChange={(e) => handleKeyFilterChange(e.target.value)}
         >
           <option value="all">All keys</option>
           {keys.map((k) => (
@@ -115,11 +161,33 @@ export default function AdminPanel() {
       )}
 
       <TuneList
-        tunes={filteredTunes}
+        tunes={pagedTunes}
         r2PublicUrl={R2_PUBLIC_URL}
         onEdit={setEditingTune}
         onDelete={handleDelete}
+        sortDirection={sortDirection}
+        onSortByConfidence={handleSortByConfidence}
       />
+
+      {totalPages > 1 && (
+        <div className="admin-panel__pagination">
+          <button
+            type="button"
+            onClick={() => setCurrentPage((p) => p - 1)}
+            disabled={safePage <= 1}
+          >
+            Previous
+          </button>
+          <span>Page {safePage} of {totalPages}</span>
+          <button
+            type="button"
+            onClick={() => setCurrentPage((p) => p + 1)}
+            disabled={safePage >= totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 }

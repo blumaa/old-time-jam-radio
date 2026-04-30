@@ -64,26 +64,15 @@ export const LongTitle: Story = {
   },
 };
 
-export const Tuning: Story = {
+export const PlayingStatic: Story = {
   args: {
-    tuneName: "Tuning...",
+    tuneName: null,
     artist: null,
     stationKey: "D",
     speed: 1.0,
     progress: 0,
     isPoweredOn: true,
-  },
-};
-
-export const LearnIdle: Story = {
-  args: {
-    tuneName: null,
-    artist: null,
-    stationKey: null,
-    speed: 1.0,
-    progress: 0,
-    isPoweredOn: true,
-    mode: "learn",
+    isPlayingStatic: true,
   },
 };
 

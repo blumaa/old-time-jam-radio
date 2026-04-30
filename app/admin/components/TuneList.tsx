@@ -3,11 +3,15 @@
 import type { Tune } from "@/app/radio/types";
 import AudioPreview from "./AudioPreview";
 
+type SortDirection = "asc" | "desc" | null;
+
 interface TuneListProps {
   tunes: Tune[];
   r2PublicUrl: string;
   onEdit: (tune: Tune) => void;
   onDelete: (tune: Tune) => void;
+  sortDirection: SortDirection;
+  onSortByConfidence: () => void;
 }
 
 export default function TuneList({
@@ -15,19 +19,30 @@ export default function TuneList({
   r2PublicUrl,
   onEdit,
   onDelete,
+  sortDirection,
+  onSortByConfidence,
 }: TuneListProps) {
   if (tunes.length === 0) {
     return <p className="tune-list__empty">No tunes found.</p>;
   }
+
+  const sortArrow = sortDirection === "asc" ? "▲" : sortDirection === "desc" ? "▼" : "";
 
   return (
     <table className="tune-list">
       <thead>
         <tr>
           <th>Title</th>
+          <th>Artist</th>
           <th>Key</th>
           <th>Format</th>
-          <th>Confidence</th>
+          <th
+            className="tune-list__sortable"
+            onClick={onSortByConfidence}
+          >
+            Confidence
+            {sortArrow && <span className="tune-list__sort-arrow">{sortArrow}</span>}
+          </th>
           <th>Preview</th>
           <th>Actions</th>
         </tr>
@@ -36,6 +51,7 @@ export default function TuneList({
         {tunes.map((tune) => (
           <tr key={tune.url}>
             <td>{tune.title}</td>
+            <td>{tune.artist}</td>
             <td>{tune.key}</td>
             <td>{tune.format}</td>
             <td>

@@ -45,6 +45,10 @@ export const WithQuery: Story = {
   args: { isOpen: true, query: "sal", results: sampleResults.slice(0, 2) },
 };
 
+export const NoResults: Story = {
+  args: { isOpen: true, query: "zzzzz", results: [] },
+};
+
 export const Closed: Story = {
   args: { isOpen: false, query: "", results: [] },
 };

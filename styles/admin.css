@@ -5,121 +5,146 @@
   align-items: center;
   justify-content: center;
   min-height: 100dvh;
-  padding: 20px;
-  background: var(--bg);
+  padding: var(--space-xl);
+  background: var(--page-bg);
   color: var(--text-primary);
 }
 
 .password-gate__title {
   font-size: 1.5rem;
-  margin-bottom: 20px;
+  margin-bottom: var(--space-xl);
 }
 
 .password-gate__form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-md);
   width: 100%;
   max-width: 300px;
 }
 
 .password-gate__input {
-  padding: 10px 14px;
-  border: 1px solid var(--radio-brass);
-  border-radius: 6px;
-  background: var(--radio-wood-dark);
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--radio-accent);
+  border-radius: var(--radius-md);
+  background: var(--color-wood-300);
   color: var(--text-primary);
-  font-size: 1rem;
+  font-size: var(--text-md);
 }
 
 .password-gate__button {
-  padding: 10px;
+  padding: var(--space-md);
   border: none;
-  border-radius: 6px;
-  background: var(--radio-brass);
-  color: var(--radio-wood-dark);
+  border-radius: var(--radius-md);
+  background: var(--radio-accent);
+  color: var(--color-wood-300);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: var(--text-md);
   cursor: pointer;
+  transition: background var(--duration-fast) ease;
+}
+
+.password-gate__button:hover {
+  background: var(--radio-accent-light);
 }
 
 .password-gate__button:disabled {
   opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .password-gate__error {
   color: #e74c3c;
-  font-size: 0.85rem;
+  font-size: var(--text-base);
   text-align: center;
 }
 
 /* Admin Panel */
 .admin-panel {
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 20px;
+  padding: var(--space-xl);
   color: var(--text-primary);
 }
 
 .admin-panel__title {
   font-size: 1.5rem;
-  margin-bottom: 4px;
+  margin-bottom: var(--space-xs);
 }
 
 .admin-panel__stats {
-  font-size: 0.85rem;
+  font-size: var(--text-base);
   color: var(--text-muted);
-  margin-bottom: 16px;
+  margin-bottom: var(--space-lg);
 }
 
 .admin-panel__filters {
   display: flex;
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
 }
 
 .admin-panel__search {
   flex: 1;
-  padding: 8px 12px;
-  border: 1px solid var(--radio-brass);
-  border-radius: 6px;
-  background: var(--radio-wood-dark);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--radio-accent);
+  border-radius: var(--radius-md);
+  background: var(--color-wood-300);
   color: var(--text-primary);
+  font-size: var(--text-base);
+}
+
+.admin-panel__search::placeholder {
+  color: var(--text-muted);
 }
 
 .admin-panel__key-filter {
-  padding: 8px 12px;
-  border: 1px solid var(--radio-brass);
-  border-radius: 6px;
-  background: var(--radio-wood-dark);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--radio-accent);
+  border-radius: var(--radius-md);
+  background: var(--color-wood-300);
   color: var(--text-primary);
+  font-size: var(--text-base);
 }
 
 /* Tune List */
 .tune-list {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.85rem;
+  font-size: var(--text-base);
 }
 
 .tune-list th,
 .tune-list td {
-  padding: 8px 10px;
+  padding: var(--space-sm) var(--space-md);
   text-align: left;
   border-bottom: 1px solid var(--radio-grille-slat);
 }
 
 .tune-list th {
-  color: var(--radio-brass);
+  color: var(--radio-accent);
   font-weight: 700;
   text-transform: uppercase;
-  font-size: 0.7rem;
+  font-size: var(--text-xs);
   letter-spacing: 0.05em;
+}
+
+.tune-list__sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.tune-list__sortable:hover {
+  color: var(--radio-accent-light);
+}
+
+.tune-list__sort-arrow {
+  margin-left: var(--space-xs);
 }
 
 .tune-list__empty {
   color: var(--text-muted);
-  padding: 20px;
+  padding: var(--space-xl);
   text-align: center;
 }
 
@@ -137,13 +162,19 @@
 
 .tune-list__action {
   background: none;
-  border: 1px solid var(--radio-brass);
-  color: var(--radio-brass);
-  padding: 4px 8px;
-  border-radius: 4px;
+  border: 1px solid var(--radio-accent);
+  color: var(--radio-accent);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  font-size: 0.75rem;
-  margin-right: 4px;
+  font-size: var(--text-sm);
+  margin-right: var(--space-xs);
+  transition: background var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.tune-list__action:hover {
+  background: var(--radio-accent);
+  color: var(--color-wood-300);
 }
 
 .tune-list__action--delete {
@@ -151,66 +182,133 @@
   color: #e74c3c;
 }
 
+.tune-list__action--delete:hover {
+  background: #e74c3c;
+  color: var(--color-white);
+}
+
 /* Audio Preview */
 .audio-preview__button {
-  background: none;
-  border: none;
+  background: var(--color-wood-300);
+  border: 1px solid var(--radio-accent);
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  font-size: 1rem;
-  padding: 2px 6px;
+  font-size: var(--text-base);
+  padding: var(--space-2xs) var(--space-sm);
+  color: var(--text-primary);
+  transition: background var(--duration-fast) ease;
+}
+
+.audio-preview__button:hover {
+  background: var(--radio-accent);
+  color: var(--color-wood-300);
 }
 
 /* Tune Editor */
 .tune-editor {
-  background: var(--radio-wood-dark);
-  padding: 16px;
-  border-radius: 8px;
-  margin-bottom: 16px;
+  background: var(--color-wood-300);
+  border: 1px solid var(--radio-accent);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-md);
+}
+
+.tune-editor__title {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--radio-accent-light);
+  margin-bottom: var(--space-xs);
 }
 
 .tune-editor__field {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--space-xs);
 }
 
 .tune-editor__field label {
-  font-size: 0.75rem;
-  color: var(--radio-brass);
+  font-size: var(--text-sm);
+  color: var(--radio-accent);
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .tune-editor__field input,
 .tune-editor__field select {
-  padding: 8px 10px;
-  border: 1px solid var(--radio-brass);
-  border-radius: 4px;
-  background: var(--bg);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--radio-accent);
+  border-radius: var(--radius-sm);
+  background: var(--page-bg);
   color: var(--text-primary);
+  font-size: var(--text-base);
 }
 
 .tune-editor__actions {
   display: flex;
-  gap: 8px;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
 }
 
 .tune-editor__actions button {
-  padding: 8px 16px;
+  padding: var(--space-sm) var(--space-lg);
   border: none;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-weight: 600;
+  font-size: var(--text-base);
+  transition: background var(--duration-fast) ease;
 }
 
 .tune-editor__actions button[type="submit"] {
-  background: var(--radio-brass);
-  color: var(--radio-wood-dark);
+  background: var(--radio-accent);
+  color: var(--color-wood-300);
+}
+
+.tune-editor__actions button[type="submit"]:hover {
+  background: var(--radio-accent-light);
 }
 
 .tune-editor__actions button[type="button"] {
-  background: var(--radio-grille);
+  background: var(--radio-grille-bg);
   color: var(--text-primary);
+  border: 1px solid var(--radio-grille-slat);
+}
+
+.tune-editor__actions button[type="button"]:hover {
+  background: var(--radio-grille-slat);
+}
+
+/* Pagination */
+.admin-panel__pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg) 0;
+  color: var(--text-muted);
+  font-size: var(--text-base);
+}
+
+.admin-panel__pagination button {
+  padding: var(--space-xs) var(--space-md);
+  border: 1px solid var(--radio-accent);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--radio-accent);
+  cursor: pointer;
+  font-size: var(--text-base);
+  transition: background var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.admin-panel__pagination button:hover:not(:disabled) {
+  background: var(--radio-accent);
+  color: var(--color-wood-300);
+}
+
+.admin-panel__pagination button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
