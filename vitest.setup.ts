@@ -55,7 +55,12 @@ class MockAudioContext {
   decodeAudioData() {
     return Promise.resolve(new MockAudioBuffer());
   }
+  suspend() {
+    this.state = "suspended";
+    return Promise.resolve();
+  }
   resume() {
+    this.state = "running";
     return Promise.resolve();
   }
   close() {

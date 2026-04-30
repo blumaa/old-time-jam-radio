@@ -27,15 +27,22 @@ export class AudioEngine {
     );
   }
 
+  private async ensureRunning(): Promise<void> {
+    if (this.audioContext.state === "suspended") {
+      await this.audioContext.resume();
+    }
+  }
+
   async init(): Promise<void> {
-    if (this._initialized) return;
-    const buffer = this.audioContext.createBuffer(1, 1, this.audioContext.sampleRate);
-    const source = this.audioContext.createBufferSource();
-    source.buffer = buffer;
-    source.connect(this.audioContext.destination);
-    source.start();
-    await this.audioContext.resume();
-    this._initialized = true;
+    if (!this._initialized) {
+      const buffer = this.audioContext.createBuffer(1, 1, this.audioContext.sampleRate);
+      const source = this.audioContext.createBufferSource();
+      source.buffer = buffer;
+      source.connect(this.audioContext.destination);
+      source.start();
+      this._initialized = true;
+    }
+    await this.ensureRunning();
   }
 
   async loadAndPlay(url: string): Promise<void> {
@@ -44,6 +51,7 @@ export class AudioEngine {
     this.loadAbortController = controller;
 
     this.stopPlayback();
+    await this.ensureRunning();
 
     try {
       const response = await fetch(url, { signal: controller.signal });
@@ -54,6 +62,8 @@ export class AudioEngine {
 
       const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
       if (controller.signal.aborted) return;
+
+      await this.ensureRunning();
 
       this.shifter = new PitchShifter(
         this.audioContext,
@@ -99,6 +109,7 @@ export class AudioEngine {
   }
 
   async playStaticBurst(durationMs = 400): Promise<void> {
+    await this.ensureRunning();
     return this.staticNoise.play(durationMs);
   }
 
@@ -141,14 +152,14 @@ export class AudioEngine {
   }
 
   async unpause(): Promise<void> {
-    if (this.shifter && this.audioContext.state === "suspended") {
-      await this.audioContext.resume();
+    await this.ensureRunning();
+    if (this.shifter) {
       this._playing = true;
     }
   }
 
   isPaused(): boolean {
-    return this.audioContext.state === "suspended" && this.shifter !== null;
+    return this.audioContext.state === "suspended";
   }
 
   destroy(): void {

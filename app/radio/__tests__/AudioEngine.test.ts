@@ -105,23 +105,26 @@ describe("AudioEngine", () => {
 
   it("should init by playing silent buffer and resuming AudioContext", async () => {
     const ctx = (engine as unknown as { audioContext: AudioContext }).audioContext;
-    const resumeSpy = vi.fn().mockResolvedValue(undefined);
-    ctx.resume = resumeSpy;
+    await ctx.suspend();
 
     await engine.init();
 
-    expect(resumeSpy).toHaveBeenCalled();
+    expect(ctx.state).toBe("running");
   });
 
-  it("should only init once (idempotent)", async () => {
+  it("should only play silent buffer once but always resume", async () => {
     const ctx = (engine as unknown as { audioContext: AudioContext }).audioContext;
-    const resumeSpy = vi.fn().mockResolvedValue(undefined);
-    ctx.resume = resumeSpy;
+    const startSpy = vi.fn();
+    ctx.createBufferSource = vi.fn().mockReturnValue({
+      buffer: null,
+      connect: vi.fn(),
+      start: startSpy,
+    });
 
     await engine.init();
     await engine.init();
 
-    expect(resumeSpy).toHaveBeenCalledTimes(1);
+    expect(startSpy).toHaveBeenCalledTimes(1);
   });
 
   it("should register onEnded callback", () => {
@@ -181,6 +184,7 @@ describe("AudioEngine", () => {
 
     vi.useFakeTimers();
     const loadPromise = engine.loadAndPlay("https://example.com/tune.mp3");
+    await vi.advanceTimersByTimeAsync(0);
     engine.stop();
 
     expect(abortSpy).toHaveBeenCalled();
@@ -195,6 +199,7 @@ describe("AudioEngine", () => {
   it("should stop static noise when stop is called", async () => {
     vi.useFakeTimers();
     const staticPromise = engine.playStaticBurst(400);
+    await vi.advanceTimersByTimeAsync(0);
 
     let resolved = false;
     staticPromise.then(() => { resolved = true; });
@@ -204,5 +209,86 @@ describe("AudioEngine", () => {
 
     expect(resolved).toBe(true);
     vi.useRealTimers();
+  });
+
+  describe("AudioContext state guard", () => {
+    function getContext(e: AudioEngine): AudioContext {
+      return (e as unknown as { audioContext: AudioContext }).audioContext;
+    }
+
+    it("should resume suspended context before loadAndPlay", async () => {
+      vi.spyOn(global, "fetch").mockResolvedValue({
+        arrayBuffer: () => Promise.resolve(new ArrayBuffer(1024)),
+      } as Response);
+
+      const ctx = getContext(engine);
+      await ctx.suspend();
+      expect(ctx.state).toBe("suspended");
+
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+
+      expect(ctx.state).toBe("running");
+    });
+
+    it("should resume context that auto-suspends during fetch/decode", async () => {
+      const ctx = getContext(engine);
+
+      vi.spyOn(global, "fetch").mockImplementation(async () => {
+        await ctx.suspend();
+        return {
+          arrayBuffer: () => Promise.resolve(new ArrayBuffer(1024)),
+        } as Response;
+      });
+
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+
+      expect(ctx.state).toBe("running");
+    });
+
+    it("should resume suspended context before playStaticBurst", async () => {
+      vi.useFakeTimers();
+      const ctx = getContext(engine);
+      await ctx.suspend();
+
+      const burstPromise = engine.playStaticBurst(100);
+      expect(ctx.state).toBe("running");
+
+      await vi.advanceTimersByTimeAsync(200);
+      await burstPromise;
+      vi.useRealTimers();
+    });
+
+    it("should always resume context on init even if already initialized", async () => {
+      const ctx = getContext(engine);
+      await engine.init();
+      await ctx.suspend();
+      expect(ctx.state).toBe("suspended");
+
+      await engine.init();
+      expect(ctx.state).toBe("running");
+    });
+
+    it("should unpause context even when no shifter is loaded", async () => {
+      vi.spyOn(global, "fetch").mockResolvedValue({
+        arrayBuffer: () => Promise.resolve(new ArrayBuffer(1024)),
+      } as Response);
+
+      const ctx = getContext(engine);
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+      await engine.pause();
+      expect(ctx.state).toBe("suspended");
+
+      engine.stop();
+      await engine.unpause();
+      expect(ctx.state).toBe("running");
+    });
+
+    it("should report isPaused based on context state alone", async () => {
+      const ctx = getContext(engine);
+      expect(engine.isPaused()).toBe(false);
+
+      await ctx.suspend();
+      expect(engine.isPaused()).toBe(true);
+    });
   });
 });
