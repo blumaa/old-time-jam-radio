@@ -3,6 +3,7 @@ import type { Decorator } from "@storybook/react";
 import React, { useEffect } from "react";
 import "../styles/global.css";
 import "../styles/radio.css";
+import "../styles/admin.css";
 import "../styles/themes.css";
 import "../styles/loading-spinner.css";
 
