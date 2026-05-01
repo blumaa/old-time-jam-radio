@@ -10,15 +10,16 @@
     "test": "vitest",
     "test:run": "vitest run",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "postinstall": "cp node_modules/@soundtouchjs/audio-worklet/dist/soundtouch-processor.js public/soundtouch-processor.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1038.0",
+    "@soundtouchjs/audio-worklet": "^1.0.10",
     "@vercel/analytics": "^2.0.1",
     "next": "16.2.4",
     "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "soundtouchjs": "^0.3.0"
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.1.2",

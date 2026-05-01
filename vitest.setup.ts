@@ -7,6 +7,16 @@ class MockGainNode {
   disconnect = vi.fn();
 }
 
+class MockAudioParam {
+  value: number;
+  constructor(defaultValue = 1) {
+    this.value = defaultValue;
+  }
+  setValueAtTime = vi.fn();
+  linearRampToValueAtTime = vi.fn();
+  exponentialRampToValueAtTime = vi.fn();
+}
+
 class MockAudioBuffer {
   numberOfChannels = 1;
   length = 44100;
@@ -17,6 +27,7 @@ class MockAudioBuffer {
 
 class MockAudioBufferSourceNode {
   buffer: MockAudioBuffer | null = null;
+  playbackRate = new MockAudioParam(1);
   connect = vi.fn().mockReturnThis();
   disconnect = vi.fn();
   start = vi.fn();
@@ -30,10 +41,32 @@ class MockScriptProcessorNode {
   onaudioprocess: ((e: unknown) => void) | null = null;
 }
 
+class MockAudioWorkletNode {
+  _parameters = new Map<string, MockAudioParam>([
+    ["pitch", new MockAudioParam(1)],
+    ["tempo", new MockAudioParam(1)],
+    ["rate", new MockAudioParam(1)],
+    ["pitchSemitones", new MockAudioParam(0)],
+    ["playbackRate", new MockAudioParam(1)],
+  ]);
+  get parameters() {
+    return this._parameters;
+  }
+  connect = vi.fn().mockReturnThis();
+  disconnect = vi.fn();
+  constructor() {}
+}
+
+globalThis.AudioWorkletNode = MockAudioWorkletNode as unknown as typeof AudioWorkletNode;
+
 class MockAudioContext {
   state = "running";
   sampleRate = 44100;
+  currentTime = 0;
   destination = {};
+  audioWorklet = {
+    addModule: vi.fn().mockResolvedValue(undefined),
+  };
 
   createGain() {
     return new MockGainNode();

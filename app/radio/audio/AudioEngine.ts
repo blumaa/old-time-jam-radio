@@ -1,14 +1,19 @@
-import { PitchShifter } from "soundtouchjs";
+import type { SoundTouchNode as SoundTouchNodeType } from "@soundtouchjs/audio-worklet";
 import { StaticNoiseGenerator } from "./StaticNoiseGenerator";
 
 export class AudioEngine {
   private audioContext: AudioContext;
   private gainNode: GainNode;
-  private shifter: PitchShifter | null = null;
+  private stNode: SoundTouchNodeType | null = null;
+  private source: AudioBufferSourceNode | null = null;
   private _tempo = 1.0;
   private _playing = false;
   private _onEndedCallback: (() => void) | null = null;
   private _progress = 0;
+  private _duration = 0;
+  private _startTime = 0;
+  private _accumulatedPos = 0;
+  private _activeTempo = 1.0;
   private staticNoise: StaticNoiseGenerator;
   private _initialized = false;
   private loadAbortController: AbortController | null = null;
@@ -40,6 +45,10 @@ export class AudioEngine {
       source.buffer = buffer;
       source.connect(this.audioContext.destination);
       source.start();
+
+      const { SoundTouchNode } = await import("@soundtouchjs/audio-worklet");
+      await SoundTouchNode.register(this.audioContext, "/soundtouch-processor.js");
+
       this._initialized = true;
     }
     await this.ensureRunning();
@@ -65,25 +74,30 @@ export class AudioEngine {
 
       await this.ensureRunning();
 
-      this.shifter = new PitchShifter(
-        this.audioContext,
-        audioBuffer,
-        16384,
-        () => {
-          this._playing = false;
-          this._progress = 0;
-          this._onEndedCallback?.();
-        }
-      );
+      this._duration = audioBuffer.duration;
 
-      this.shifter.tempo = this._tempo;
-      this.shifter.pitch = 1;
+      const { SoundTouchNode } = await import("@soundtouchjs/audio-worklet");
+      this.stNode = new SoundTouchNode(this.audioContext);
+      this.stNode.playbackRate.value = this._tempo;
+      this.stNode.pitch.value = 1;
+      this.stNode.connect(this.gainNode);
 
-      this.shifter.on("play", (detail: { percentagePlayed: number }) => {
-        this._progress = detail.percentagePlayed / 100;
-      });
+      this.source = this.audioContext.createBufferSource();
+      this.source.buffer = audioBuffer;
+      this.source.playbackRate.value = this._tempo;
+      this.source.connect(this.stNode);
 
-      this.shifter.connect(this.gainNode);
+      this.source.onended = () => {
+        this._playing = false;
+        this._progress = 0;
+        this._accumulatedPos = 0;
+        this._onEndedCallback?.();
+      };
+
+      this._startTime = this.audioContext.currentTime;
+      this._accumulatedPos = 0;
+      this._activeTempo = this._tempo;
+      this.source.start();
       this._playing = true;
     } catch (e: unknown) {
       if (e instanceof DOMException && e.name === "AbortError") return;
@@ -92,13 +106,19 @@ export class AudioEngine {
   }
 
   private stopPlayback(): void {
-    if (this.shifter) {
-      this.shifter.disconnect();
-      this.shifter.off();
-      this.shifter = null;
+    if (this.source) {
+      this.source.onended = null;
+      try { this.source.stop(); } catch { /* already stopped */ }
+      this.source.disconnect();
+      this.source = null;
+    }
+    if (this.stNode) {
+      this.stNode.disconnect();
+      this.stNode = null;
     }
     this._playing = false;
     this._progress = 0;
+    this._accumulatedPos = 0;
   }
 
   stop(): void {
@@ -114,9 +134,18 @@ export class AudioEngine {
   }
 
   setTempo(tempo: number): void {
+    if (this._playing) {
+      const elapsed = this.audioContext.currentTime - this._startTime;
+      this._accumulatedPos += elapsed * this._activeTempo;
+      this._startTime = this.audioContext.currentTime;
+    }
     this._tempo = Math.max(0.25, Math.min(1.0, tempo));
-    if (this.shifter) {
-      this.shifter.tempo = this._tempo;
+    this._activeTempo = this._tempo;
+    if (this.source) {
+      this.source.playbackRate.value = this._tempo;
+    }
+    if (this.stNode) {
+      this.stNode.playbackRate.value = this._tempo;
     }
   }
 
@@ -133,7 +162,10 @@ export class AudioEngine {
   }
 
   getProgress(): number {
-    return this._progress;
+    if (!this._playing || !this.source) return this._progress;
+    const elapsed = this.audioContext.currentTime - this._startTime;
+    const position = this._accumulatedPos + elapsed * this._activeTempo;
+    return Math.min(position / this._duration, 1);
   }
 
   isPlaying(): boolean {
@@ -146,6 +178,7 @@ export class AudioEngine {
 
   async pause(): Promise<void> {
     if (this._playing) {
+      this._progress = this.getProgress();
       await this.audioContext.suspend();
       this._playing = false;
     }
@@ -153,7 +186,7 @@ export class AudioEngine {
 
   async unpause(): Promise<void> {
     await this.ensureRunning();
-    if (this.shifter) {
+    if (this.source) {
       this._playing = true;
     }
   }

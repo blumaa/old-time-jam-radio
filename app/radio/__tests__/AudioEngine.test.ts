@@ -1,34 +1,41 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { AudioEngine } from "../audio/AudioEngine";
 
-vi.mock("soundtouchjs", () => {
-  const mockConnect = vi.fn();
-  const mockDisconnect = vi.fn();
-  const mockOn = vi.fn();
-  const mockOff = vi.fn();
+const { mockConnect, mockDisconnect, mockRegister } = vi.hoisted(() => ({
+  mockConnect: vi.fn(),
+  mockDisconnect: vi.fn(),
+  mockRegister: vi.fn().mockResolvedValue(undefined),
+}));
 
+vi.mock("@soundtouchjs/audio-worklet", () => {
   return {
-    PitchShifter: class MockPitchShifter {
-      _tempo = 1;
-      duration = 120;
-      percentagePlayed = 0;
-      listeners: Array<{ name: string; cb: (detail: unknown) => void }> = [];
+    SoundTouchNode: class MockSoundTouchNode {
+      static register = mockRegister;
+
+      _parameters = new Map([
+        ["pitch", { value: 1 }],
+        ["tempo", { value: 1 }],
+        ["rate", { value: 1 }],
+        ["pitchSemitones", { value: 0 }],
+        ["playbackRate", { value: 1 }],
+      ]);
+      get parameters() {
+        return this._parameters;
+      }
+      get pitch() {
+        return this._parameters.get("pitch");
+      }
+      get tempo() {
+        return this._parameters.get("tempo");
+      }
+      get playbackRate() {
+        return this._parameters.get("playbackRate");
+      }
 
       connect = mockConnect;
       disconnect = mockDisconnect;
-      on = mockOn;
-      off = mockOff;
 
-      set tempo(v: number) {
-        this._tempo = v;
-      }
-      get tempo() {
-        return this._tempo;
-      }
-      set pitch(v: number) {
-        /* noop */
-        void v;
-      }
+      constructor() {}
     },
   };
 });
@@ -38,6 +45,9 @@ describe("AudioEngine", () => {
 
   beforeEach(() => {
     vi.restoreAllMocks();
+    mockConnect.mockClear();
+    mockDisconnect.mockClear();
+    mockRegister.mockClear();
     engine = new AudioEngine();
   });
 
@@ -75,11 +85,26 @@ describe("AudioEngine", () => {
     expect(engine.getTempo()).toBe(1.0);
   });
 
+  it("should register worklet on init", async () => {
+    await engine.init();
+    expect(mockRegister).toHaveBeenCalledWith(
+      expect.anything(),
+      "/soundtouch-processor.js"
+    );
+  });
+
+  it("should only register worklet once across multiple init calls", async () => {
+    await engine.init();
+    await engine.init();
+    expect(mockRegister).toHaveBeenCalledTimes(1);
+  });
+
   it("should load and decode audio from a URL", async () => {
     vi.spyOn(global, "fetch").mockResolvedValue({
       arrayBuffer: () => Promise.resolve(new ArrayBuffer(1024)),
     } as Response);
 
+    await engine.init();
     await engine.loadAndPlay("https://example.com/tune.mp3");
 
     expect(global.fetch).toHaveBeenCalledWith(
@@ -93,6 +118,7 @@ describe("AudioEngine", () => {
       arrayBuffer: () => Promise.resolve(new ArrayBuffer(1024)),
     } as Response);
 
+    await engine.init();
     await engine.loadAndPlay("https://example.com/tune.mp3");
     engine.stop();
 
@@ -119,6 +145,9 @@ describe("AudioEngine", () => {
       buffer: null,
       connect: vi.fn(),
       start: startSpy,
+      stop: vi.fn(),
+      onended: null,
+      playbackRate: { value: 1 },
     });
 
     await engine.init();
@@ -155,6 +184,7 @@ describe("AudioEngine", () => {
 
     vi.useFakeTimers();
 
+    await engine.init();
     const first = engine.loadAndPlay("https://example.com/tune1.mp3");
     const second = engine.loadAndPlay("https://example.com/tune2.mp3");
 
@@ -183,6 +213,7 @@ describe("AudioEngine", () => {
     );
 
     vi.useFakeTimers();
+    await engine.init();
     const loadPromise = engine.loadAndPlay("https://example.com/tune.mp3");
     await vi.advanceTimersByTimeAsync(0);
     engine.stop();
@@ -211,6 +242,161 @@ describe("AudioEngine", () => {
     vi.useRealTimers();
   });
 
+  describe("SoundTouchNode integration", () => {
+    beforeEach(async () => {
+      await engine.init();
+      vi.spyOn(global, "fetch").mockResolvedValue({
+        arrayBuffer: () => Promise.resolve(new ArrayBuffer(1024)),
+      } as Response);
+    });
+
+    it("should set playbackRate on source and SoundTouchNode when loading", async () => {
+      engine.setTempo(0.75);
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+
+      const stNode = (engine as unknown as { stNode: { playbackRate: { value: number } } }).stNode;
+      const source = (engine as unknown as { source: { playbackRate: { value: number } } }).source;
+      expect(stNode.playbackRate.value).toBe(0.75);
+      expect(source.playbackRate.value).toBe(0.75);
+    });
+
+    it("should update playbackRate on source and SoundTouchNode in real time", async () => {
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+      engine.setTempo(0.5);
+
+      const stNode = (engine as unknown as { stNode: { playbackRate: { value: number } } }).stNode;
+      const source = (engine as unknown as { source: { playbackRate: { value: number } } }).source;
+      expect(stNode.playbackRate.value).toBe(0.5);
+      expect(source.playbackRate.value).toBe(0.5);
+    });
+
+    it("should fire onEnded when source ends naturally", async () => {
+      const callback = vi.fn();
+      engine.onEnded(callback);
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+
+      const source = (engine as unknown as { source: { onended: (() => void) | null } }).source;
+      source.onended?.();
+
+      expect(engine.isPlaying()).toBe(false);
+      expect(callback).toHaveBeenCalled();
+    });
+
+    it("should not fire onEnded when stopped manually", async () => {
+      const callback = vi.fn();
+      engine.onEnded(callback);
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+
+      engine.stop();
+
+      expect(callback).not.toHaveBeenCalled();
+      expect(engine.isPlaying()).toBe(false);
+    });
+
+    it("should stop source on stopPlayback", async () => {
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+      const source = (engine as unknown as { source: { stop: ReturnType<typeof vi.fn> } }).source;
+
+      engine.stop();
+      expect(source.stop).toHaveBeenCalled();
+    });
+
+    it("should create a fresh SoundTouchNode per tune", async () => {
+      await engine.loadAndPlay("https://example.com/tune1.mp3");
+      const firstNode = (engine as unknown as { stNode: unknown }).stNode;
+
+      await engine.loadAndPlay("https://example.com/tune2.mp3");
+      const secondNode = (engine as unknown as { stNode: unknown }).stNode;
+
+      expect(firstNode).not.toBe(secondNode);
+    });
+
+    it("should disconnect old SoundTouchNode when stopping", async () => {
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+
+      engine.stop();
+      expect(mockDisconnect).toHaveBeenCalled();
+      expect((engine as unknown as { stNode: unknown }).stNode).toBeNull();
+    });
+  });
+
+  describe("progress tracking", () => {
+    function getContext(e: AudioEngine): AudioContext & { currentTime: number } {
+      return (e as unknown as { audioContext: AudioContext & { currentTime: number } }).audioContext;
+    }
+
+    beforeEach(async () => {
+      await engine.init();
+      vi.spyOn(global, "fetch").mockResolvedValue({
+        arrayBuffer: () => Promise.resolve(new ArrayBuffer(1024)),
+      } as Response);
+    });
+
+    it("should report 0 progress when not playing", () => {
+      expect(engine.getProgress()).toBe(0);
+    });
+
+    it("should calculate progress from currentTime and duration", async () => {
+      const ctx = getContext(engine);
+      ctx.currentTime = 10;
+
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+
+      ctx.currentTime = 10.5;
+      expect(engine.getProgress()).toBeCloseTo(0.5);
+    });
+
+    it("should account for tempo when calculating progress", async () => {
+      const ctx = getContext(engine);
+      ctx.currentTime = 10;
+      engine.setTempo(0.5);
+
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+
+      ctx.currentTime = 11;
+      expect(engine.getProgress()).toBeCloseTo(0.5);
+    });
+
+    it("should handle tempo change mid-playback", async () => {
+      const ctx = getContext(engine);
+      ctx.currentTime = 0;
+
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+
+      ctx.currentTime = 0.5;
+      engine.setTempo(0.5);
+
+      ctx.currentTime = 1.5;
+      expect(engine.getProgress()).toBeCloseTo(1.0);
+    });
+
+    it("should clamp progress to 1", async () => {
+      const ctx = getContext(engine);
+      ctx.currentTime = 0;
+
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+
+      ctx.currentTime = 5;
+      expect(engine.getProgress()).toBe(1);
+    });
+
+    it("should preserve progress across pause and unpause", async () => {
+      const ctx = getContext(engine);
+      ctx.currentTime = 0;
+
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+
+      ctx.currentTime = 0.5;
+      const progressBeforePause = engine.getProgress();
+
+      await engine.pause();
+      expect(engine.getProgress()).toBeCloseTo(progressBeforePause);
+
+      await engine.unpause();
+      expect(engine.getProgress()).toBeCloseTo(progressBeforePause);
+    });
+  });
+
   describe("AudioContext state guard", () => {
     function getContext(e: AudioEngine): AudioContext {
       return (e as unknown as { audioContext: AudioContext }).audioContext;
@@ -221,6 +407,7 @@ describe("AudioEngine", () => {
         arrayBuffer: () => Promise.resolve(new ArrayBuffer(1024)),
       } as Response);
 
+      await engine.init();
       const ctx = getContext(engine);
       await ctx.suspend();
       expect(ctx.state).toBe("suspended");
@@ -231,6 +418,7 @@ describe("AudioEngine", () => {
     });
 
     it("should resume context that auto-suspends during fetch/decode", async () => {
+      await engine.init();
       const ctx = getContext(engine);
 
       vi.spyOn(global, "fetch").mockImplementation(async () => {
@@ -268,11 +456,12 @@ describe("AudioEngine", () => {
       expect(ctx.state).toBe("running");
     });
 
-    it("should unpause context even when no shifter is loaded", async () => {
+    it("should unpause context even when no source is loaded", async () => {
       vi.spyOn(global, "fetch").mockResolvedValue({
         arrayBuffer: () => Promise.resolve(new ArrayBuffer(1024)),
       } as Response);
 
+      await engine.init();
       const ctx = getContext(engine);
       await engine.loadAndPlay("https://example.com/tune.mp3");
       await engine.pause();
