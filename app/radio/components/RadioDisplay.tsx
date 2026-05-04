@@ -15,6 +15,7 @@ interface RadioDisplayProps {
   mode?: RadioMode;
   playCount?: number;
   onSeek?: (fraction: number) => void;
+  onShare?: () => void;
 }
 
 function formatDisplayText(tuneName: string | null, artist: string | null): string {
@@ -34,6 +35,7 @@ export default function RadioDisplay({
   mode = "jam",
   playCount = 0,
   onSeek,
+  onShare,
 }: RadioDisplayProps) {
   const measureRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -75,6 +77,7 @@ export default function RadioDisplay({
   );
 
   const isLearnPlaying = mode === "learn" && !!tuneName;
+  const showShare = mode === "learn" && !!tuneName && !!onShare;
 
   return (
     <div
@@ -116,6 +119,20 @@ export default function RadioDisplay({
           </>
         )}
       </div>
+      {showShare && (
+        <button
+          className="radio-display__share-button"
+          onClick={onShare}
+          aria-label="Share tune"
+          type="button"
+        >
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+            <polyline points="16 6 12 2 8 6" />
+            <line x1="12" y1="2" x2="12" y2="15" />
+          </svg>
+        </button>
+      )}
       <div
         className={`radio-display__progress${onSeek ? " radio-display__progress--seekable" : ""}`}
         data-testid="radio-progress"

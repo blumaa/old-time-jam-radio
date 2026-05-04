@@ -528,6 +528,31 @@
   align-self: center;
 }
 
+/* Share button (learn mode, inside display) */
+.radio-display__share-button {
+  position: absolute;
+  bottom: var(--space-sm);
+  right: var(--space-sm);
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-round);
+  border: 1.5px solid var(--radio-accent);
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--radio-accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity var(--duration-normal);
+  z-index: 1;
+}
+
+.radio-display__share-button:active {
+  opacity: 1;
+  transform: scale(0.9);
+}
+
 /* RadioDisplay Learn Mode */
 
 .radio-display__loop-indicator {

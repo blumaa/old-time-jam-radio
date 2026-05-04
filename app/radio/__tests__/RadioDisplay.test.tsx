@@ -275,6 +275,97 @@ describe("RadioDisplay", () => {
     });
   });
 
+  describe("share button", () => {
+    it("should render share button in learn mode with tune loaded and onShare", () => {
+      const onShare = vi.fn();
+      render(
+        <RadioDisplay
+          tuneName="Salt Creek"
+          artist="Brad Leftwich"
+          stationKey="A"
+          speed={1.0}
+          progress={0.3}
+          isPoweredOn={true}
+          mode="learn"
+          onShare={onShare}
+        />
+      );
+
+      expect(screen.getByRole("button", { name: /share/i })).toBeInTheDocument();
+    });
+
+    it("should not render share button in jam mode", () => {
+      const onShare = vi.fn();
+      render(
+        <RadioDisplay
+          tuneName="Salt Creek"
+          artist="Brad Leftwich"
+          stationKey="A"
+          speed={1.0}
+          progress={0.3}
+          isPoweredOn={true}
+          mode="jam"
+          onShare={onShare}
+        />
+      );
+
+      expect(screen.queryByRole("button", { name: /share/i })).not.toBeInTheDocument();
+    });
+
+    it("should not render share button when no tune is loaded", () => {
+      const onShare = vi.fn();
+      render(
+        <RadioDisplay
+          tuneName={null}
+          artist={null}
+          stationKey="A"
+          speed={1.0}
+          progress={0}
+          isPoweredOn={true}
+          mode="learn"
+          onShare={onShare}
+        />
+      );
+
+      expect(screen.queryByRole("button", { name: /share/i })).not.toBeInTheDocument();
+    });
+
+    it("should not render share button when onShare is not provided", () => {
+      render(
+        <RadioDisplay
+          tuneName="Salt Creek"
+          artist="Brad Leftwich"
+          stationKey="A"
+          speed={1.0}
+          progress={0.3}
+          isPoweredOn={true}
+          mode="learn"
+        />
+      );
+
+      expect(screen.queryByRole("button", { name: /share/i })).not.toBeInTheDocument();
+    });
+
+    it("should call onShare when clicked", () => {
+      const onShare = vi.fn();
+      render(
+        <RadioDisplay
+          tuneName="Salt Creek"
+          artist="Brad Leftwich"
+          stationKey="A"
+          speed={1.0}
+          progress={0.3}
+          isPoweredOn={true}
+          mode="learn"
+          onShare={onShare}
+        />
+      );
+
+      fireEvent.click(screen.getByRole("button", { name: /share/i }));
+      expect(onShare).toHaveBeenCalledTimes(1);
+    });
+  });
+
   it("in jam mode with default new props, renders identically to existing behavior", () => {
     render(
       <RadioDisplay

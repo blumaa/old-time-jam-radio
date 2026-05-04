@@ -17,6 +17,7 @@ import { useAudioEngine } from "./hooks/useAudioEngine";
 import { useStationPlayback } from "./hooks/useStationPlayback";
 import { useLearningPlayback } from "./hooks/useLearningPlayback";
 import { usePersistedSettings } from "./hooks/usePersistedSettings";
+import { useShareTune } from "./hooks/useShareTune";
 import "@/styles/radio.css";
 
 const R2_PUBLIC_URL = process.env.NEXT_PUBLIC_R2_URL ?? "";
@@ -95,6 +96,16 @@ export default function Radio() {
     initialTune: learningTune,
   });
 
+  const { sharedTune, copyShareLink, clearShareParam } = useShareTune(manifest ?? []);
+
+  const sharedTuneRef = useRef(sharedTune);
+  useEffect(() => {
+    if (sharedTune) {
+      sharedTuneRef.current = sharedTune;
+      persistMode("learn");
+    }
+  }, [sharedTune, persistMode]);
+
   const currentTune = mode === "jam" ? jamCurrentTune : learning.currentTune;
 
   useEffect(() => {
@@ -134,7 +145,13 @@ export default function Radio() {
       setIsPaused(false);
       setEngineVolume(volume);
       setTempo(speed);
-      if (mode === "jam") {
+      const pendingShare = sharedTuneRef.current;
+      if (pendingShare) {
+        sharedTuneRef.current = null;
+        clearShareParam();
+        learning.selectTune(pendingShare);
+        persistLearningTune(pendingShare);
+      } else if (mode === "jam") {
         const startStation =
           persistedStation && stations.includes(persistedStation)
             ? persistedStation
@@ -146,7 +163,7 @@ export default function Radio() {
         learning.selectTune(learningTune);
       }
     }
-  }, [isPoweredOn, stop, init, persistedStation, stations, switchStation, setEngineVolume, volume, setTempo, speed, mode, learningTune, learning]);
+  }, [isPoweredOn, stop, init, persistedStation, stations, switchStation, setEngineVolume, volume, setTempo, speed, mode, learningTune, learning, clearShareParam, persistLearningTune]);
 
   const handleStationChange = useCallback(
     (station: string) => {
@@ -251,6 +268,11 @@ export default function Radio() {
     await seek(fraction);
   }, [isPoweredOn, currentTune, seek]);
 
+  const handleShare = useCallback(async () => {
+    if (!currentTune) return;
+    await copyShareLink(currentTune);
+  }, [currentTune, copyShareLink]);
+
   const handleSelectTune = useCallback(
     async (tune: typeof learning.searchResults[number]) => {
       await learning.selectTune(tune);
@@ -303,7 +325,8 @@ export default function Radio() {
           isPlayingStatic={isPlayingStatic}
           mode={mode}
           playCount={learning.playCount}
-          onSeek={mode === "learn" && currentTune ? handleSeek : undefined}
+          onSeek={isPoweredOn && mode === "learn" && currentTune ? handleSeek : undefined}
+          onShare={isPoweredOn && mode === "learn" && currentTune ? handleShare : undefined}
         />
         <StationSelector
           stations={stations}
