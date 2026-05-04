@@ -15,6 +15,7 @@ export class AudioEngine {
   private _accumulatedPos = 0;
   private _activeTempo = 1.0;
   private staticNoise: StaticNoiseGenerator;
+  private _buffer: AudioBuffer | null = null;
   private _initialized = false;
   private loadAbortController: AbortController | null = null;
 
@@ -75,33 +76,51 @@ export class AudioEngine {
       await this.ensureRunning();
 
       this._duration = audioBuffer.duration;
-
-      const { SoundTouchNode } = await import("@soundtouchjs/audio-worklet");
-      this.stNode = new SoundTouchNode(this.audioContext);
-      this.stNode.playbackRate.value = this._tempo;
-      this.stNode.pitch.value = 1;
-      this.stNode.connect(this.gainNode);
-
-      this.source = this.audioContext.createBufferSource();
-      this.source.buffer = audioBuffer;
-      this.source.playbackRate.value = this._tempo;
-      this.source.connect(this.stNode);
-
-      this.source.onended = () => {
-        this._playing = false;
-        this._progress = 0;
-        this._accumulatedPos = 0;
-        this._onEndedCallback?.();
-      };
-
-      this._startTime = this.audioContext.currentTime;
-      this._accumulatedPos = 0;
-      this._activeTempo = this._tempo;
-      this.source.start();
-      this._playing = true;
+      this._buffer = audioBuffer;
+      await this.startFromOffset(0);
     } catch (e: unknown) {
       if (e instanceof DOMException && e.name === "AbortError") return;
       throw e;
+    }
+  }
+
+  private async startFromOffset(offsetSeconds: number): Promise<void> {
+    const { SoundTouchNode } = await import("@soundtouchjs/audio-worklet");
+    this.stNode = new SoundTouchNode(this.audioContext);
+    this.stNode.playbackRate.value = this._tempo;
+    this.stNode.pitch.value = 1;
+    this.stNode.connect(this.gainNode);
+
+    this.source = this.audioContext.createBufferSource();
+    this.source.buffer = this._buffer!;
+    this.source.playbackRate.value = this._tempo;
+    this.source.connect(this.stNode);
+
+    this.source.onended = () => {
+      this._playing = false;
+      this._progress = 0;
+      this._accumulatedPos = 0;
+      this._onEndedCallback?.();
+    };
+
+    this._startTime = this.audioContext.currentTime;
+    this._accumulatedPos = offsetSeconds;
+    this._activeTempo = this._tempo;
+    this.source.start(0, offsetSeconds);
+    this._playing = true;
+  }
+
+  async seek(fraction: number): Promise<void> {
+    if (!this._buffer || this._duration === 0) return;
+    const targetSeconds = Math.max(0, Math.min(1, fraction)) * this._duration;
+    const wasPaused = this.isPaused();
+    this.stopPlayback();
+    if (wasPaused) await this.ensureRunning();
+    await this.startFromOffset(targetSeconds);
+    if (wasPaused) {
+      this._progress = fraction;
+      await this.audioContext.suspend();
+      this._playing = false;
     }
   }
 
@@ -126,6 +145,7 @@ export class AudioEngine {
     this.loadAbortController = null;
     this.staticNoise.stop();
     this.stopPlayback();
+    this._buffer = null;
   }
 
   async playStaticBurst(durationMs = 400): Promise<void> {

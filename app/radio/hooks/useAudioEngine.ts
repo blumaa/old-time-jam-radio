@@ -74,6 +74,10 @@ export function useAudioEngine() {
     return engineRef.current?.isPaused() ?? false;
   }, []);
 
+  const seek = useCallback(async (fraction: number) => {
+    await engineRef.current?.seek(fraction);
+  }, []);
+
   const playStaticBurst = useCallback(
     async (durationMs = 400) => {
       const engine = getEngine();
@@ -94,6 +98,7 @@ export function useAudioEngine() {
     isPlaying,
     isPaused,
     onEnded,
+    seek,
     playStaticBurst,
   };
 }

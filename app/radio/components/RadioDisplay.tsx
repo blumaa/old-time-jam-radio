@@ -14,6 +14,7 @@ interface RadioDisplayProps {
   isPlayingStatic?: boolean;
   mode?: RadioMode;
   playCount?: number;
+  onSeek?: (fraction: number) => void;
 }
 
 function formatDisplayText(tuneName: string | null, artist: string | null): string {
@@ -32,6 +33,7 @@ export default function RadioDisplay({
   isPlayingStatic = false,
   mode = "jam",
   playCount = 0,
+  onSeek,
 }: RadioDisplayProps) {
   const measureRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -59,6 +61,18 @@ export default function RadioDisplay({
   useEffect(() => {
     progressFillRef.current?.style.setProperty("--progress", `${progress * 100}%`);
   }, [progress]);
+
+  const progressBarRef = useRef<HTMLDivElement>(null);
+
+  const handleProgressClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!onSeek || !progressBarRef.current) return;
+      const rect = progressBarRef.current.getBoundingClientRect();
+      const fraction = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      onSeek(fraction);
+    },
+    [onSeek]
+  );
 
   const isLearnPlaying = mode === "learn" && !!tuneName;
 
@@ -102,7 +116,18 @@ export default function RadioDisplay({
           </>
         )}
       </div>
-      <div className="radio-display__progress" data-testid="radio-progress">
+      <div
+        className={`radio-display__progress${onSeek ? " radio-display__progress--seekable" : ""}`}
+        data-testid="radio-progress"
+        ref={progressBarRef}
+        onClick={handleProgressClick}
+        role={onSeek ? "slider" : undefined}
+        aria-label={onSeek ? "Seek" : undefined}
+        aria-valuenow={onSeek ? Math.round(progress * 100) : undefined}
+        aria-valuemin={onSeek ? 0 : undefined}
+        aria-valuemax={onSeek ? 100 : undefined}
+        tabIndex={onSeek ? 0 : undefined}
+      >
         <div
           className="radio-display__progress-fill"
           ref={progressFillRef}

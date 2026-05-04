@@ -53,6 +53,7 @@ export default function Radio() {
     setVolume: setEngineVolume,
     getProgress,
     onEnded,
+    seek,
     playStaticBurst,
   } = useAudioEngine();
 
@@ -245,6 +246,11 @@ export default function Radio() {
     setIsPaused(false);
   }, [mode, jamReplayTune, learning]);
 
+  const handleSeek = useCallback(async (fraction: number) => {
+    if (!isPoweredOn || !currentTune) return;
+    await seek(fraction);
+  }, [isPoweredOn, currentTune, seek]);
+
   const handleSelectTune = useCallback(
     async (tune: typeof learning.searchResults[number]) => {
       await learning.selectTune(tune);
@@ -297,6 +303,7 @@ export default function Radio() {
           isPlayingStatic={isPlayingStatic}
           mode={mode}
           playCount={learning.playCount}
+          onSeek={mode === "learn" && currentTune ? handleSeek : undefined}
         />
         <StationSelector
           stations={stations}
@@ -330,19 +337,21 @@ export default function Radio() {
             </button>
           </div>
           <div className="radio-transport__controls">
-            <div className={`transport-button-slot ${mode === "jam" ? "transport-button-slot--hidden" : ""}`}>
-              <RestartButton
-                onClick={handleRestart}
-                disabled={!isPoweredOn || !currentTune}
-              />
-            </div>
             <PowerButton isPoweredOn={isPoweredOn} onClick={handlePowerToggle} />
-            <div className="transport-button-slot">
-              <PauseButton
-                isPaused={isPaused}
-                onClick={handlePause}
-                disabled={!isPoweredOn || !currentTune}
-              />
+            <div className="radio-transport__stack">
+              <div className="transport-button-slot">
+                <PauseButton
+                  isPaused={isPaused}
+                  onClick={handlePause}
+                  disabled={!isPoweredOn || !currentTune}
+                />
+              </div>
+              <div className={`transport-button-slot ${mode === "jam" ? "transport-button-slot--hidden" : ""}`}>
+                <RestartButton
+                  onClick={handleRestart}
+                  disabled={!isPoweredOn || !currentTune}
+                />
+              </div>
             </div>
           </div>
           <ModeToggle

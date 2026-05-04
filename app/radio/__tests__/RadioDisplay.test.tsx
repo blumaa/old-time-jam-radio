@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { describe, it, expect, vi } from "vitest";
 import RadioDisplay from "../components/RadioDisplay";
 
 describe("RadioDisplay", () => {
@@ -184,6 +184,95 @@ describe("RadioDisplay", () => {
     expect(screen.queryByTestId("static-waveform")).not.toBeInTheDocument();
     expect(screen.getByTestId("radio-marquee")).toBeInTheDocument();
     expect(screen.getByText(/Salt Creek/)).toBeInTheDocument();
+  });
+
+  describe("progress bar seek", () => {
+    it("should call onSeek with click fraction", () => {
+      const onSeek = vi.fn();
+      render(
+        <RadioDisplay
+          tuneName="Salt Creek"
+          artist="Traditional"
+          stationKey="A"
+          speed={1.0}
+          progress={0.3}
+          isPoweredOn={true}
+          onSeek={onSeek}
+        />
+      );
+
+      const progressBar = screen.getByTestId("radio-progress");
+      Object.defineProperty(progressBar, "getBoundingClientRect", {
+        value: () => ({ left: 0, width: 200, top: 0, bottom: 10, right: 200, height: 10 }),
+      });
+
+      fireEvent.click(progressBar, { clientX: 100 });
+      expect(onSeek).toHaveBeenCalledWith(0.5);
+    });
+
+    it("should not call onSeek when prop is not provided", () => {
+      render(
+        <RadioDisplay
+          tuneName="Salt Creek"
+          artist="Traditional"
+          stationKey="A"
+          speed={1.0}
+          progress={0.3}
+          isPoweredOn={true}
+        />
+      );
+
+      const progressBar = screen.getByTestId("radio-progress");
+      expect(progressBar).not.toHaveAttribute("role");
+      expect(progressBar).not.toHaveClass("radio-display__progress--seekable");
+    });
+
+    it("should add seekable class and slider role when onSeek provided", () => {
+      const onSeek = vi.fn();
+      render(
+        <RadioDisplay
+          tuneName="Salt Creek"
+          artist="Traditional"
+          stationKey="A"
+          speed={1.0}
+          progress={0.5}
+          isPoweredOn={true}
+          onSeek={onSeek}
+        />
+      );
+
+      const progressBar = screen.getByTestId("radio-progress");
+      expect(progressBar).toHaveClass("radio-display__progress--seekable");
+      expect(progressBar).toHaveAttribute("role", "slider");
+      expect(progressBar).toHaveAttribute("aria-valuenow", "50");
+    });
+
+    it("should clamp click fraction to [0, 1]", () => {
+      const onSeek = vi.fn();
+      render(
+        <RadioDisplay
+          tuneName="Salt Creek"
+          artist="Traditional"
+          stationKey="A"
+          speed={1.0}
+          progress={0.3}
+          isPoweredOn={true}
+          onSeek={onSeek}
+        />
+      );
+
+      const progressBar = screen.getByTestId("radio-progress");
+      Object.defineProperty(progressBar, "getBoundingClientRect", {
+        value: () => ({ left: 100, width: 200, top: 0, bottom: 10, right: 300, height: 10 }),
+      });
+
+      fireEvent.click(progressBar, { clientX: 50 });
+      expect(onSeek).toHaveBeenCalledWith(0);
+
+      onSeek.mockClear();
+      fireEvent.click(progressBar, { clientX: 400 });
+      expect(onSeek).toHaveBeenCalledWith(1);
+    });
   });
 
   it("in jam mode with default new props, renders identically to existing behavior", () => {

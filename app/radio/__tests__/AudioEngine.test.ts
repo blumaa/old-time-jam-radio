@@ -397,6 +397,80 @@ describe("AudioEngine", () => {
     });
   });
 
+  describe("seek", () => {
+    function getContext(e: AudioEngine): AudioContext & { currentTime: number } {
+      return (e as unknown as { audioContext: AudioContext & { currentTime: number } }).audioContext;
+    }
+
+    beforeEach(async () => {
+      await engine.init();
+      vi.spyOn(global, "fetch").mockResolvedValue({
+        arrayBuffer: () => Promise.resolve(new ArrayBuffer(1024)),
+      } as Response);
+    });
+
+    it("should seek to the correct position", async () => {
+      const ctx = getContext(engine);
+      ctx.currentTime = 0;
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+
+      ctx.currentTime = 0;
+      await engine.seek(0.5);
+
+      ctx.currentTime = 0;
+      expect(engine.getProgress()).toBeCloseTo(0.5);
+    });
+
+    it("should continue playing after seek", async () => {
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+      await engine.seek(0.25);
+
+      expect(engine.isPlaying()).toBe(true);
+    });
+
+    it("should remain paused after seek while paused", async () => {
+      const ctx = getContext(engine);
+      ctx.currentTime = 0;
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+      await engine.pause();
+
+      await engine.seek(0.5);
+
+      expect(engine.isPlaying()).toBe(false);
+      expect(engine.isPaused()).toBe(true);
+      expect(engine.getProgress()).toBeCloseTo(0.5);
+    });
+
+    it("should clamp seek fraction to [0, 1]", async () => {
+      const ctx = getContext(engine);
+      ctx.currentTime = 0;
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+
+      ctx.currentTime = 0;
+      await engine.seek(1.5);
+      expect(engine.getProgress()).toBeCloseTo(1.0);
+
+      await engine.seek(-0.5);
+      expect(engine.getProgress()).toBeCloseTo(0);
+    });
+
+    it("should no-op when no buffer is loaded", async () => {
+      await engine.seek(0.5);
+      expect(engine.isPlaying()).toBe(false);
+      expect(engine.getProgress()).toBe(0);
+    });
+
+    it("should create a new source node after seek", async () => {
+      await engine.loadAndPlay("https://example.com/tune.mp3");
+      const sourceBefore = (engine as unknown as { source: unknown }).source;
+
+      await engine.seek(0.5);
+      const sourceAfter = (engine as unknown as { source: unknown }).source;
+
+      expect(sourceAfter).not.toBe(sourceBefore);
+    });
+  });
+
   describe("AudioContext state guard", () => {
     function getContext(e: AudioEngine): AudioContext {
       return (e as unknown as { audioContext: AudioContext }).audioContext;

@@ -167,11 +167,14 @@
   background: rgba(0, 0, 0, 0.15);
 }
 
+.radio-display__progress--seekable {
+  cursor: pointer;
+}
+
 .radio-display__progress-fill {
   height: 100%;
   width: var(--progress, 0%);
   background: var(--radio-accent);
-  transition: width var(--duration-normal) linear;
 }
 
 /* Power Knob */
@@ -390,7 +393,14 @@
   grid-column: 2;
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-sm);
+}
+
+.radio-transport__stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
 }
 
 /* Transport Button Slot (animated visibility) */
