@@ -318,7 +318,7 @@ export default function Radio() {
         <RadioDisplay
           tuneName={displayTuneName}
           artist={displayArtist}
-          stationKey={currentStation}
+          stationKey={mode === "learn" ? currentTune?.key ?? null : currentStation}
           speed={speed}
           progress={progress}
           isPoweredOn={isPoweredOn}

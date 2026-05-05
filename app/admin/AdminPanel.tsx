@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import type { Tune, Manifest } from "@/app/radio/types";
 import TuneList from "./components/TuneList";
 import TuneEditor from "./components/TuneEditor";
+import SyncButton from "./components/SyncButton";
 
 const R2_PUBLIC_URL = process.env.NEXT_PUBLIC_R2_URL ?? "";
 const PAGE_SIZE = 25;
@@ -119,16 +120,25 @@ export default function AdminPanel() {
     }
   }
 
+  const handleSync = useCallback((added: number, newManifest: Manifest) => {
+    if (added > 0) {
+      setManifest(newManifest);
+    }
+  }, []);
+
   if (loading) return <p>Loading manifest...</p>;
 
   return (
     <div className="admin-panel">
       <h1 className="admin-panel__title">Tune Manager</h1>
-      <div className="admin-panel__stats">
-        {manifest.length} tunes &middot; {keys.length} keys
-        {sortedTunes.length !== manifest.length && (
-          <> &middot; {sortedTunes.length} shown</>
-        )}
+      <div className="admin-panel__header">
+        <div className="admin-panel__stats">
+          {manifest.length} tunes &middot; {keys.length} keys
+          {sortedTunes.length !== manifest.length && (
+            <> &middot; {sortedTunes.length} shown</>
+          )}
+        </div>
+        <SyncButton onSync={handleSync} />
       </div>
       <div className="admin-panel__filters">
         <input

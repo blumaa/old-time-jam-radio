@@ -24,7 +24,8 @@ export default function TuneSearch({
 
   useEffect(() => {
     if (isOpen) {
-      inputRef.current?.focus();
+      const timer = setTimeout(() => inputRef.current?.focus(), 50);
+      return () => clearTimeout(timer);
     }
   }, [isOpen]);
 
