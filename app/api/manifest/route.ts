@@ -20,7 +20,7 @@ export async function GET() {
     return Response.json(JSON.parse(body), {
       status: 200,
       headers: {
-        "Cache-Control": "public, max-age=60, stale-while-revalidate=300",
+        "Cache-Control": "no-cache",
       },
     });
   } catch {

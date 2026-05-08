@@ -73,4 +73,14 @@ describe("searchTunes", () => {
     const results = searchTunes(manyTunes, "Tune", null);
     expect(results).toHaveLength(20);
   });
+
+  it("returns newly-synced tunes with default key when no station filter", () => {
+    const tunesWithNewSync = [
+      ...tunes,
+      makeTune({ title: "New Synced Tune", key: "G", confidence: 0, url: "new-synced.mp3" }),
+    ];
+    const results = searchTunes(tunesWithNewSync, "New Synced", null);
+    expect(results).toHaveLength(1);
+    expect(results[0].title).toBe("New Synced Tune");
+  });
 });

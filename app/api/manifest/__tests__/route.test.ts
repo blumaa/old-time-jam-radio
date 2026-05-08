@@ -68,6 +68,20 @@ describe("GET /api/manifest", () => {
     expect(data[1].key).toBe("A");
   });
 
+  it("should return no-cache headers to prevent stale manifests", async () => {
+    mockSend.mockResolvedValue({
+      Body: {
+        transformToString: () => Promise.resolve(JSON.stringify(mockManifest)),
+      },
+    });
+
+    const { GET } = await import("../route");
+    const response = await GET();
+    const cacheControl = response.headers.get("Cache-Control");
+
+    expect(cacheControl).toBe("no-cache");
+  });
+
   it("should return 500 when R2 request fails", async () => {
     mockSend.mockRejectedValue(new Error("R2 error"));
 

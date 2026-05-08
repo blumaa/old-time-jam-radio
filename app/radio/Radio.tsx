@@ -61,7 +61,7 @@ export default function Radio() {
   useEffect(() => {
     async function fetchManifest() {
       try {
-        const response = await fetch("/api/manifest");
+        const response = await fetch("/api/manifest", { cache: "no-store" });
         if (!response.ok) throw new Error("Failed to load manifest");
         const data: Manifest = await response.json();
         setManifest(data);
