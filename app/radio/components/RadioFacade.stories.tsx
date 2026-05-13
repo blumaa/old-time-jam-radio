@@ -1,13 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import RadioFacade from "./RadioFacade";
 import RadioDisplay from "./RadioDisplay";
-import PowerButton from "./PowerButton";
-import PauseButton from "./PauseButton";
-import RestartButton from "./RestartButton";
+import PlayerControls from "./PlayerControls";
 import StationSelector from "./StationSelector";
 import SpeedSlider from "./SpeedSlider";
 import VolumeSlider from "./VolumeSlider";
-import ModeToggle from "./ModeToggle";
 
 const meta: Meta<typeof RadioFacade> = {
   title: "Radio/RadioFacade",
@@ -37,19 +34,17 @@ export const PoweredOff: Story = {
       />
       <SpeedSlider speed={1.0} onSpeedChange={() => {}} disabled={true} />
       <VolumeSlider volume={0.7} onVolumeChange={() => {}} disabled={true} />
-      <div className="radio-transport">
-        <div className="transport-button-slot transport-button-slot--hidden" />
-        <div className="radio-transport__controls">
-          <div className="transport-button-slot transport-button-slot--hidden">
-            <RestartButton onClick={() => {}} disabled={true} />
-          </div>
-          <PowerButton isPoweredOn={false} onClick={() => {}} />
-          <div className="transport-button-slot">
-            <PauseButton isPaused={false} onClick={() => {}} disabled={true} />
-          </div>
-        </div>
-        <ModeToggle mode="jam" onModeChange={() => {}} disabled={true} />
-      </div>
+      <PlayerControls
+        isPoweredOn={false}
+        onPowerToggle={() => {}}
+        isPaused={false}
+        onPause={() => {}}
+        onSearch={() => {}}
+        onRestart={() => {}}
+        mode="jam"
+        onModeChange={() => {}}
+        hasCurrentTune={false}
+      />
     </RadioFacade>
   ),
 };
@@ -74,19 +69,17 @@ export const PoweredOn: Story = {
       />
       <SpeedSlider speed={0.75} onSpeedChange={() => {}} disabled={false} />
       <VolumeSlider volume={0.7} onVolumeChange={() => {}} disabled={false} />
-      <div className="radio-transport">
-        <div className="transport-button-slot transport-button-slot--hidden" />
-        <div className="radio-transport__controls">
-          <div className="transport-button-slot transport-button-slot--hidden">
-            <RestartButton onClick={() => {}} disabled={false} />
-          </div>
-          <PowerButton isPoweredOn={true} onClick={() => {}} />
-          <div className="transport-button-slot">
-            <PauseButton isPaused={false} onClick={() => {}} disabled={false} />
-          </div>
-        </div>
-        <ModeToggle mode="jam" onModeChange={() => {}} disabled={false} />
-      </div>
+      <PlayerControls
+        isPoweredOn={true}
+        onPowerToggle={() => {}}
+        isPaused={false}
+        onPause={() => {}}
+        onSearch={() => {}}
+        onRestart={() => {}}
+        mode="jam"
+        onModeChange={() => {}}
+        hasCurrentTune={true}
+      />
     </RadioFacade>
   ),
 };
@@ -113,26 +106,17 @@ export const LearnMode: Story = {
       />
       <SpeedSlider speed={0.5} onSpeedChange={() => {}} disabled={false} />
       <VolumeSlider volume={0.7} onVolumeChange={() => {}} disabled={false} />
-      <div className="radio-transport">
-        <div className="transport-button-slot radio-transport__search">
-          <button className="transport-button" type="button" aria-label="Search tunes">
-            <svg className="transport-button__icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-              <circle cx="10" cy="10" r="6" />
-              <line x1="14.5" y1="14.5" x2="20" y2="20" />
-            </svg>
-          </button>
-        </div>
-        <div className="radio-transport__controls">
-          <div className="transport-button-slot">
-            <RestartButton onClick={() => {}} disabled={false} />
-          </div>
-          <PowerButton isPoweredOn={true} onClick={() => {}} />
-          <div className="transport-button-slot">
-            <PauseButton isPaused={false} onClick={() => {}} disabled={false} />
-          </div>
-        </div>
-        <ModeToggle mode="learn" onModeChange={() => {}} disabled={false} />
-      </div>
+      <PlayerControls
+        isPoweredOn={true}
+        onPowerToggle={() => {}}
+        isPaused={false}
+        onPause={() => {}}
+        onSearch={() => {}}
+        onRestart={() => {}}
+        mode="learn"
+        onModeChange={() => {}}
+        hasCurrentTune={true}
+      />
     </RadioFacade>
   ),
 };

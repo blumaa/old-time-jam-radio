@@ -5,13 +5,10 @@ import type { Manifest, RadioMode } from "./types";
 import LoadingSpinner from "./components/LoadingSpinner";
 import RadioFacade from "./components/RadioFacade";
 import RadioDisplay from "./components/RadioDisplay";
-import PowerButton from "./components/PowerButton";
-import PauseButton from "./components/PauseButton";
-import RestartButton from "./components/RestartButton";
 import StationSelector from "./components/StationSelector";
 import SpeedSlider from "./components/SpeedSlider";
 import VolumeSlider from "./components/VolumeSlider";
-import ModeToggle from "./components/ModeToggle";
+import PlayerControls from "./components/PlayerControls";
 import TuneSearchDrawer from "./components/TuneSearchDrawer";
 import { useAudioEngine } from "./hooks/useAudioEngine";
 import { useStationPlayback } from "./hooks/useStationPlayback";
@@ -344,45 +341,17 @@ export default function Radio() {
           onVolumeChange={handleVolumeChange}
           disabled={!isPoweredOn}
         />
-        <div className="radio-transport">
-          <div className={`transport-button-slot radio-transport__search ${mode === "jam" ? "transport-button-slot--hidden" : ""}`}>
-            <button
-              className="transport-button"
-              onClick={() => learning.openSearch()}
-              disabled={!isPoweredOn}
-              aria-label="Search tunes"
-              type="button"
-            >
-              <svg className="transport-button__icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                <circle cx="10" cy="10" r="6" />
-                <line x1="14.5" y1="14.5" x2="20" y2="20" />
-              </svg>
-            </button>
-          </div>
-          <div className="radio-transport__controls">
-            <PowerButton isPoweredOn={isPoweredOn} onClick={handlePowerToggle} />
-            <div className="radio-transport__stack">
-              <div className="transport-button-slot">
-                <PauseButton
-                  isPaused={isPaused}
-                  onClick={handlePause}
-                  disabled={!isPoweredOn || !currentTune}
-                />
-              </div>
-              <div className={`transport-button-slot ${mode === "jam" ? "transport-button-slot--hidden" : ""}`}>
-                <RestartButton
-                  onClick={handleRestart}
-                  disabled={!isPoweredOn || !currentTune}
-                />
-              </div>
-            </div>
-          </div>
-          <ModeToggle
-            mode={mode}
-            onModeChange={handleModeChange}
-            disabled={!isPoweredOn}
-          />
-        </div>
+        <PlayerControls
+          isPoweredOn={isPoweredOn}
+          onPowerToggle={handlePowerToggle}
+          isPaused={isPaused}
+          onPause={handlePause}
+          onSearch={() => learning.openSearch()}
+          onRestart={handleRestart}
+          mode={mode}
+          onModeChange={handleModeChange}
+          hasCurrentTune={!!currentTune}
+        />
         <TuneSearchDrawer
           isOpen={learning.isSearchOpen}
           query={learning.searchQuery}

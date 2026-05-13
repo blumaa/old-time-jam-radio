@@ -93,7 +93,7 @@ describe("Radio", () => {
       expect(screen.getByTestId("radio-facade")).toBeInTheDocument();
     });
 
-    expect(screen.getByRole("switch", { name: /mode/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /switch to/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /pause|resume/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /restart/i })).toBeInTheDocument();
   });
