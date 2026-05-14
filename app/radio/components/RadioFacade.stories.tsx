@@ -4,7 +4,6 @@ import RadioDisplay from "./RadioDisplay";
 import PlayerControls from "./PlayerControls";
 import StationSelector from "./StationSelector";
 import SpeedSlider from "./SpeedSlider";
-import VolumeSlider from "./VolumeSlider";
 
 const meta: Meta<typeof RadioFacade> = {
   title: "Radio/RadioFacade",
@@ -33,7 +32,7 @@ export const PoweredOff: Story = {
         disabled={true}
       />
       <SpeedSlider speed={1.0} onSpeedChange={() => {}} disabled={true} />
-      <VolumeSlider volume={0.7} onVolumeChange={() => {}} disabled={true} />
+
       <PlayerControls
         isPoweredOn={false}
         onPowerToggle={() => {}}
@@ -68,7 +67,7 @@ export const PoweredOn: Story = {
         disabled={false}
       />
       <SpeedSlider speed={0.75} onSpeedChange={() => {}} disabled={false} />
-      <VolumeSlider volume={0.7} onVolumeChange={() => {}} disabled={false} />
+
       <PlayerControls
         isPoweredOn={true}
         onPowerToggle={() => {}}
@@ -105,7 +104,7 @@ export const LearnMode: Story = {
         disabled={false}
       />
       <SpeedSlider speed={0.5} onSpeedChange={() => {}} disabled={false} />
-      <VolumeSlider volume={0.7} onVolumeChange={() => {}} disabled={false} />
+
       <PlayerControls
         isPoweredOn={true}
         onPowerToggle={() => {}}

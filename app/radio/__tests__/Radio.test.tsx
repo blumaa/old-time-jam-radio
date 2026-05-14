@@ -52,9 +52,8 @@ describe("Radio", () => {
 
     expect(screen.getByRole("button", { name: /power/i })).toBeInTheDocument();
     expect(screen.getByTestId("station-selector")).toBeInTheDocument();
-    expect(screen.getByTestId("volume-slider")).toBeInTheDocument();
     expect(screen.getByTestId("speed-selector")).toBeInTheDocument();
-    expect(screen.getAllByRole("slider")).toHaveLength(2);
+    expect(screen.getAllByRole("slider")).toHaveLength(1);
   });
 
   it("should show error message on fetch failure", async () => {
@@ -93,7 +92,7 @@ describe("Radio", () => {
       expect(screen.getByTestId("radio-facade")).toBeInTheDocument();
     });
 
-    expect(screen.getByRole("button", { name: /switch to/i })).toBeInTheDocument();
+    expect(screen.getByRole("switch", { name: /mode/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /pause|resume/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /restart/i })).toBeInTheDocument();
   });

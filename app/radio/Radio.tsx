@@ -7,7 +7,6 @@ import RadioFacade from "./components/RadioFacade";
 import RadioDisplay from "./components/RadioDisplay";
 import StationSelector from "./components/StationSelector";
 import SpeedSlider from "./components/SpeedSlider";
-import VolumeSlider from "./components/VolumeSlider";
 import PlayerControls from "./components/PlayerControls";
 import TuneSearchDrawer from "./components/TuneSearchDrawer";
 import { useAudioEngine } from "./hooks/useAudioEngine";
@@ -36,7 +35,6 @@ export default function Radio() {
     learningTune,
     setStation: persistStation,
     setSpeed: persistSpeed,
-    setVolume: persistVolume,
     setMode: persistMode,
     setLearningTune: persistLearningTune,
   } = usePersistedSettings();
@@ -183,14 +181,6 @@ export default function Radio() {
     [persistSpeed, setTempo]
   );
 
-  const handleVolumeChange = useCallback(
-    (newVolume: number) => {
-      persistVolume(newVolume);
-      setEngineVolume(newVolume);
-    },
-    [persistVolume, setEngineVolume]
-  );
-
   const handleModeChange = useCallback(
     (newMode: RadioMode) => {
       const tuneBeforeSwitch = currentTune;
@@ -334,11 +324,6 @@ export default function Radio() {
         <SpeedSlider
           speed={speed}
           onSpeedChange={handleSpeedChange}
-          disabled={!isPoweredOn}
-        />
-        <VolumeSlider
-          volume={volume}
-          onVolumeChange={handleVolumeChange}
           disabled={!isPoweredOn}
         />
         <PlayerControls

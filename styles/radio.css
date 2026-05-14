@@ -177,22 +177,30 @@
   background: var(--radio-accent);
 }
 
-/* Player Controls Row */
+/* Player Controls */
 .player-controls {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-sm);
+  gap: var(--space-md);
+}
+
+.player-controls__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 
 /* Unified Control (56px round knob) */
 .control {
   position: relative;
-  width: 56px;
-  height: 56px;
+  width: clamp(40px, 12vw, 56px);
+  height: clamp(40px, 12vw, 56px);
   border-radius: var(--radius-round);
   border: 4px solid var(--radio-accent);
+  overflow: hidden;
   background: radial-gradient(
     circle at 40% 35%,
     var(--radio-control-highlight) 0%,
@@ -263,6 +271,56 @@
   color: var(--radio-accent);
 }
 
+/* Rocker Switch */
+.control--rocker {
+  display: flex;
+  align-items: stretch;
+  width: 100px;
+  height: 32px;
+  min-height: 44px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--radio-accent);
+  background: var(--radio-control-surface);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.control--rocker:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.control--rocker__option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #8a7a5a;
+  opacity: 0.35;
+  transition:
+    opacity var(--duration-fast),
+    color var(--duration-fast),
+    background-color var(--duration-fast),
+    text-shadow var(--duration-fast),
+    box-shadow var(--duration-fast);
+}
+
+.control--rocker__option--active {
+  opacity: 1;
+  color: #f5d882;
+  background: rgba(196, 149, 32, 0.45);
+  text-shadow: 0 0 6px rgba(196, 149, 32, 0.9);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
 
 /* Station Selector (segmented toggle) */
 .station-selector {
@@ -277,13 +335,13 @@
 
 .station-selector__button {
   flex: 1;
-  min-width: 48px;
+  min-width: 44px;
   min-height: 44px;
   background: transparent;
   border: none;
   color: var(--radio-accent);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
   font-weight: 700;
   cursor: pointer;
   border-radius: calc(var(--radius-md) - var(--space-2xs));
@@ -330,8 +388,8 @@
 
 .radio-slider__input::-webkit-slider-thumb {
   appearance: none;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   background: radial-gradient(
     circle at 40% 35%,
     var(--radio-control-highlight),
@@ -343,8 +401,8 @@
 }
 
 .radio-slider__input::-moz-range-thumb {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   background: radial-gradient(
     circle at 40% 35%,
     var(--radio-control-highlight),
@@ -367,7 +425,7 @@
 .speed-control {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
+  gap: var(--space-md);
 }
 
 .speed-presets {
@@ -377,8 +435,8 @@
 }
 
 .speed-presets__button {
-  min-width: 40px;
-  height: 32px;
+  min-width: 44px;
+  min-height: 44px;
   background: var(--radio-control-surface);
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--radio-accent);
