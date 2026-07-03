@@ -41,7 +41,7 @@ describe("useStationPlayback", () => {
   it("should return stations derived from manifest keys with All first", () => {
     const { result } = renderPlaybackHook(mockManifest, mocks);
 
-    expect(result.current.stations).toEqual(["All", "G", "A", "D"]);
+    expect(result.current.stations).toEqual(["All", "D", "G", "A"]);
   });
 
   it("should initialize with null currentStation and null currentTune", () => {

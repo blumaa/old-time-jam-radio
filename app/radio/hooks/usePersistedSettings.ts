@@ -8,6 +8,14 @@ const SPEED_KEY = "otr-speed";
 const VOLUME_KEY = "otr-volume";
 const MODE_KEY = "otr-mode";
 const LEARNING_TUNE_KEY = "otr-learning-tune";
+const LISTEN_QUEUE_KEY = "otr-listen-queue";
+
+interface ListenQueueState {
+  queue: Tune[];
+  index: number;
+}
+
+const EMPTY_LISTEN_QUEUE: ListenQueueState = { queue: [], index: -1 };
 
 export function usePersistedSettings() {
   const [station, setStationState] = useState<string | null>(() => {
@@ -49,7 +57,9 @@ export function usePersistedSettings() {
   const [mode, setModeState] = useState<RadioMode>(() => {
     if (typeof window === "undefined") return "jam";
     const stored = localStorage.getItem(MODE_KEY);
-    return stored === "jam" || stored === "learn" ? stored : "jam";
+    return stored === "jam" || stored === "learn" || stored === "listen"
+      ? stored
+      : "jam";
   });
 
   const setMode = useCallback((m: RadioMode) => {
@@ -77,8 +87,31 @@ export function usePersistedSettings() {
     }
   }, []);
 
+  const [listenQueue, setListenQueueState] = useState<ListenQueueState>(() => {
+    if (typeof window === "undefined") return EMPTY_LISTEN_QUEUE;
+    const stored = localStorage.getItem(LISTEN_QUEUE_KEY);
+    if (!stored) return EMPTY_LISTEN_QUEUE;
+    try {
+      const parsed = JSON.parse(stored) as Partial<ListenQueueState>;
+      if (!Array.isArray(parsed.queue)) return EMPTY_LISTEN_QUEUE;
+      const index = typeof parsed.index === "number" ? parsed.index : -1;
+      return { queue: parsed.queue as Tune[], index };
+    } catch {
+      return EMPTY_LISTEN_QUEUE;
+    }
+  });
+
+  const setListenQueue = useCallback((queue: Tune[], index: number) => {
+    setListenQueueState({ queue, index });
+    if (queue.length > 0) {
+      localStorage.setItem(LISTEN_QUEUE_KEY, JSON.stringify({ queue, index }));
+    } else {
+      localStorage.removeItem(LISTEN_QUEUE_KEY);
+    }
+  }, []);
+
   return {
-    station, speed, volume, mode, learningTune,
-    setStation, setSpeed, setVolume, setMode, setLearningTune,
+    station, speed, volume, mode, learningTune, listenQueue,
+    setStation, setSpeed, setVolume, setMode, setLearningTune, setListenQueue,
   };
 }

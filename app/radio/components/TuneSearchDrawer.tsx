@@ -2,6 +2,7 @@
 
 import type { Tune } from "../types";
 import TuneSearch from "./TuneSearch";
+import Drawer from "./Drawer";
 
 interface TuneSearchDrawerProps {
   isOpen: boolean;
@@ -21,25 +22,15 @@ export default function TuneSearchDrawer({
   onClose,
 }: TuneSearchDrawerProps) {
   return (
-    <div
-      className={`tune-search-drawer ${isOpen ? "tune-search-drawer--open" : ""}`}
-      data-testid="tune-search-drawer"
-    >
-      <div
-        className="tune-search-drawer__backdrop"
-        data-testid="tune-search-backdrop"
-        onClick={onClose}
+    <Drawer isOpen={isOpen} onClose={onClose} testId="tune-search-drawer">
+      <TuneSearch
+        isOpen={isOpen}
+        query={query}
+        results={results}
+        onQueryChange={onQueryChange}
+        onSelectTune={onSelectTune}
+        onClose={onClose}
       />
-      <div className="tune-search-drawer__panel">
-        <TuneSearch
-          isOpen={isOpen}
-          query={query}
-          results={results}
-          onQueryChange={onQueryChange}
-          onSelectTune={onSelectTune}
-          onClose={onClose}
-        />
-      </div>
-    </div>
+    </Drawer>
   );
 }

@@ -151,4 +151,51 @@ describe("usePersistedSettings", () => {
     const { result } = renderHook(() => usePersistedSettings());
     expect(result.current.learningTune).toBeNull();
   });
+
+  const listenTune = {
+    title: "Cluck Old Hen",
+    artist: "Trad",
+    key: "D",
+    url: "cluck.mp3",
+    duration: 120,
+    confidence: 1.0,
+    format: "mp3" as const,
+  };
+
+  it("should default listenQueue to empty", () => {
+    const { result } = renderHook(() => usePersistedSettings());
+    expect(result.current.listenQueue).toEqual({ queue: [], index: -1 });
+  });
+
+  it("should persist and restore listenQueue", () => {
+    const { result } = renderHook(() => usePersistedSettings());
+    act(() => {
+      result.current.setListenQueue([listenTune], 0);
+    });
+    expect(result.current.listenQueue).toEqual({ queue: [listenTune], index: 0 });
+    expect(JSON.parse(localStorage.getItem("otr-listen-queue")!)).toEqual({
+      queue: [listenTune],
+      index: 0,
+    });
+  });
+
+  it("should clear listen-queue storage when emptied", () => {
+    const { result } = renderHook(() => usePersistedSettings());
+    act(() => {
+      result.current.setListenQueue([listenTune], 0);
+    });
+    act(() => {
+      result.current.setListenQueue([], -1);
+    });
+    expect(localStorage.getItem("otr-listen-queue")).toBeNull();
+  });
+
+  it("should persist listen mode selection", () => {
+    const { result } = renderHook(() => usePersistedSettings());
+    act(() => {
+      result.current.setMode("listen");
+    });
+    expect(result.current.mode).toBe("listen");
+    expect(localStorage.getItem("otr-mode")).toBe("listen");
+  });
 });

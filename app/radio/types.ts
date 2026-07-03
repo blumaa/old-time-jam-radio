@@ -10,7 +10,7 @@ export interface Tune {
 
 export type Manifest = Tune[];
 
-export const SUPPORTED_STATIONS = ["G", "A", "D"] as const;
+export const SUPPORTED_STATIONS = ["C", "D", "G", "A"] as const;
 export type StationKey = (typeof SUPPORTED_STATIONS)[number];
 
-export type RadioMode = "jam" | "learn";
+export type RadioMode = "jam" | "learn" | "listen";

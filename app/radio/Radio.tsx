@@ -9,9 +9,11 @@ import StationSelector from "./components/StationSelector";
 import SpeedSlider from "./components/SpeedSlider";
 import PlayerControls from "./components/PlayerControls";
 import TuneSearchDrawer from "./components/TuneSearchDrawer";
+import QueueDrawer from "./components/QueueDrawer";
 import { useAudioEngine } from "./hooks/useAudioEngine";
 import { useStationPlayback } from "./hooks/useStationPlayback";
 import { useLearningPlayback } from "./hooks/useLearningPlayback";
+import { useListenQueue } from "./hooks/useListenQueue";
 import { usePersistedSettings } from "./hooks/usePersistedSettings";
 import { useShareTune } from "./hooks/useShareTune";
 import "@/styles/radio.css";
@@ -23,6 +25,7 @@ export default function Radio() {
   const [error, setError] = useState<string | null>(null);
   const [isPoweredOn, setIsPoweredOn] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [isQueueOpen, setIsQueueOpen] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const progressRef = useRef<number>(0);
@@ -33,10 +36,12 @@ export default function Radio() {
     volume,
     mode,
     learningTune,
+    listenQueue,
     setStation: persistStation,
     setSpeed: persistSpeed,
     setMode: persistMode,
     setLearningTune: persistLearningTune,
+    setListenQueue: persistListenQueue,
   } = usePersistedSettings();
 
   const {
@@ -91,6 +96,19 @@ export default function Radio() {
     initialTune: learningTune,
   });
 
+  const listen = useListenQueue({
+    manifest: manifest ?? [],
+    play,
+    stop,
+    r2PublicUrl: R2_PUBLIC_URL,
+    initialQueue: listenQueue.queue,
+    initialIndex: listenQueue.index,
+    onQueueChange: persistListenQueue,
+  });
+
+  // Search UI is shared; it drives whichever mode owns a search (learn or listen).
+  const activeSearch = mode === "listen" ? listen : learning;
+
   const { sharedTune, copyShareLink, clearShareParam } = useShareTune(manifest ?? []);
 
   const sharedTuneRef = useRef(sharedTune);
@@ -101,18 +119,25 @@ export default function Radio() {
     }
   }, [sharedTune, persistMode]);
 
-  const currentTune = mode === "jam" ? jamCurrentTune : learning.currentTune;
+  const currentTune =
+    mode === "jam"
+      ? jamCurrentTune
+      : mode === "learn"
+        ? learning.currentTune
+        : listen.currentTune;
 
   useEffect(() => {
     if (!isPoweredOn) return;
     onEnded(() => {
       if (mode === "jam") {
         jamHandleTuneEnded();
-      } else {
+      } else if (mode === "learn") {
         learning.handleTuneEnded();
+      } else {
+        listen.handleTuneEnded();
       }
     });
-  }, [isPoweredOn, mode, onEnded, jamHandleTuneEnded, learning]);
+  }, [isPoweredOn, mode, onEnded, jamHandleTuneEnded, learning, listen]);
 
   useEffect(() => {
     if (!isPoweredOn) return;
@@ -156,9 +181,11 @@ export default function Radio() {
         }
       } else if (mode === "learn" && learningTune) {
         learning.selectTune(learningTune);
+      } else if (mode === "listen" && listen.currentTune) {
+        listen.replayTune();
       }
     }
-  }, [isPoweredOn, stop, init, persistedStation, stations, switchStation, setEngineVolume, volume, setTempo, speed, mode, learningTune, learning, clearShareParam, persistLearningTune]);
+  }, [isPoweredOn, stop, init, persistedStation, stations, switchStation, setEngineVolume, volume, setTempo, speed, mode, learningTune, learning, listen, clearShareParam, persistLearningTune]);
 
   const handleStationChange = useCallback(
     (station: string) => {
@@ -166,11 +193,13 @@ export default function Radio() {
       persistStation(station);
       if (mode === "jam") {
         switchStation(station);
-      } else {
+      } else if (mode === "learn") {
         learning.setStationFilter(station);
+      } else {
+        listen.setStationFilter(station);
       }
     },
-    [isPoweredOn, persistStation, switchStation, mode, learning]
+    [isPoweredOn, persistStation, switchStation, mode, learning, listen]
   );
 
   const handleSpeedChange = useCallback(
@@ -199,9 +228,11 @@ export default function Radio() {
       } else if (newMode === "learn" && isPoweredOn && tuneBeforeSwitch) {
         learning.selectTune(tuneBeforeSwitch);
         persistLearningTune(tuneBeforeSwitch);
+      } else if (newMode === "listen" && isPoweredOn && listen.currentTune) {
+        listen.replayTune();
       }
     },
-    [stop, persistMode, isPoweredOn, persistedStation, stations, switchStation, currentTune, learning, persistLearningTune]
+    [stop, persistMode, isPoweredOn, persistedStation, stations, switchStation, currentTune, learning, listen, persistLearningTune]
   );
 
   const handlePause = useCallback(async () => {
@@ -244,11 +275,13 @@ export default function Radio() {
   const handleRestart = useCallback(async () => {
     if (mode === "jam") {
       await jamReplayTune();
-    } else {
+    } else if (mode === "learn") {
       await learning.replayTune();
+    } else {
+      await listen.replayTune();
     }
     setIsPaused(false);
-  }, [mode, jamReplayTune, learning]);
+  }, [mode, jamReplayTune, learning, listen]);
 
   const handleSeek = useCallback(async (fraction: number) => {
     if (!isPoweredOn || !currentTune) return;
@@ -262,11 +295,18 @@ export default function Radio() {
 
   const handleSelectTune = useCallback(
     async (tune: typeof learning.searchResults[number]) => {
-      await learning.selectTune(tune);
-      persistLearningTune(tune);
+      if (mode === "listen") {
+        // Listen: append to the queue (auto-starts if empty). Search stays open
+        // so several tunes can be added.
+        await listen.addToQueue(tune);
+      } else {
+        // Learn: replace and loop the single tune.
+        await learning.selectTune(tune);
+        persistLearningTune(tune);
+      }
       setIsPaused(false);
     },
-    [learning, persistLearningTune]
+    [mode, learning, listen, persistLearningTune]
   );
 
   if (error) {
@@ -305,13 +345,13 @@ export default function Radio() {
         <RadioDisplay
           tuneName={displayTuneName}
           artist={displayArtist}
-          stationKey={mode === "learn" ? currentTune?.key ?? null : currentStation}
+          stationKey={mode === "jam" ? currentStation : currentTune?.key ?? null}
           speed={speed}
           progress={progress}
           isPoweredOn={isPoweredOn}
           isPlayingStatic={isPlayingStatic}
           mode={mode}
-          playCount={learning.playCount}
+          playCount={mode === "learn" ? learning.playCount : 0}
           onSeek={isPoweredOn && mode === "learn" && currentTune ? handleSeek : undefined}
           onShare={isPoweredOn && mode === "learn" && currentTune ? handleShare : undefined}
         />
@@ -331,19 +371,28 @@ export default function Radio() {
           onPowerToggle={handlePowerToggle}
           isPaused={isPaused}
           onPause={handlePause}
-          onSearch={() => learning.openSearch()}
+          onSearch={() => activeSearch.openSearch()}
+          onQueue={() => setIsQueueOpen(true)}
           onRestart={handleRestart}
           mode={mode}
           onModeChange={handleModeChange}
           hasCurrentTune={!!currentTune}
         />
         <TuneSearchDrawer
-          isOpen={learning.isSearchOpen}
-          query={learning.searchQuery}
-          results={learning.searchResults}
-          onQueryChange={learning.setSearchQuery}
+          isOpen={activeSearch.isSearchOpen}
+          query={activeSearch.searchQuery}
+          results={activeSearch.searchResults}
+          onQueryChange={activeSearch.setSearchQuery}
           onSelectTune={handleSelectTune}
-          onClose={learning.closeSearch}
+          onClose={activeSearch.closeSearch}
+        />
+        <QueueDrawer
+          isOpen={isQueueOpen}
+          queue={listen.queue}
+          currentIndex={listen.currentIndex}
+          onJump={listen.jumpToQueueIndex}
+          onRemove={listen.removeFromQueue}
+          onClose={() => setIsQueueOpen(false)}
         />
       </RadioFacade>
     </div>

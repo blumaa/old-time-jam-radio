@@ -40,10 +40,10 @@ describe("buildStationMap", () => {
     const stations = buildStationMap(mockTunes);
     const keys = Array.from(stations.keys());
 
-    expect(keys).toEqual(["All", "G", "A", "D"]);
+    expect(keys).toEqual(["All", "D", "G", "A"]);
   });
 
-  it("should only include supported stations (All, G, A, D)", () => {
+  it("should only include supported stations (All, C, G, A, D)", () => {
     const mixedTunes: Tune[] = [
       ...mockTunes,
       { title: "Tune Em1", artist: "Artist Em", key: "Em", url: "tunes/em1.mp3", duration: 100, confidence: 0.9, format: "mp3" },
@@ -57,9 +57,9 @@ describe("buildStationMap", () => {
     expect(stations.has("D")).toBe(true);
     expect(stations.has("A")).toBe(true);
     expect(stations.has("Em")).toBe(false);
-    expect(stations.has("C")).toBe(false);
+    expect(stations.has("C")).toBe(true);
     expect(stations.has("?")).toBe(false);
-    expect(stations.size).toBe(4);
+    expect(stations.size).toBe(5);
   });
 
   it("should return empty map when no tunes match supported stations", () => {

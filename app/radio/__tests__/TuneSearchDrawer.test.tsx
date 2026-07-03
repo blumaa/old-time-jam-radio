@@ -33,7 +33,7 @@ describe("TuneSearchDrawer", () => {
       />
     );
     const drawer = screen.getByTestId("tune-search-drawer");
-    expect(drawer).not.toHaveClass("tune-search-drawer--open");
+    expect(drawer).not.toHaveClass("drawer--open");
   });
 
   it("renders backdrop and panel when open", () => {
@@ -49,7 +49,7 @@ describe("TuneSearchDrawer", () => {
     );
 
     expect(screen.getByTestId("tune-search-drawer")).toBeInTheDocument();
-    expect(screen.getByTestId("tune-search-backdrop")).toBeInTheDocument();
+    expect(screen.getByTestId("tune-search-drawer-backdrop")).toBeInTheDocument();
     expect(screen.getByRole("searchbox")).toBeInTheDocument();
     expect(screen.getAllByRole("option")).toHaveLength(2);
   });
@@ -67,7 +67,7 @@ describe("TuneSearchDrawer", () => {
       />
     );
 
-    await userEvent.click(screen.getByTestId("tune-search-backdrop"));
+    await userEvent.click(screen.getByTestId("tune-search-drawer-backdrop"));
     expect(onClose).toHaveBeenCalledOnce();
   });
 

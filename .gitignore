@@ -30,6 +30,8 @@ scripts/.venv/
 
 # claude code
 .claude/
+.serena/
+.playwright-mcp/
 
 # debug
 npm-debug.log*

@@ -39,6 +39,7 @@ export const PoweredOff: Story = {
         isPaused={false}
         onPause={() => {}}
         onSearch={() => {}}
+        onQueue={() => {}}
         onRestart={() => {}}
         mode="jam"
         onModeChange={() => {}}
@@ -74,6 +75,7 @@ export const PoweredOn: Story = {
         isPaused={false}
         onPause={() => {}}
         onSearch={() => {}}
+        onQueue={() => {}}
         onRestart={() => {}}
         mode="jam"
         onModeChange={() => {}}
@@ -111,6 +113,7 @@ export const LearnMode: Story = {
         isPaused={false}
         onPause={() => {}}
         onSearch={() => {}}
+        onQueue={() => {}}
         onRestart={() => {}}
         mode="learn"
         onModeChange={() => {}}
