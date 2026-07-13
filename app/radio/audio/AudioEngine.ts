@@ -4,6 +4,7 @@ import { StaticNoiseGenerator } from "./StaticNoiseGenerator";
 export class AudioEngine {
   private audioContext: AudioContext;
   private gainNode: GainNode;
+  private keepAliveElement: HTMLAudioElement;
   private stNode: SoundTouchNodeType | null = null;
   private source: AudioBufferSourceNode | null = null;
   private _tempo = 1.0;
@@ -27,6 +28,24 @@ export class AudioEngine {
     this.audioContext = new AudioCtx();
     this.gainNode = this.audioContext.createGain();
     this.gainNode.connect(this.audioContext.destination);
+
+    // A silent, looping real audio FILE playing in a real <audio> element.
+    // Web Audio alone is invisible to the OS media layer: the browser only
+    // activates a Media Session (and captures headphone/keyboard media keys)
+    // for a genuine media element whose currentTime advances. A MediaStream-
+    // backed element does NOT qualify (Chrome treats it as a communication
+    // stream, currentTime never advances), so media keys leak to the system
+    // player (e.g. Apple Music on macOS). A looping silent file is real media:
+    // it activates the session for key routing AND holds audio focus so the
+    // AudioContext survives PWA backgrounding on Android.
+    this.keepAliveElement = document.createElement("audio");
+    this.keepAliveElement.src = "/silence.mp3";
+    this.keepAliveElement.loop = true;
+    this.keepAliveElement.preload = "auto";
+    this.keepAliveElement.setAttribute("playsinline", "");
+    this.keepAliveElement.style.display = "none";
+    document.body.appendChild(this.keepAliveElement);
+
     this.staticNoise = new StaticNoiseGenerator(
       this.audioContext,
       this.gainNode
@@ -53,6 +72,14 @@ export class AudioEngine {
       this._initialized = true;
     }
     await this.ensureRunning();
+    // Start the keep-alive element while we still hold the user gesture from
+    // power-on; a playing media element is what activates the OS media session
+    // and grabs audio focus.
+    try {
+      await this.keepAliveElement.play();
+    } catch {
+      /* autoplay may reject if not yet gestured; retried on next play */
+    }
   }
 
   async loadAndPlay(url: string): Promise<void> {
@@ -199,6 +226,10 @@ export class AudioEngine {
   async pause(): Promise<void> {
     if (this._playing) {
       this._progress = this.getProgress();
+      // The keep-alive element deliberately keeps playing: pausing it would
+      // deactivate the OS media session and release the media keys, so play/
+      // next/prev would stop reaching us while paused. The lock-screen "paused"
+      // state is driven by navigator.mediaSession.playbackState instead.
       await this.audioContext.suspend();
       this._playing = false;
     }
@@ -217,6 +248,9 @@ export class AudioEngine {
 
   destroy(): void {
     this.stop();
+    this.keepAliveElement.pause();
+    this.keepAliveElement.removeAttribute("src");
+    this.keepAliveElement.remove();
     this.audioContext.close();
   }
 }

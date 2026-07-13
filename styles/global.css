@@ -57,6 +57,17 @@
   --radio-indicator-on: var(--color-amber-200);
   --radio-indicator-off: var(--color-bakelite-100);
 
+  /* Mode/rocker labels (Jam · Learn · Listen and speed rocker).
+     Default = the original amber literals so the default theme is unchanged.
+     Themes re-skin these via the generic [data-theme] rule in themes.css. */
+  --radio-label-inactive: #8a7a5a;
+  --radio-label-active: #f5d882;
+  --radio-label-active-bg: rgba(196, 149, 32, 0.45);
+  --radio-label-active-shadow: rgba(196, 149, 32, 0.9);
+
+  /* Error */
+  --radio-error: #c0392b;
+
   /* Page */
   --page-bg: var(--color-bg);
   --text-primary: var(--color-amber-100);
@@ -95,7 +106,9 @@
   --shadow-control: 0 2px 4px rgba(0, 0, 0, 0.4);
   --shadow-control-lg: 0 2px 8px rgba(0, 0, 0, 0.5);
   --shadow-surface-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  --shadow-glow-amber: 0 0 20px rgba(232, 200, 80, 0.15);
+  /* Display glow follows the lit-screen color so it re-skins per theme.
+     Default resolves to rgba(232, 200, 80, 0.15) — pixel-identical. */
+  --shadow-glow-amber: 0 0 20px color-mix(in srgb, var(--radio-display-bg-on) 15%, transparent);
 
   /* Transitions */
   --duration-fast: 0.15s;

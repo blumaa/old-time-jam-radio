@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import "@/styles/global.css";
+import "@/styles/themes.css";
 import { Analytics } from '@vercel/analytics/next';
+import Footer from "@/app/components/Footer";
+import BrandSwitcher from "@/app/components/BrandSwitcher";
 
 export const metadata: Metadata = {
   title: "The Old-Time Dial",
@@ -30,6 +33,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
           {children}
+          <Footer />
+          <BrandSwitcher />
           <Analytics />
         </body>
     </html>

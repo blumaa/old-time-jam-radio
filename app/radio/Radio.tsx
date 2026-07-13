@@ -78,6 +78,7 @@ export default function Radio() {
     isPlayingStatic,
     stations,
     switchStation,
+    skipTune: jamSkipTune,
     replayTune: jamReplayTune,
     handleTuneEnded: jamHandleTuneEnded,
   } = useStationPlayback({
@@ -245,32 +246,6 @@ export default function Radio() {
     }
   }, [isPaused, pause, unpause]);
 
-  useEffect(() => {
-    if (!("mediaSession" in navigator)) return;
-
-    if (!isPoweredOn) {
-      navigator.mediaSession.playbackState = "none";
-      navigator.mediaSession.setActionHandler("play", null);
-      navigator.mediaSession.setActionHandler("pause", null);
-      return;
-    }
-
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title: currentTune?.title ?? "Old-Time Radio",
-      artist: currentTune?.artist ?? "",
-    });
-
-    navigator.mediaSession.playbackState = isPaused ? "paused" : "playing";
-
-    navigator.mediaSession.setActionHandler("play", () => handlePause());
-    navigator.mediaSession.setActionHandler("pause", () => handlePause());
-
-    return () => {
-      navigator.mediaSession.setActionHandler("play", null);
-      navigator.mediaSession.setActionHandler("pause", null);
-      navigator.mediaSession.playbackState = "none";
-    };
-  }, [isPoweredOn, isPaused, handlePause, currentTune]);
 
   const handleRestart = useCallback(async () => {
     if (mode === "jam") {
@@ -282,6 +257,90 @@ export default function Radio() {
     }
     setIsPaused(false);
   }, [mode, jamReplayTune, learning, listen]);
+
+  // Skip forward: jam picks a new random tune, listen advances the queue,
+  // learn has no next tune so it restarts the practice loop.
+  const handleSkipNext = useCallback(async () => {
+    if (mode === "jam") {
+      await jamSkipTune();
+    } else if (mode === "listen") {
+      const nextIndex = listen.currentIndex + 1;
+      if (nextIndex >= listen.queue.length) return;
+      await listen.jumpToQueueIndex(nextIndex);
+    } else {
+      await learning.replayTune();
+    }
+    setIsPaused(false);
+  }, [mode, jamSkipTune, learning, listen]);
+
+  // Skip back: listen steps to the previous queue item (restarts if at the
+  // start); jam/learn have no history, so restart the current tune.
+  const handleSkipPrevious = useCallback(async () => {
+    if (mode === "listen") {
+      const prevIndex = listen.currentIndex - 1;
+      if (prevIndex >= 0) {
+        await listen.jumpToQueueIndex(prevIndex);
+      } else {
+        await listen.replayTune();
+      }
+      setIsPaused(false);
+      return;
+    }
+    await handleRestart();
+  }, [mode, listen, handleRestart]);
+
+  // Media Session: routes OS transport controls — headphone buttons, keyboard
+  // media keys (Mac F7/F8/F9), lock screen — to the app. Requires the playing
+  // <audio> sink element in AudioEngine so the OS recognizes real media.
+  useEffect(() => {
+    if (!("mediaSession" in navigator)) return;
+
+    if (!isPoweredOn) {
+      navigator.mediaSession.playbackState = "none";
+      navigator.mediaSession.setActionHandler("play", null);
+      navigator.mediaSession.setActionHandler("pause", null);
+      navigator.mediaSession.setActionHandler("nexttrack", null);
+      navigator.mediaSession.setActionHandler("previoustrack", null);
+      return;
+    }
+
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: currentTune?.title ?? "Old-Time Radio",
+      artist: currentTune?.artist ?? "",
+    });
+
+    navigator.mediaSession.playbackState = isPaused ? "paused" : "playing";
+
+    // Both actions toggle. The keep-alive element is always playing, so the OS
+    // reads the session as "playing" and keeps sending the "pause" action even
+    // after we set playbackState to "paused" — it never sends "play". A guarded
+    // handler would therefore no-op on resume. handlePause() flips on the real
+    // (fresh) isPaused state, so a single toggle on either action is correct.
+    const togglePlayback = () => handlePause();
+    navigator.mediaSession.setActionHandler("play", togglePlayback);
+    navigator.mediaSession.setActionHandler("pause", togglePlayback);
+    navigator.mediaSession.setActionHandler("nexttrack", () => {
+      handleSkipNext();
+    });
+    navigator.mediaSession.setActionHandler("previoustrack", () => {
+      handleSkipPrevious();
+    });
+
+    return () => {
+      navigator.mediaSession.setActionHandler("play", null);
+      navigator.mediaSession.setActionHandler("pause", null);
+      navigator.mediaSession.setActionHandler("nexttrack", null);
+      navigator.mediaSession.setActionHandler("previoustrack", null);
+      navigator.mediaSession.playbackState = "none";
+    };
+  }, [
+    isPoweredOn,
+    isPaused,
+    handlePause,
+    handleSkipNext,
+    handleSkipPrevious,
+    currentTune,
+  ]);
 
   const handleSeek = useCallback(async (fraction: number) => {
     if (!isPoweredOn || !currentTune) return;

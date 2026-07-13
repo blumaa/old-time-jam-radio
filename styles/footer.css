@@ -1,0 +1,31 @@
+/* Low-profile educational-use notice, pinned to the bottom of the viewport. */
+
+.site-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  padding: 0.4rem 0.75rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.site-footer__text {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  font-size: 0.7rem;
+  line-height: 1.3;
+  color: var(--text-muted, rgba(255, 255, 255, 0.5));
+}
+
+.site-footer__link {
+  color: var(--radio-accent-light, #d4a830);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  pointer-events: auto;
+}
+
+.site-footer__link:hover {
+  color: var(--radio-accent, #c9960c);
+}

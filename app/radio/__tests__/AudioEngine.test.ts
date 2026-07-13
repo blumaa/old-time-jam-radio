@@ -59,6 +59,47 @@ describe("AudioEngine", () => {
     expect(engine).toBeDefined();
   });
 
+  describe("media-session keep-alive element", () => {
+    it("creates a hidden looping silent <audio> file element", () => {
+      const el = document.querySelector("audio") as HTMLAudioElement;
+      expect(el).not.toBeNull();
+      expect(el.style.display).toBe("none");
+      expect(el.loop).toBe(true);
+      // A real media file (not a MediaStream) so the OS activates a Media
+      // Session and routes hardware/keyboard media keys to the app.
+      expect(el.getAttribute("src")).toBe("/silence.mp3");
+    });
+
+    it("plays the keep-alive element on init to activate the session", async () => {
+      const el = document.querySelector("audio") as HTMLAudioElement;
+      (el.play as ReturnType<typeof vi.fn>).mockClear();
+      await engine.init();
+      expect(el.play).toHaveBeenCalled();
+    });
+
+    it("keeps the keep-alive element playing across pause/unpause so the session stays active", async () => {
+      const el = document.querySelector("audio") as HTMLAudioElement;
+      await engine.loadAndPlay("http://example.com/tune.mp3");
+      (el.pause as ReturnType<typeof vi.fn>).mockClear();
+
+      // Pausing the tune must NOT pause the keep-alive element — that would
+      // deactivate the media session and drop the hardware media keys.
+      await engine.pause();
+      expect(el.pause).not.toHaveBeenCalled();
+
+      await engine.unpause();
+      expect(el.pause).not.toHaveBeenCalled();
+    });
+
+    it("removes the keep-alive element on destroy", () => {
+      const before = document.querySelectorAll("audio").length;
+      engine.destroy();
+      expect(document.querySelectorAll("audio").length).toBe(before - 1);
+      // re-create so afterEach destroy() is a no-op-safe double call
+      engine = new AudioEngine();
+    });
+  });
+
   it("should set volume via gain node", () => {
     engine.setVolume(0.5);
     expect(engine.getVolume()).toBe(0.5);

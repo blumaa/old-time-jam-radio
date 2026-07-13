@@ -103,3 +103,19 @@ class MockAudioContext {
 
 globalThis.AudioContext = MockAudioContext as unknown as typeof AudioContext;
 (globalThis as Record<string, unknown>).webkitAudioContext = MockAudioContext;
+
+// jsdom doesn't implement HTMLMediaElement playback or srcObject; stub them so
+// AudioEngine's MediaStream sink element can be created/played in tests.
+if (typeof HTMLMediaElement !== "undefined") {
+  HTMLMediaElement.prototype.play = vi.fn().mockResolvedValue(undefined);
+  HTMLMediaElement.prototype.pause = vi.fn();
+  Object.defineProperty(HTMLMediaElement.prototype, "srcObject", {
+    configurable: true,
+    get() {
+      return this._srcObject ?? null;
+    },
+    set(value) {
+      this._srcObject = value;
+    },
+  });
+}

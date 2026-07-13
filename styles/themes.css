@@ -1,12 +1,26 @@
-/* Alternate theme palettes — override palette-layer vars only */
+/* Alternate theme palettes — override palette-layer vars only.
+   Theme names are mirrored in app/theme/themes.ts (SSOT for the dev switcher).
+   Brand palettes are adapted from the xClues brand system. */
+
+/* Mode/rocker label tokens re-skin for ALL themes at once (any data-theme
+   value). The default theme (no data-theme attribute) keeps the literal amber
+   values from global.css. Active/inactive derive from the theme's own text
+   tokens; the glow/pill derive from the theme accent — so labels take the
+   brand color instead of staying gold. */
+[data-theme] {
+  --radio-label-inactive: var(--text-muted);
+  --radio-label-active: var(--text-primary);
+  --radio-label-active-bg: color-mix(in srgb, var(--radio-accent) 45%, transparent);
+  --radio-label-active-shadow: color-mix(in srgb, var(--radio-accent) 70%, transparent);
+}
 
 [data-theme="midnight"] {
-  --color-wood-100: #5a4a50;
-  --color-wood-200: #3a2a30;
-  --color-wood-300: #221820;
+  --color-wood-100: #3c3236;
+  --color-wood-200: #22191c;
+  --color-wood-300: #0b080a;
   --color-bakelite-100: #201a20;
   --color-bakelite-200: #0a0608;
-  --color-brass-100: #c0c0c8;
+  --color-brass-100: #b8b8c1;
   --color-brass-200: #9898a4;
   --color-amber-100: #d0e8ff;
   --color-amber-200: #8ab0d0;
@@ -19,21 +33,257 @@
   --text-muted: #8080a0;
 }
 
+/* Blonde is the one LIGHT theme: light surfaces with dark ink. Because the
+   token architecture assumes dark surfaces / light ink, blonde overrides
+   --text-primary directly (decoupled from the lit-screen amber) and lightens
+   the knobs (bakelite) so the mid-tone accent stays legible on both the light
+   knobs and the light body. */
 [data-theme="blonde"] {
-  --color-wood-100: #d4b896;
-  --color-wood-200: #b89870;
-  --color-wood-300: #8a7050;
-  --color-bakelite-100: #4a3828;
-  --color-bakelite-200: #2a1c10;
-  --color-brass-100: #8a7030;
-  --color-brass-200: #6a5020;
+  --color-wood-100: #f0e0c4;
+  --color-wood-200: #e2cba0;
+  --color-wood-300: #c8ac7c;
+  --color-bakelite-100: #e8d8b8;
+  --color-bakelite-200: #d8c4a0;
+  --color-brass-100: #725c27;
+  --color-brass-200: #473515;
   --color-amber-100: #fff8e0;
   --color-amber-200: #e8d8a0;
   --color-grille-100: #7a6040;
   --color-grille-200: #5a4430;
-  --color-bg: #c8a878;
+  --color-bg: #efe2cc;
 
-  --radio-display-bg-off: #4a3828;
+  --radio-display-bg-off: #c8b088;
   --radio-display-text: #3a2810;
-  --text-muted: #7a6848;
+  --text-primary: #30210d;
+  --text-muted: #60421a;
+}
+
+/* ── Brand palettes (from xClues) ─────────────────────────────── */
+
+[data-theme="xclues"] {
+  --color-wood-100: #422acc;
+  --color-wood-200: #3222a1;
+  --color-wood-300: #2f207a;
+  --color-bakelite-100: #1a1230;
+  --color-bakelite-200: #0d0818;
+  --color-brass-100: #cdc9fe;
+  --color-brass-200: #a49af0;
+  --color-amber-100: #efeaff;
+  --color-amber-200: #c4b8f0;
+  --color-grille-100: #2a2050;
+  --color-grille-200: #1a1436;
+  --color-bg: #0f0a1a;
+
+  --radio-display-bg-off: #17122a;
+  --radio-display-text: #2a1d5e;
+  --text-muted: #a29bfe;
+}
+
+[data-theme="superhuman"] {
+  --color-wood-100: #6a3eb0;
+  --color-wood-200: #4e3586;
+  --color-wood-300: #3b286b;
+  --color-bakelite-100: #1b1938;
+  --color-bakelite-200: #100e22;
+  --color-brass-100: #daccfc;
+  --color-brass-200: #bca9e2;
+  --color-amber-100: #efe9ff;
+  --color-amber-200: #cbb7fb;
+  --color-grille-100: #2a2150;
+  --color-grille-200: #1a1436;
+  --color-bg: #1b1938;
+
+  --radio-display-bg-off: #171430;
+  --radio-display-text: #2c1e50;
+  --text-muted: #cbb7fb;
+}
+
+[data-theme="stripe"] {
+  --color-wood-100: #1d2d9c;
+  --color-wood-200: #222964;
+  --color-wood-300: #171946;
+  --color-bakelite-100: #101a30;
+  --color-bakelite-200: #08101f;
+  --color-brass-100: #ccccfb;
+  --color-brass-200: #918bfe;
+  --color-amber-100: #e6eaff;
+  --color-amber-200: #b9b9f9;
+  --color-grille-100: #1c2a50;
+  --color-grille-200: #101a30;
+  --color-bg: #0d253d;
+
+  --radio-display-bg-off: #0f1c30;
+  --radio-display-text: #1c1e54;
+  --text-muted: #8898aa;
+}
+
+[data-theme="spotify"] {
+  --color-wood-100: #0f6e31;
+  --color-wood-200: #0a411d;
+  --color-wood-300: #051d0d;
+  --color-bakelite-100: #181818;
+  --color-bakelite-200: #0a0a0a;
+  --color-brass-100: #31e270;
+  --color-brass-200: #1db954;
+  --color-amber-100: #d8ffe4;
+  --color-amber-200: #a3f7bf;
+  --color-grille-100: #1a1a1a;
+  --color-grille-200: #0d0d0d;
+  --color-bg: #121212;
+
+  --radio-display-bg-off: #0f1a12;
+  --radio-display-text: #0d3a1e;
+  --text-muted: #1ed760;
+}
+
+[data-theme="linear"] {
+  --color-wood-100: #2731a0;
+  --color-wood-200: #202549;
+  --color-wood-300: #13152e;
+  --color-bakelite-100: #0f1011;
+  --color-bakelite-200: #08090a;
+  --color-brass-100: #97a2ff;
+  --color-brass-200: #7e88db;
+  --color-amber-100: #e0e2ff;
+  --color-amber-200: #a5a5ff;
+  --color-grille-100: #191a1b;
+  --color-grille-200: #0f1011;
+  --color-bg: #08090a;
+
+  --radio-display-bg-off: #101120;
+  --radio-display-text: #2e3470;
+  --text-muted: #8a8f98;
+}
+
+[data-theme="notion"] {
+  --color-wood-100: #3c3b38;
+  --color-wood-200: #22221f;
+  --color-wood-300: #0c0c0c;
+  --color-bakelite-100: #191918;
+  --color-bakelite-200: #0a0a08;
+  --color-brass-100: #51a5ee;
+  --color-brass-200: #0388ff;
+  --color-amber-100: #f2f9ff;
+  --color-amber-200: #cbe6fb;
+  --color-grille-100: #232320;
+  --color-grille-200: #141413;
+  --color-bg: #191918;
+
+  --radio-display-bg-off: #14140f;
+  --radio-display-text: #005bab;
+  --text-muted: #a39e98;
+}
+
+[data-theme="framer"] {
+  --color-wood-100: #005187;
+  --color-wood-200: #003254;
+  --color-wood-300: #001a2b;
+  --color-bakelite-100: #0a0a0a;
+  --color-bakelite-200: #050505;
+  --color-brass-100: #42b4ff;
+  --color-brass-200: #059bff;
+  --color-amber-100: #d6f0ff;
+  --color-amber-200: #b3e0ff;
+  --color-grille-100: #0d0d0d;
+  --color-grille-200: #060606;
+  --color-bg: #000000;
+
+  --radio-display-bg-off: #0a1620;
+  --radio-display-text: #004d80;
+  --text-muted: #66c2ff;
+}
+
+[data-theme="claude"] {
+  --color-wood-100: #672b17;
+  --color-wood-200: #3a1b11;
+  --color-wood-300: #1b0c08;
+  --color-bakelite-100: #2a1c14;
+  --color-bakelite-200: #14100a;
+  --color-brass-100: #dfa17e;
+  --color-brass-200: #ce7152;
+  --color-amber-100: #fbeee4;
+  --color-amber-200: #f0c8b4;
+  --color-grille-100: #3a281e;
+  --color-grille-200: #241811;
+  --color-bg: #201812;
+
+  --radio-display-bg-off: #24170f;
+  --radio-display-text: #6e3320;
+  --text-muted: #b08060;
+}
+
+[data-theme="pinterest"] {
+  --color-wood-100: #6b0012;
+  --color-wood-200: #380009;
+  --color-wood-300: #100002;
+  --color-bakelite-100: #1a1012;
+  --color-bakelite-200: #0d0608;
+  --color-brass-100: #ff3e3e;
+  --color-brass-200: #ff0027;
+  --color-amber-100: #ffe0e4;
+  --color-amber-200: #ffd6db;
+  --color-grille-100: #241416;
+  --color-grille-200: #14090b;
+  --color-bg: #1a1118;
+
+  --radio-display-bg-off: #200e11;
+  --radio-display-text: #7a0013;
+  --text-muted: #ff5c5c;
+}
+
+[data-theme="raycast"] {
+  --color-wood-100: #9a3a3a;
+  --color-wood-200: #752222;
+  --color-wood-300: #501d1d;
+  --color-bakelite-100: #0f1011;
+  --color-bakelite-200: #07080a;
+  --color-brass-100: #ffb3b3;
+  --color-brass-200: #ff8787;
+  --color-amber-100: #ffe4e4;
+  --color-amber-200: #ffcccc;
+  --color-grille-100: #14090a;
+  --color-grille-200: #0a0506;
+  --color-bg: #07080a;
+
+  --radio-display-bg-off: #180e0e;
+  --radio-display-text: #802f2f;
+  --text-muted: #55b3ff;
+}
+
+[data-theme="supabase"] {
+  --color-wood-100: #1b6b47;
+  --color-wood-200: #005230;
+  --color-wood-300: #002918;
+  --color-bakelite-100: #171717;
+  --color-bakelite-200: #0a0a0a;
+  --color-brass-100: #5af18c;
+  --color-brass-200: #3ecf8e;
+  --color-amber-100: #d1fae5;
+  --color-amber-200: #a3f7bf;
+  --color-grille-100: #141414;
+  --color-grille-200: #0a0a0a;
+  --color-bg: #171717;
+
+  --radio-display-bg-off: #0d1a12;
+  --radio-display-text: #00693c;
+  --text-muted: #3ecf8e;
+}
+
+[data-theme="vercel"] {
+  --color-wood-100: #313131;
+  --color-wood-200: #171717;
+  --color-wood-300: #050505;
+  --color-bakelite-100: #111111;
+  --color-bakelite-200: #000000;
+  --color-brass-100: #4c9aff;
+  --color-brass-200: #187df5;
+  --color-amber-100: #ebf5ff;
+  --color-amber-200: #cfe4ff;
+  --color-grille-100: #171717;
+  --color-grille-200: #0a0a0a;
+  --color-bg: #0a0a0a;
+
+  --radio-display-bg-off: #0d1620;
+  --radio-display-text: #0a3a80;
+  --text-muted: #888888;
 }
