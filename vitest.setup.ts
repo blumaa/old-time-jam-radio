@@ -74,6 +74,9 @@ class MockAudioContext {
   createBufferSource() {
     return new MockAudioBufferSourceNode();
   }
+  createMediaElementSource() {
+    return { connect: vi.fn().mockReturnThis(), disconnect: vi.fn() };
+  }
   createScriptProcessor() {
     return new MockScriptProcessorNode();
   }
@@ -104,18 +107,47 @@ class MockAudioContext {
 globalThis.AudioContext = MockAudioContext as unknown as typeof AudioContext;
 (globalThis as Record<string, unknown>).webkitAudioContext = MockAudioContext;
 
-// jsdom doesn't implement HTMLMediaElement playback or srcObject; stub them so
-// AudioEngine's MediaStream sink element can be created/played in tests.
+// jsdom doesn't implement HTMLMediaElement playback; stub it so AudioEngine's
+// <audio> source element behaves like real media: play()/pause() flip `paused`
+// and fire the matching events, and duration/currentTime/playbackRate are
+// controllable from tests.
 if (typeof HTMLMediaElement !== "undefined") {
-  HTMLMediaElement.prototype.play = vi.fn().mockResolvedValue(undefined);
-  HTMLMediaElement.prototype.pause = vi.fn();
-  Object.defineProperty(HTMLMediaElement.prototype, "srcObject", {
+  type MockMedia = HTMLMediaElement & Record<string, unknown>;
+
+  HTMLMediaElement.prototype.play = vi.fn(function (this: MockMedia) {
+    this._paused = false;
+    this.dispatchEvent(new Event("play"));
+    return Promise.resolve();
+  });
+  HTMLMediaElement.prototype.pause = vi.fn(function (this: MockMedia) {
+    this._paused = true;
+    this.dispatchEvent(new Event("pause"));
+  });
+  HTMLMediaElement.prototype.load = vi.fn();
+
+  const accessor = (
+    name: string,
+    backing: string,
+    fallback: unknown
+  ): void => {
+    Object.defineProperty(HTMLMediaElement.prototype, name, {
+      configurable: true,
+      get(this: MockMedia) {
+        return this[backing] ?? fallback;
+      },
+      set(this: MockMedia, value: unknown) {
+        this[backing] = value;
+      },
+    });
+  };
+
+  Object.defineProperty(HTMLMediaElement.prototype, "paused", {
     configurable: true,
-    get() {
-      return this._srcObject ?? null;
-    },
-    set(value) {
-      this._srcObject = value;
+    get(this: MockMedia) {
+      return (this._paused as boolean) ?? true;
     },
   });
+  accessor("duration", "_duration", NaN);
+  accessor("currentTime", "_currentTime", 0);
+  accessor("playbackRate", "_playbackRate", 1);
 }

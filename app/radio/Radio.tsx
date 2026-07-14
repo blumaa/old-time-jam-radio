@@ -29,6 +29,7 @@ export default function Radio() {
   const [progress, setProgress] = useState(0);
 
   const progressRef = useRef<number>(0);
+  const pauseInFlightRef = useRef(false);
 
   const {
     station: persistedStation,
@@ -50,10 +51,12 @@ export default function Radio() {
     stop,
     pause,
     unpause,
+    isPaused: getEngineIsPaused,
     setTempo,
     setVolume: setEngineVolume,
     getProgress,
     onEnded,
+    onPlayStateChange,
     seek,
     playStaticBurst,
   } = useAudioEngine();
@@ -237,14 +240,31 @@ export default function Radio() {
   );
 
   const handlePause = useCallback(async () => {
-    if (isPaused) {
-      await unpause();
-      setIsPaused(false);
-    } else {
-      await pause();
-      setIsPaused(true);
+    // Guard against overlapping toggles (double-tap, rapid headset presses).
+    // Each branch awaits the engine, so without this two calls could read the
+    // same pre-toggle state and both pause or both resume.
+    if (pauseInFlightRef.current) return;
+    pauseInFlightRef.current = true;
+    try {
+      // Branch on the engine (single source of truth), not the React mirror.
+      // React `isPaused` is updated by the element's play/pause events via
+      // onPlayStateChange below — the one writer, whoever triggers the change
+      // (this button, a media key, or the OS lock screen).
+      if (getEngineIsPaused()) {
+        await unpause();
+      } else {
+        await pause();
+      }
+    } finally {
+      pauseInFlightRef.current = false;
     }
-  }, [isPaused, pause, unpause]);
+  }, [pause, unpause, getEngineIsPaused]);
+
+  // Mirror the element's real play/pause state into React (single source of
+  // truth = the element). Fires for our UI, hardware media keys, and the OS.
+  useEffect(() => {
+    onPlayStateChange(setIsPaused);
+  }, [onPlayStateChange]);
 
 
   const handleRestart = useCallback(async () => {
@@ -290,13 +310,14 @@ export default function Radio() {
   }, [mode, listen, handleRestart]);
 
   // Media Session: routes OS transport controls — headphone buttons, keyboard
-  // media keys (Mac F7/F8/F9), lock screen — to the app. Requires the playing
-  // <audio> sink element in AudioEngine so the OS recognizes real media.
+  // media keys (Mac F7/F8/F9), lock screen — to the app. Works because the tune
+  // plays through a real <audio> element in AudioEngine, so the OS activates a
+  // session and derives playbackState from the element automatically (we don't
+  // set it manually). We only supply metadata and the transport handlers.
   useEffect(() => {
     if (!("mediaSession" in navigator)) return;
 
     if (!isPoweredOn) {
-      navigator.mediaSession.playbackState = "none";
       navigator.mediaSession.setActionHandler("play", null);
       navigator.mediaSession.setActionHandler("pause", null);
       navigator.mediaSession.setActionHandler("nexttrack", null);
@@ -309,13 +330,8 @@ export default function Radio() {
       artist: currentTune?.artist ?? "",
     });
 
-    navigator.mediaSession.playbackState = isPaused ? "paused" : "playing";
-
-    // Both actions toggle. The keep-alive element is always playing, so the OS
-    // reads the session as "playing" and keeps sending the "pause" action even
-    // after we set playbackState to "paused" — it never sends "play". A guarded
-    // handler would therefore no-op on resume. handlePause() flips on the real
-    // (fresh) isPaused state, so a single toggle on either action is correct.
+    // handlePause() reads the element's live state and is re-entrancy-guarded,
+    // so a single toggle handles both the "play" and "pause" actions correctly.
     const togglePlayback = () => handlePause();
     navigator.mediaSession.setActionHandler("play", togglePlayback);
     navigator.mediaSession.setActionHandler("pause", togglePlayback);
@@ -331,11 +347,9 @@ export default function Radio() {
       navigator.mediaSession.setActionHandler("pause", null);
       navigator.mediaSession.setActionHandler("nexttrack", null);
       navigator.mediaSession.setActionHandler("previoustrack", null);
-      navigator.mediaSession.playbackState = "none";
     };
   }, [
     isPoweredOn,
-    isPaused,
     handlePause,
     handleSkipNext,
     handleSkipPrevious,

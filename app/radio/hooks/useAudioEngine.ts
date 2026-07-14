@@ -6,12 +6,16 @@ import { AudioEngine } from "../audio/AudioEngine";
 export function useAudioEngine() {
   const engineRef = useRef<AudioEngine | null>(null);
   const onEndedRef = useRef<(() => void) | null>(null);
+  const onPlayStateChangeRef = useRef<((paused: boolean) => void) | null>(null);
 
   const getEngine = useCallback(() => {
     if (!engineRef.current) {
       engineRef.current = new AudioEngine();
       if (onEndedRef.current) {
         engineRef.current.onEnded(onEndedRef.current);
+      }
+      if (onPlayStateChangeRef.current) {
+        engineRef.current.onPlayStateChange(onPlayStateChangeRef.current);
       }
     }
     return engineRef.current;
@@ -53,13 +57,14 @@ export function useAudioEngine() {
     return engineRef.current?.getProgress() ?? 0;
   }, []);
 
-  const isPlaying = useCallback(() => {
-    return engineRef.current?.isPlaying() ?? false;
-  }, []);
-
   const onEnded = useCallback((callback: () => void) => {
     onEndedRef.current = callback;
     engineRef.current?.onEnded(callback);
+  }, []);
+
+  const onPlayStateChange = useCallback((callback: (paused: boolean) => void) => {
+    onPlayStateChangeRef.current = callback;
+    engineRef.current?.onPlayStateChange(callback);
   }, []);
 
   const pause = useCallback(async () => {
@@ -95,9 +100,9 @@ export function useAudioEngine() {
     setTempo,
     setVolume,
     getProgress,
-    isPlaying,
     isPaused,
     onEnded,
+    onPlayStateChange,
     seek,
     playStaticBurst,
   };

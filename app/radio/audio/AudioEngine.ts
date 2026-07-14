@@ -1,24 +1,45 @@
 import type { SoundTouchNode as SoundTouchNodeType } from "@soundtouchjs/audio-worklet";
 import { StaticNoiseGenerator } from "./StaticNoiseGenerator";
 
+/**
+ * Audio graph:
+ *
+ *   <audio> ─▶ MediaElementAudioSourceNode ─▶ SoundTouchNode ─▶ gain ─▶ destination
+ *
+ * The tune plays through a real <audio> element (not decodeAudioData + a
+ * buffer source). This is deliberate and load-bearing:
+ *
+ *  - Web Audio alone does not request Android audio focus, so Chrome never
+ *    shows a media notification and never routes hardware media keys
+ *    (headset/Bluetooth). A genuine, audible media element does. Routing the
+ *    tune through the element is the only documented way to get the Media
+ *    Session working on Android — and it makes play/pause native across every
+ *    platform (Mac keyboard, Android headset, lock screen).
+ *
+ *  - Pitch-preserved speed is split for realtime safety: the element does the
+ *    time change via `playbackRate` (a perfect resample; but with
+ *    `preservesPitch = false` it also lowers pitch by the same factor), and
+ *    SoundTouch restores pitch with a duration-preserving pitch shift
+ *    (`pitch = 1 / speed`, `tempo = 1`). SoundTouch's *time-stretch* would
+ *    drift unboundedly when fed a realtime source (input:output ratio ≠ 1);
+ *    its *pitch-shift* preserves duration, so sample flow stays ~1:1 and the
+ *    worklet's FIFO stays bounded.
+ *
+ * Single source of truth for playback state is the element itself:
+ * `audioElement.paused` / `.currentTime` / `.duration`.
+ */
 export class AudioEngine {
   private audioContext: AudioContext;
   private gainNode: GainNode;
-  private keepAliveElement: HTMLAudioElement;
+  private audioElement: HTMLAudioElement;
+  private mediaElementSource: MediaElementAudioSourceNode | null = null;
   private stNode: SoundTouchNodeType | null = null;
-  private source: AudioBufferSourceNode | null = null;
-  private _tempo = 1.0;
-  private _playing = false;
-  private _onEndedCallback: (() => void) | null = null;
-  private _progress = 0;
-  private _duration = 0;
-  private _startTime = 0;
-  private _accumulatedPos = 0;
-  private _activeTempo = 1.0;
   private staticNoise: StaticNoiseGenerator;
-  private _buffer: AudioBuffer | null = null;
+  private _tempo = 1.0;
+  private _onEndedCallback: (() => void) | null = null;
+  private _onPlayStateChange: ((paused: boolean) => void) | null = null;
   private _initialized = false;
-  private loadAbortController: AbortController | null = null;
+  private _loadToken = 0;
 
   constructor() {
     const AudioCtx =
@@ -29,27 +50,45 @@ export class AudioEngine {
     this.gainNode = this.audioContext.createGain();
     this.gainNode.connect(this.audioContext.destination);
 
-    // A silent, looping real audio FILE playing in a real <audio> element.
-    // Web Audio alone is invisible to the OS media layer: the browser only
-    // activates a Media Session (and captures headphone/keyboard media keys)
-    // for a genuine media element whose currentTime advances. A MediaStream-
-    // backed element does NOT qualify (Chrome treats it as a communication
-    // stream, currentTime never advances), so media keys leak to the system
-    // player (e.g. Apple Music on macOS). A looping silent file is real media:
-    // it activates the session for key routing AND holds audio focus so the
-    // AudioContext survives PWA backgrounding on Android.
-    this.keepAliveElement = document.createElement("audio");
-    this.keepAliveElement.src = "/silence.mp3";
-    this.keepAliveElement.loop = true;
-    this.keepAliveElement.preload = "auto";
-    this.keepAliveElement.setAttribute("playsinline", "");
-    this.keepAliveElement.style.display = "none";
-    document.body.appendChild(this.keepAliveElement);
+    this.audioElement = document.createElement("audio");
+    // crossOrigin is required so MediaElementAudioSourceNode is not "tainted"
+    // (a tainted element feeds silence into the graph). The tunes are served
+    // from R2 with CORS headers, so anonymous mode succeeds.
+    this.audioElement.crossOrigin = "anonymous";
+    this.audioElement.preload = "auto";
+    this.audioElement.setAttribute("playsinline", "");
+    this.audioElement.style.display = "none";
+    // SoundTouch owns pitch correction; disable the browser's own so the
+    // element's playbackRate lowers pitch by exactly the speed factor.
+    this.setPreservesPitch(false);
+    document.body.appendChild(this.audioElement);
+
+    this.audioElement.addEventListener("ended", () => {
+      this._onEndedCallback?.();
+    });
+    // The element is the single source of truth: mirror its state to listeners
+    // regardless of who changed it (our UI, a media key, or the OS lock screen).
+    this.audioElement.addEventListener("play", () =>
+      this._onPlayStateChange?.(false)
+    );
+    this.audioElement.addEventListener("pause", () =>
+      this._onPlayStateChange?.(true)
+    );
 
     this.staticNoise = new StaticNoiseGenerator(
       this.audioContext,
       this.gainNode
     );
+  }
+
+  private setPreservesPitch(value: boolean): void {
+    const el = this.audioElement as HTMLAudioElement & {
+      mozPreservesPitch?: boolean;
+      webkitPreservesPitch?: boolean;
+    };
+    el.preservesPitch = value;
+    el.mozPreservesPitch = value;
+    el.webkitPreservesPitch = value;
   }
 
   private async ensureRunning(): Promise<void> {
@@ -60,119 +99,58 @@ export class AudioEngine {
 
   async init(): Promise<void> {
     if (!this._initialized) {
-      const buffer = this.audioContext.createBuffer(1, 1, this.audioContext.sampleRate);
-      const source = this.audioContext.createBufferSource();
-      source.buffer = buffer;
-      source.connect(this.audioContext.destination);
-      source.start();
-
       const { SoundTouchNode } = await import("@soundtouchjs/audio-worklet");
-      await SoundTouchNode.register(this.audioContext, "/soundtouch-processor.js");
+      await SoundTouchNode.register(
+        this.audioContext,
+        "/soundtouch-processor.js"
+      );
+
+      // Built once and reused for every tune: createMediaElementSource can only
+      // be called a single time per element.
+      this.mediaElementSource = this.audioContext.createMediaElementSource(
+        this.audioElement
+      );
+      this.stNode = new SoundTouchNode(this.audioContext);
+      this.mediaElementSource.connect(this.stNode);
+      this.stNode.connect(this.gainNode);
+      this.applyTempo();
 
       this._initialized = true;
     }
     await this.ensureRunning();
-    // Start the keep-alive element while we still hold the user gesture from
-    // power-on; a playing media element is what activates the OS media session
-    // and grabs audio focus.
-    try {
-      await this.keepAliveElement.play();
-    } catch {
-      /* autoplay may reject if not yet gestured; retried on next play */
-    }
   }
 
   async loadAndPlay(url: string): Promise<void> {
-    this.loadAbortController?.abort();
-    const controller = new AbortController();
-    this.loadAbortController = controller;
+    const token = ++this._loadToken;
+    await this.init();
+    if (token !== this._loadToken) return;
 
-    this.stopPlayback();
-    await this.ensureRunning();
-
+    this.audioElement.src = url;
+    // Some browsers reset preservesPitch when the source changes.
+    this.setPreservesPitch(false);
+    this.applyTempo();
     try {
-      const response = await fetch(url, { signal: controller.signal });
-      if (controller.signal.aborted) return;
-
-      const arrayBuffer = await response.arrayBuffer();
-      if (controller.signal.aborted) return;
-
-      const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
-      if (controller.signal.aborted) return;
-
-      await this.ensureRunning();
-
-      this._duration = audioBuffer.duration;
-      this._buffer = audioBuffer;
-      await this.startFromOffset(0);
+      await this.audioElement.play();
     } catch (e: unknown) {
+      // A newer load (or stop) interrupted this one — expected, not an error.
+      if (token !== this._loadToken) return;
       if (e instanceof DOMException && e.name === "AbortError") return;
       throw e;
     }
   }
 
-  private async startFromOffset(offsetSeconds: number): Promise<void> {
-    const { SoundTouchNode } = await import("@soundtouchjs/audio-worklet");
-    this.stNode = new SoundTouchNode(this.audioContext);
-    this.stNode.playbackRate.value = this._tempo;
-    this.stNode.pitch.value = 1;
-    this.stNode.connect(this.gainNode);
-
-    this.source = this.audioContext.createBufferSource();
-    this.source.buffer = this._buffer!;
-    this.source.playbackRate.value = this._tempo;
-    this.source.connect(this.stNode);
-
-    this.source.onended = () => {
-      this._playing = false;
-      this._progress = 0;
-      this._accumulatedPos = 0;
-      this._onEndedCallback?.();
-    };
-
-    this._startTime = this.audioContext.currentTime;
-    this._accumulatedPos = offsetSeconds;
-    this._activeTempo = this._tempo;
-    this.source.start(0, offsetSeconds);
-    this._playing = true;
-  }
-
   async seek(fraction: number): Promise<void> {
-    if (!this._buffer || this._duration === 0) return;
-    const targetSeconds = Math.max(0, Math.min(1, fraction)) * this._duration;
-    const wasPaused = this.isPaused();
-    this.stopPlayback();
-    if (wasPaused) await this.ensureRunning();
-    await this.startFromOffset(targetSeconds);
-    if (wasPaused) {
-      this._progress = fraction;
-      await this.audioContext.suspend();
-      this._playing = false;
-    }
-  }
-
-  private stopPlayback(): void {
-    if (this.source) {
-      this.source.onended = null;
-      try { this.source.stop(); } catch { /* already stopped */ }
-      this.source.disconnect();
-      this.source = null;
-    }
-    if (this.stNode) {
-      this.stNode.disconnect();
-      this.stNode = null;
-    }
-    this._playing = false;
-    this._progress = 0;
-    this._accumulatedPos = 0;
+    const duration = this.audioElement.duration;
+    if (!duration || Number.isNaN(duration)) return;
+    this.audioElement.currentTime = Math.max(0, Math.min(1, fraction)) * duration;
   }
 
   stop(): void {
-    this.loadAbortController?.abort();
-    this.loadAbortController = null;
+    this._loadToken++;
     this.staticNoise.stop();
-    this.stopPlayback();
-    this._buffer = null;
+    this.audioElement.pause();
+    this.audioElement.removeAttribute("src");
+    this.audioElement.load();
   }
 
   async playStaticBurst(durationMs = 400): Promise<void> {
@@ -180,20 +158,19 @@ export class AudioEngine {
     return this.staticNoise.play(durationMs);
   }
 
-  setTempo(tempo: number): void {
-    if (this._playing) {
-      const elapsed = this.audioContext.currentTime - this._startTime;
-      this._accumulatedPos += elapsed * this._activeTempo;
-      this._startTime = this.audioContext.currentTime;
-    }
-    this._tempo = Math.max(0.25, Math.min(1.0, tempo));
-    this._activeTempo = this._tempo;
-    if (this.source) {
-      this.source.playbackRate.value = this._tempo;
-    }
+  private applyTempo(): void {
+    // Element handles the time change (and, with preservesPitch off, drops
+    // pitch by `_tempo`); SoundTouch shifts pitch back up to restore it.
+    this.audioElement.playbackRate = this._tempo;
     if (this.stNode) {
-      this.stNode.playbackRate.value = this._tempo;
+      this.stNode.tempo.value = 1;
+      this.stNode.pitch.value = 1 / this._tempo;
     }
+  }
+
+  setTempo(tempo: number): void {
+    this._tempo = Math.max(0.25, Math.min(1.0, tempo));
+    this.applyTempo();
   }
 
   getTempo(): number {
@@ -209,48 +186,42 @@ export class AudioEngine {
   }
 
   getProgress(): number {
-    if (!this._playing || !this.source) return this._progress;
-    const elapsed = this.audioContext.currentTime - this._startTime;
-    const position = this._accumulatedPos + elapsed * this._activeTempo;
-    return Math.min(position / this._duration, 1);
+    const duration = this.audioElement.duration;
+    if (!duration || Number.isNaN(duration)) return 0;
+    return Math.min(this.audioElement.currentTime / duration, 1);
   }
 
   isPlaying(): boolean {
-    return this._playing;
+    return !!this.audioElement.src && !this.audioElement.paused;
   }
 
   onEnded(callback: () => void): void {
     this._onEndedCallback = callback;
   }
 
+  onPlayStateChange(callback: (paused: boolean) => void): void {
+    this._onPlayStateChange = callback;
+  }
+
   async pause(): Promise<void> {
-    if (this._playing) {
-      this._progress = this.getProgress();
-      // The keep-alive element deliberately keeps playing: pausing it would
-      // deactivate the OS media session and release the media keys, so play/
-      // next/prev would stop reaching us while paused. The lock-screen "paused"
-      // state is driven by navigator.mediaSession.playbackState instead.
-      await this.audioContext.suspend();
-      this._playing = false;
-    }
+    this.audioElement.pause();
   }
 
   async unpause(): Promise<void> {
     await this.ensureRunning();
-    if (this.source) {
-      this._playing = true;
-    }
+    if (!this.audioElement.src) return;
+    await this.audioElement.play();
   }
 
+  // Single source of truth for paused: the element itself.
   isPaused(): boolean {
-    return this.audioContext.state === "suspended";
+    return this.audioElement.paused;
   }
 
   destroy(): void {
     this.stop();
-    this.keepAliveElement.pause();
-    this.keepAliveElement.removeAttribute("src");
-    this.keepAliveElement.remove();
+    this.staticNoise.stop();
+    this.audioElement.remove();
     this.audioContext.close();
   }
 }
